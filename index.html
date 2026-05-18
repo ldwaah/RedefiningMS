@@ -49,7 +49,6 @@
       --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
       --reveal-blur: 11px;
       --screen-gutter: clamp(2rem, 8vw, 5.5rem);
-      --course-announce-height: 2.85rem;
     }
 
     * {
@@ -179,186 +178,6 @@
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
       border: 0;
-    }
-
-    .course-announce {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 31;
-      background: #ffffff;
-      color: #0a0a0a;
-      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
-      opacity: 0;
-      transform: translateY(-100%);
-      pointer-events: none;
-      transition:
-        opacity 0.65s ease,
-        transform 0.65s var(--reveal-ease);
-    }
-
-    .course-announce.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
-    .course-announce__bar {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-height: var(--course-announce-height);
-      padding: 0 max(1rem, env(safe-area-inset-right)) 0 max(1rem, env(safe-area-inset-left));
-    }
-
-    .course-announce__toggle {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.45rem;
-      width: 100%;
-      max-width: 52rem;
-      padding: 0.55rem 0.35rem;
-      border: 0;
-      background: transparent;
-      color: inherit;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      font-size: clamp(0.72rem, 2vw, 0.86rem);
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      line-height: 1.35;
-      text-align: center;
-      text-wrap: balance;
-      cursor: pointer;
-    }
-
-    .course-announce__toggle:hover,
-    .course-announce__toggle:focus-visible {
-      text-decoration: underline;
-      text-underline-offset: 0.2em;
-    }
-
-    .course-announce__toggle:focus-visible {
-      outline: 2px solid #0a0a0a;
-      outline-offset: 3px;
-    }
-
-    .course-announce__name {
-      font-weight: 600;
-    }
-
-    .course-announce__chevron {
-      display: inline-block;
-      font-size: 0.62rem;
-      line-height: 1;
-      transition: transform 0.25s ease;
-    }
-
-    .course-announce.is-open .course-announce__chevron {
-      transform: rotate(180deg);
-    }
-
-    .course-announce__panel {
-      overflow: hidden;
-      max-height: 0;
-      border-top: 1px solid transparent;
-      transition:
-        max-height 0.4s var(--reveal-ease),
-        border-color 0.25s ease;
-    }
-
-    .course-announce.is-open .course-announce__panel {
-      max-height: 16rem;
-      border-top-color: rgba(0, 0, 0, 0.1);
-    }
-
-    .course-announce__panel-inner {
-      max-width: 22rem;
-      margin: 0 auto;
-      padding: 0.85rem max(1rem, env(safe-area-inset-right)) 1rem max(1rem, env(safe-area-inset-left));
-    }
-
-    .course-announce__form {
-      display: grid;
-      gap: 0.65rem;
-    }
-
-    .course-announce__field {
-      display: grid;
-      gap: 0.3rem;
-      text-align: left;
-    }
-
-    .course-announce__field span {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .course-announce__field input {
-      width: 100%;
-      padding: 0.55rem 0.65rem;
-      border: 1px solid rgba(0, 0, 0, 0.18);
-      border-radius: 0.25rem;
-      background: #fff;
-      color: #0a0a0a;
-      font: inherit;
-      font-size: 0.92rem;
-      letter-spacing: 0.02em;
-    }
-
-    .course-announce__field input:focus {
-      outline: 2px solid rgba(0, 0, 0, 0.35);
-      outline-offset: 1px;
-      border-color: rgba(0, 0, 0, 0.35);
-    }
-
-    .course-announce__submit {
-      margin-top: 0.15rem;
-      padding: 0.55rem 0.85rem;
-      border: 1px solid #0a0a0a;
-      border-radius: 999px;
-      background: #0a0a0a;
-      color: #fff;
-      font: inherit;
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease;
-    }
-
-    .course-announce__submit:hover,
-    .course-announce__submit:focus-visible {
-      background: #fff;
-      color: #0a0a0a;
-    }
-
-    .course-announce__success {
-      margin: 0;
-      padding: 0.35rem 0.25rem 0.15rem;
-      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-      font-size: clamp(0.92rem, 2.2vw, 1.02rem);
-      font-weight: 400;
-      line-height: 1.55;
-      text-align: center;
-      text-wrap: balance;
-    }
-
-    .course-announce__form[hidden],
-    .course-announce__success[hidden] {
-      display: none !important;
-    }
-
-    body.has-course-announce .site-nav.is-visible {
-      top: var(--course-announce-height);
-    }
-
-    body.has-course-announce .site-nav.is-menu-open .site-nav__inner {
-      top: var(--course-announce-height);
     }
 
     .site-nav {
@@ -910,6 +729,7 @@
     }
 
   </style>
+  <link rel="stylesheet" href="css/coaching-modal.css">
 </head>
 <body>
   <div class="ambient" aria-hidden="true">
@@ -925,43 +745,6 @@
     <input type="email" name="email" />
   </form>
 
-  <aside class="course-announce" id="course-announce" aria-hidden="true">
-    <div class="course-announce__bar">
-      <button
-        type="button"
-        class="course-announce__toggle"
-        id="course-announce-toggle"
-        aria-expanded="false"
-        aria-controls="course-announce-panel"
-      >
-        Start Free Coaching Course — <span class="course-announce__name">The Rebuilding Room</span>
-        <span class="course-announce__chevron" aria-hidden="true">▼</span>
-      </button>
-    </div>
-    <div id="course-announce-panel" class="course-announce__panel" hidden>
-      <div class="course-announce__panel-inner">
-        <form class="course-announce__form" id="course-signup-form" name="coaching-signup" novalidate>
-          <input type="hidden" name="form-name" value="coaching-signup" />
-          <p class="visually-hidden">
-            <label>Do not fill this in<input name="bot-field" tabindex="-1" autocomplete="off" /></label>
-          </p>
-          <label class="course-announce__field">
-            <span>Name</span>
-            <input type="text" name="name" id="course-signup-name" autocomplete="name" required />
-          </label>
-          <label class="course-announce__field">
-            <span>Email Address</span>
-            <input type="email" name="email" id="course-signup-email" autocomplete="email" required />
-          </label>
-          <button type="submit" class="course-announce__submit">Request access</button>
-        </form>
-        <p class="course-announce__success" id="course-signup-success" hidden role="status">
-          I will send a link to my free coaching shortly.
-        </p>
-      </div>
-    </div>
-  </aside>
-
   <header class="site-nav" id="site-nav" aria-hidden="true">
     <div class="site-nav__inner">
       <button type="button" class="site-nav__toggle" aria-expanded="false" aria-controls="site-nav-menu">
@@ -976,14 +759,52 @@
   </header>
 
   <nav id="site-nav-menu" class="site-nav__menu" aria-label="Primary" aria-hidden="true">
-    <ul class="site-nav__list">
-      <li><a class="site-nav__link" href="index.html" aria-current="page">Home</a></li>
-      <li><a class="site-nav__link" href="my-story.html">My Story</a></li>
-      <li><a class="site-nav__link" href="the-book.html">The Book</a></li>
-      <li><a class="site-nav__link" href="support.html">Support</a></li>
-      <li><a class="site-nav__link" href="https://www.instagram.com/redefiningms" target="_blank" rel="noopener noreferrer">Connect</a></li>
-    </ul>
+    <div class="site-nav__menu-inner">
+      <ul class="site-nav__list">
+        <li><a class="site-nav__link" href="index.html" aria-current="page">Home</a></li>
+        <li><a class="site-nav__link" href="my-story.html">My Story</a></li>
+        <li><a class="site-nav__link" href="the-book.html">The Book</a></li>
+        <li><a class="site-nav__link" href="support.html">Support</a></li>
+        <li><a class="site-nav__link" href="https://www.instagram.com/redefiningms" target="_blank" rel="noopener noreferrer">Connect</a></li>
+      </ul>
+      <button
+        type="button"
+        class="site-nav__course-btn"
+        id="course-signup-open"
+        aria-haspopup="dialog"
+        aria-controls="coaching-modal"
+      >
+        Free Coaching Course
+      </button>
+    </div>
   </nav>
+
+  <div id="coaching-modal" class="coaching-modal" hidden aria-hidden="true">
+    <button type="button" class="coaching-modal__backdrop" id="coaching-modal-backdrop" aria-label="Close dialog"></button>
+    <div class="coaching-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="coaching-modal-title">
+      <button type="button" class="coaching-modal__close" id="coaching-modal-close" aria-label="Close">×</button>
+      <h2 class="coaching-modal__title" id="coaching-modal-title">The Rebuilding Room</h2>
+      <p class="coaching-modal__lede">Start your free coaching course.</p>
+      <form class="coaching-modal__form" id="coaching-signup-form" name="coaching-signup" novalidate>
+        <input type="hidden" name="form-name" value="coaching-signup" />
+        <p class="visually-hidden">
+          <label>Do not fill this in<input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+        </p>
+        <label class="coaching-modal__field">
+          <span>Name</span>
+          <input type="text" name="name" id="course-signup-name" autocomplete="name" required />
+        </label>
+        <label class="coaching-modal__field">
+          <span>Email Address</span>
+          <input type="email" name="email" id="course-signup-email" autocomplete="email" required />
+        </label>
+        <button type="submit" class="coaching-modal__submit">Request access</button>
+      </form>
+      <p class="coaching-modal__success" id="coaching-signup-success" hidden role="status">
+        I will send a link to my free coaching shortly.
+      </p>
+    </div>
+  </div>
 
   <p class="scroll-cue" id="scroll-cue" aria-hidden="true">
     <span class="scroll-cue__arrow" aria-hidden="true">↓</span>
@@ -1047,15 +868,9 @@
     const revealTargets = document.querySelectorAll(".screen__line--in-view, .screen--in-view");
     const openingScreen = document.querySelector(".screen--opening");
     const invitationScreen = document.querySelector(".screen--invitation");
-    const brandScreen = document.querySelector(".screen--brand");
     const scrollCue = document.getElementById("scroll-cue");
     const scrollCueLabel = document.getElementById("scroll-cue-label");
     const siteNav = document.getElementById("site-nav");
-    const courseAnnounce = document.getElementById("course-announce");
-    const courseAnnounceToggle = document.getElementById("course-announce-toggle");
-    const courseAnnouncePanel = document.getElementById("course-announce-panel");
-    const courseSignupForm = document.getElementById("course-signup-form");
-    const courseSignupSuccess = document.getElementById("course-signup-success");
     const navToggle = document.querySelector(".site-nav__toggle");
     const navToggleLabel = document.getElementById("site-nav-toggle-label");
     const navMenu = document.getElementById("site-nav-menu");
@@ -1063,62 +878,6 @@
     const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     const ambientDepth = document.querySelector(".ambient__depth");
     const ambientCanvas = document.querySelector(".ambient__particles");
-
-    const syncCourseAnnounceHeight = () => {
-      if (!courseAnnounce || !document.body.classList.contains("has-course-announce")) {
-        return;
-      }
-
-      document.documentElement.style.setProperty(
-        "--course-announce-height",
-        `${courseAnnounce.offsetHeight}px`
-      );
-    };
-
-    const setCourseAnnounceOpen = (open) => {
-      if (!courseAnnounce || !courseAnnouncePanel || !courseAnnounceToggle) {
-        return;
-      }
-
-      courseAnnounce.classList.toggle("is-open", open);
-      courseAnnounceToggle.setAttribute("aria-expanded", String(open));
-
-      if (open) {
-        courseAnnouncePanel.removeAttribute("hidden");
-      } else {
-        courseAnnouncePanel.setAttribute("hidden", "");
-      }
-
-      window.requestAnimationFrame(syncCourseAnnounceHeight);
-    };
-
-    const showCourseSignupSuccess = () => {
-      if (courseSignupForm) {
-        courseSignupForm.hidden = true;
-      }
-      if (courseSignupSuccess) {
-        courseSignupSuccess.hidden = false;
-      }
-      setCourseAnnounceOpen(true);
-      window.localStorage.setItem("rr-coaching-signup", "1");
-      window.requestAnimationFrame(syncCourseAnnounceHeight);
-    };
-
-    const setCourseAnnounceVisible = (visible) => {
-      if (!courseAnnounce) {
-        return;
-      }
-
-      courseAnnounce.classList.toggle("is-visible", visible);
-      courseAnnounce.setAttribute("aria-hidden", String(!visible));
-      document.body.classList.toggle("has-course-announce", visible);
-
-      if (!visible) {
-        setCourseAnnounceOpen(false);
-      } else {
-        window.requestAnimationFrame(syncCourseAnnounceHeight);
-      }
-    };
 
     const setNavVisible = (visible) => {
       siteNav.classList.toggle("is-visible", visible);
@@ -1128,62 +887,6 @@
         setMenuOpen(false);
       }
     };
-
-    if (courseAnnounceToggle && courseAnnouncePanel) {
-      if (window.localStorage.getItem("rr-coaching-signup") === "1") {
-        showCourseSignupSuccess();
-      }
-
-      courseAnnounceToggle.addEventListener("click", () => {
-        const willOpen = !courseAnnounce.classList.contains("is-open");
-        setCourseAnnounceOpen(willOpen);
-      });
-
-      document.addEventListener("click", (event) => {
-        if (
-          !courseAnnounce.classList.contains("is-open") ||
-          !courseAnnounce.classList.contains("is-visible") ||
-          courseAnnounce.contains(event.target)
-        ) {
-          return;
-        }
-        setCourseAnnounceOpen(false);
-      });
-
-      document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && courseAnnounce.classList.contains("is-open")) {
-          setCourseAnnounceOpen(false);
-        }
-      });
-
-      window.addEventListener("resize", syncCourseAnnounceHeight);
-    }
-
-    if (courseSignupForm) {
-      courseSignupForm.addEventListener("submit", async (event) => {
-        event.preventDefault();
-
-        const submitBtn = courseSignupForm.querySelector(".course-announce__submit");
-        if (submitBtn) {
-          submitBtn.disabled = true;
-        }
-
-        const payload = new URLSearchParams(new FormData(courseSignupForm)).toString();
-
-        try {
-          await fetch("/", {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: payload,
-          });
-          showCourseSignupSuccess();
-        } catch (error) {
-          if (submitBtn) {
-            submitBtn.disabled = false;
-          }
-        }
-      });
-    }
 
     const setMenuOpen = (open) => {
       siteNav.classList.toggle("is-menu-open", open);
@@ -1286,52 +989,6 @@
       );
 
       navObserver.observe(openingScreen);
-    }
-
-    if (brandScreen && courseAnnounce) {
-      let courseAnnounceScheduled = false;
-      const brandRevealDelayMs = reducedMotionQuery.matches
-        ? 0
-        : Math.ceil((1.35 + 4.75 + 0.5) * 1000);
-
-      const maybeRevealCourseAnnounce = () => {
-        if (courseAnnounceScheduled || !brandScreen.classList.contains("is-visible")) {
-          return;
-        }
-
-        const rect = brandScreen.getBoundingClientRect();
-        const inView =
-          rect.top < window.innerHeight * 0.78 && rect.bottom > window.innerHeight * 0.22;
-
-        if (!inView) {
-          return;
-        }
-
-        courseAnnounceScheduled = true;
-        window.setTimeout(() => {
-          setCourseAnnounceVisible(true);
-        }, brandRevealDelayMs);
-      };
-
-      const brandAnnounceObserver = new IntersectionObserver(
-        () => {
-          maybeRevealCourseAnnounce();
-        },
-        {
-          threshold: [0.22, 0.45, 0.65],
-        }
-      );
-
-      brandAnnounceObserver.observe(brandScreen);
-
-      const brandClassObserver = new MutationObserver(() => {
-        maybeRevealCourseAnnounce();
-      });
-
-      brandClassObserver.observe(brandScreen, {
-        attributes: true,
-        attributeFilter: ["class"],
-      });
     }
 
     updateScrollCue();
@@ -1488,5 +1145,6 @@
     initAmbientParticles();
     initAmbientDepth();
   </script>
+  <script src="js/coaching-modal.js" defer></script>
 </body>
 </html>
