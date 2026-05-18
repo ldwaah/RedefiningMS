@@ -88,11 +88,14 @@
     trigger.hidden = false;
     resetStage();
     isAnimating = false;
+    showFormState();
 
-    if (window.localStorage.getItem("rr-coaching-signup") === "1") {
-      showSuccessState();
-    } else {
-      showFormState();
+    if (form) {
+      form.reset();
+      const submitBtn = form.querySelector(".support-door-entry__submit");
+      if (submitBtn) {
+        submitBtn.disabled = false;
+      }
     }
   };
 
@@ -105,10 +108,8 @@
     closeBtn?.classList.add("is-visible");
 
     const firstField = form?.querySelector("input[name='name']");
-    if (firstField && success?.hidden) {
+    if (firstField) {
       firstField.focus();
-    } else {
-      success?.focus({ preventScroll: true });
     }
   };
 
@@ -131,12 +132,7 @@
     isAnimating = true;
     stopIntroVideo();
     trigger.hidden = true;
-
-    if (window.localStorage.getItem("rr-coaching-signup") === "1") {
-      showSuccessState();
-    } else {
-      showFormState();
-    }
+    showFormState();
 
     entry.setAttribute("aria-hidden", "false");
     entry.classList.add("is-active");
@@ -153,9 +149,7 @@
     isAnimating = false;
   };
 
-  if (window.localStorage.getItem("rr-coaching-signup") === "1") {
-    showSuccessState();
-  }
+  showFormState();
 
   trigger.addEventListener("click", openEntry);
   closeBtn?.addEventListener("click", hideEntry);
@@ -173,6 +167,16 @@
       const submitBtn = form.querySelector(".support-door-entry__submit");
       if (submitBtn) {
         submitBtn.disabled = true;
+      }
+
+      const name = form.querySelector("input[name='name']")?.value.trim();
+      const email = form.querySelector("input[name='email']")?.value.trim();
+
+      if (!name || !email) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+        }
+        return;
       }
 
       const payload = new URLSearchParams(new FormData(form)).toString();
