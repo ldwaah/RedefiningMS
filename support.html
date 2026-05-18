@@ -770,6 +770,28 @@
       transition: opacity 0.45s var(--reveal-ease), visibility 0.45s;
     }
 
+    .support-video-gate__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(1rem, 2.5vh, 1.5rem);
+      width: min(100%, 72rem);
+      max-height: 100%;
+    }
+
+    .support-video-gate__title {
+      margin: 0;
+      color: var(--text);
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: clamp(1.35rem, 4vw, 2rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      line-height: 1.25;
+      text-align: center;
+      text-transform: uppercase;
+      text-wrap: balance;
+    }
+
     .support-video-gate[hidden] {
       display: none !important;
     }
@@ -782,19 +804,15 @@
 
     .support-video-gate__video {
       display: block;
-      width: min(100%, 72rem);
-      max-height: 100%;
+      width: 100%;
+      max-height: min(68vh, 40rem);
       object-fit: contain;
       border: none;
       background: #000;
     }
 
     .support-video-gate__skip {
-      position: absolute;
-      top: max(1rem, env(safe-area-inset-top));
-      right: max(1rem, env(safe-area-inset-right));
-      z-index: 2;
-      padding: 0.55rem 1rem;
+      padding: 0.55rem 1.35rem;
       border: 1px solid rgba(168, 181, 160, 0.35);
       border-radius: 999px;
       background: rgba(0, 0, 0, 0.55);
@@ -846,17 +864,20 @@
     class="support-video-gate"
     role="dialog"
     aria-modal="true"
-    aria-label="Introduction video"
+    aria-labelledby="support-video-gate-title"
   >
-    <button type="button" class="support-video-gate__skip" id="support-video-skip">Skip</button>
-    <video
-      id="support-intro-video"
-      class="support-video-gate__video"
-      src="MSYOUTUBE.mp4"
-      playsinline
-      autoplay
-      preload="auto"
-    ></video>
+    <div class="support-video-gate__inner">
+      <h1 class="support-video-gate__title" id="support-video-gate-title">The invisible battle</h1>
+      <video
+        id="support-intro-video"
+        class="support-video-gate__video"
+        src="MSYOUTUBE.mp4"
+        playsinline
+        autoplay
+        preload="auto"
+      ></video>
+      <button type="button" class="support-video-gate__skip" id="support-video-skip">Skip</button>
+    </div>
   </div>
 
   <div class="support-page-shell" id="support-page-shell">
