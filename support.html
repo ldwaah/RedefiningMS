@@ -904,6 +904,7 @@
       }
     }
   </style>
+  <link rel="stylesheet" href="css/support-door.css">
 </head>
 <body class="support-gate-active">
 
@@ -927,6 +928,11 @@
       <button type="button" class="support-video-gate__skip" id="support-video-skip">Skip</button>
     </div>
   </div>
+
+  <form name="coaching-signup" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="text" name="name" />
+    <input type="email" name="email" />
+  </form>
 
   <div class="support-page-shell" id="support-page-shell">
   <div class="support-page__backdrop" id="support-backdrop" aria-hidden="true"></div>
@@ -1056,6 +1062,41 @@
       </div>
     </section>
   </main>
+
+  <button type="button" class="support-door" id="support-door-trigger" aria-label="Open The Rebuilding Room">
+    <img class="support-door__frame" id="support-door-frame" src="doors/1.svg" alt="" width="375" height="375" />
+  </button>
+
+  <div id="support-door-entry" class="support-door-entry" hidden aria-hidden="true">
+    <button type="button" class="support-door-entry__close" id="support-door-close" aria-label="Close">×</button>
+    <div class="support-door-entry__anim" id="support-door-anim">
+      <img class="support-door-entry__frame" id="support-door-anim-frame" src="doors/1.svg" alt="" width="375" height="375" />
+    </div>
+    <div class="support-door-entry__portal" id="support-door-portal" hidden>
+      <div class="support-door-entry__dialog" role="dialog" aria-modal="true" aria-labelledby="support-door-title">
+        <h2 class="support-door-entry__title" id="support-door-title">The Rebuilding Room</h2>
+        <p class="support-door-entry__lede">Start your free coaching course.</p>
+        <form class="support-door-entry__form" id="support-door-signup-form" name="coaching-signup" novalidate>
+          <input type="hidden" name="form-name" value="coaching-signup" />
+          <p class="visually-hidden">
+            <label>Do not fill this in<input name="bot-field" tabindex="-1" autocomplete="off" /></label>
+          </p>
+          <label class="support-door-entry__field">
+            <span>Name</span>
+            <input type="text" name="name" autocomplete="name" required />
+          </label>
+          <label class="support-door-entry__field">
+            <span>Email Address</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+          <button type="submit" class="support-door-entry__submit">Request access</button>
+        </form>
+        <p class="support-door-entry__success" id="support-door-signup-success" hidden role="status" tabindex="-1">
+          I will send a link to my free coaching shortly.
+        </p>
+      </div>
+    </div>
+  </div>
   </div>
 
   <script>
@@ -1381,5 +1422,6 @@
       queueParallax();
     }
   </script>
+  <script src="js/support-door.js" defer></script>
 </body>
 </html>
