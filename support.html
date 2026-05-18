@@ -603,6 +603,53 @@
       line-height: 1.85;
     }
 
+    .support-resources {
+      padding: clamp(3rem, 8vh, 5rem) var(--screen-gutter) clamp(4.5rem, 11vh, 6.5rem);
+      text-align: center;
+    }
+
+    .support-resources__inner {
+      max-width: 34rem;
+      margin: 0 auto;
+    }
+
+    .support-resources__label {
+      margin: 0 0 0.85rem;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .support-resources__link {
+      display: inline-block;
+      color: var(--text-sage);
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: clamp(1.05rem, 2.2vw, 1.2rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      line-height: 1.5;
+      text-decoration: underline;
+      text-decoration-color: rgba(168, 181, 160, 0.45);
+      text-underline-offset: 0.28em;
+      transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    }
+
+    .support-resources__link:hover,
+    .support-resources__link:focus-visible {
+      color: var(--text);
+      text-decoration-color: rgba(200, 215, 195, 0.75);
+      outline: none;
+    }
+
+    .support-resources__hint {
+      margin: 0.65rem 0 0;
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
     .support-reveal {
       opacity: 0;
       filter: blur(10px);
@@ -989,6 +1036,21 @@
             <p class="support-chapter__copy">A space for honest conversations, shared experiences, and reminding people they are not fighting invisible battles alone.</p>
           </div>
         </article>
+      </div>
+    </section>
+
+    <section class="support-resources" aria-label="Further information about MS">
+      <div class="support-resources__inner support-reveal" style="--reveal-delay: 0s">
+        <p class="support-resources__label">Trusted information</p>
+        <a
+          class="support-resources__link"
+          href="https://mstrust.org.uk/information-support/about-ms/what-is-ms"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          MS Trust — What is MS?
+        </a>
+        <p class="support-resources__hint">Opens the MS Trust website in a new tab.</p>
       </div>
     </section>
   </main>
