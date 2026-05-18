@@ -199,14 +199,19 @@
         return;
       }
 
-      const payload = new URLSearchParams(new FormData(form)).toString();
-
       try {
-        await fetch("/", {
+        const response = await fetch("/.netlify/functions/coaching-signup", {
           method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: payload,
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ name, email }),
         });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          throw new Error(result.error || "Signup request failed");
+        }
+
         showSuccessState();
         success?.focus({ preventScroll: true });
         scheduleSuccessDismiss();
