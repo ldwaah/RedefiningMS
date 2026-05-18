@@ -757,6 +757,76 @@
       }
     }
 
+
+    .support-video-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      display: grid;
+      place-items: center;
+      padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right))
+        max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
+      background: #000;
+      transition: opacity 0.45s var(--reveal-ease), visibility 0.45s;
+    }
+
+    .support-video-gate[hidden] {
+      display: none !important;
+    }
+
+    .support-video-gate.is-exiting {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .support-video-gate__video {
+      display: block;
+      width: min(100%, 72rem);
+      max-height: 100%;
+      object-fit: contain;
+      border: none;
+      background: #000;
+    }
+
+    .support-video-gate__skip {
+      position: absolute;
+      top: max(1rem, env(safe-area-inset-top));
+      right: max(1rem, env(safe-area-inset-right));
+      z-index: 2;
+      padding: 0.55rem 1rem;
+      border: 1px solid rgba(168, 181, 160, 0.35);
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.55);
+      color: var(--text);
+      font: inherit;
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+
+    .support-video-gate__skip:hover,
+    .support-video-gate__skip:focus-visible {
+      border-color: rgba(200, 215, 195, 0.55);
+      background: rgba(18, 22, 20, 0.82);
+      color: #fff;
+      outline: none;
+    }
+
+    body.support-gate-active {
+      overflow: hidden;
+    }
+
+    body.support-gate-active .support-page-shell {
+      visibility: hidden;
+      pointer-events: none;
+    }
+
     @media (max-width: 540px) {
       .voice-note__player {
         grid-template-columns: 1fr;
@@ -770,7 +840,26 @@
     }
   </style>
 </head>
-<body>
+<body class="support-gate-active">
+  <div
+    id="support-video-gate"
+    class="support-video-gate"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Introduction video"
+  >
+    <button type="button" class="support-video-gate__skip" id="support-video-skip">Skip</button>
+    <video
+      id="support-intro-video"
+      class="support-video-gate__video"
+      src="MSYOUTUBE.mp4"
+      playsinline
+      autoplay
+      preload="auto"
+    ></video>
+  </div>
+
+  <div class="support-page-shell" id="support-page-shell">
   <div class="support-page__backdrop" id="support-backdrop" aria-hidden="true"></div>
   <div class="support-page__grain" aria-hidden="true"></div>
 
@@ -882,8 +971,55 @@
       </div>
     </section>
   </main>
+  </div>
 
   <script>
+    const supportVideoGate = document.getElementById("support-video-gate");
+    const supportIntroVideo = document.getElementById("support-intro-video");
+    const supportVideoSkip = document.getElementById("support-video-skip");
+    const supportGateMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    const dismissSupportGate = () => {
+      if (!document.body.classList.contains("support-gate-active")) {
+        return;
+      }
+
+      supportVideoGate?.classList.add("is-exiting");
+      if (supportIntroVideo) {
+        supportIntroVideo.pause();
+      }
+
+      window.setTimeout(() => {
+        document.body.classList.remove("support-gate-active");
+        supportVideoGate?.setAttribute("hidden", "");
+        supportVideoGate?.setAttribute("aria-hidden", "true");
+      }, 420);
+    };
+
+    supportVideoSkip?.addEventListener("click", dismissSupportGate);
+    supportIntroVideo?.addEventListener("ended", dismissSupportGate);
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && document.body.classList.contains("support-gate-active")) {
+        dismissSupportGate();
+      }
+    });
+
+    if (supportGateMotionQuery.matches) {
+      dismissSupportGate();
+    } else if (supportIntroVideo) {
+      const playIntro = () => {
+        supportIntroVideo.play().catch(() => {
+          supportIntroVideo.setAttribute("controls", "");
+        });
+      };
+      if (supportIntroVideo.readyState >= 2) {
+        playIntro();
+      } else {
+        supportIntroVideo.addEventListener("loadeddata", playIntro, { once: true });
+      }
+    }
+
     const siteNav = document.getElementById("site-nav");
     const navToggle = document.querySelector(".site-nav__toggle");
     const navToggleLabel = document.getElementById("site-nav-toggle-label");
