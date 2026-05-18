@@ -19,6 +19,8 @@
   }
 
   let isAnimating = false;
+  let successDismissTimer = null;
+  const SUCCESS_DISMISS_MS = 2000;
 
   const delay = (ms) =>
     new Promise((resolve) => {
@@ -67,6 +69,22 @@
     window.localStorage.setItem("rr-coaching-signup", "1");
   };
 
+  const clearSuccessDismissTimer = () => {
+    if (successDismissTimer) {
+      window.clearTimeout(successDismissTimer);
+      successDismissTimer = null;
+    }
+  };
+
+  const scheduleSuccessDismiss = () => {
+    clearSuccessDismissTimer();
+    closeBtn?.classList.remove("is-visible");
+    successDismissTimer = window.setTimeout(() => {
+      successDismissTimer = null;
+      hideEntry();
+    }, SUCCESS_DISMISS_MS);
+  };
+
   const setStageFrame = (index) => {
     stageFrames.forEach((frame, frameIndex) => {
       frame.classList.toggle("is-current", frameIndex === index);
@@ -78,6 +96,7 @@
   };
 
   const hideEntry = () => {
+    clearSuccessDismissTimer();
     entry.classList.remove("is-active", "is-form-visible");
     portal.classList.remove("is-visible");
     portal.setAttribute("aria-hidden", "true");
@@ -130,6 +149,7 @@
     }
 
     isAnimating = true;
+    clearSuccessDismissTimer();
     stopIntroVideo();
     trigger.hidden = true;
     showFormState();
@@ -189,6 +209,7 @@
         });
         showSuccessState();
         success?.focus({ preventScroll: true });
+        scheduleSuccessDismiss();
       } catch (error) {
         if (submitBtn) {
           submitBtn.disabled = false;
