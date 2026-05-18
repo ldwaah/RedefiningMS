@@ -729,7 +729,6 @@
     }
 
   </style>
-  <link rel="stylesheet" href="css/coaching-modal.css">
 </head>
 <body>
   <div class="ambient" aria-hidden="true">
@@ -739,11 +738,6 @@
     <canvas class="ambient__particles"></canvas>
     <div class="ambient__noise"></div>
   </div>
-
-  <form name="coaching-signup" data-netlify="true" netlify-honeypot="bot-field" hidden>
-    <input type="text" name="name" />
-    <input type="email" name="email" />
-  </form>
 
   <header class="site-nav" id="site-nav" aria-hidden="true">
     <div class="site-nav__inner">
@@ -759,53 +753,14 @@
   </header>
 
   <nav id="site-nav-menu" class="site-nav__menu" aria-label="Primary" aria-hidden="true">
-    <div class="site-nav__menu-inner">
-      <ul class="site-nav__list">
-        <li><a class="site-nav__link" href="index.html" aria-current="page">Home</a></li>
-        <li><a class="site-nav__link" href="my-story.html">My Story</a></li>
-        <li><a class="site-nav__link" href="the-book.html">The Book</a></li>
-        <li><a class="site-nav__link" href="support.html">Support</a></li>
-        <li><a class="site-nav__link" href="https://www.instagram.com/redefiningms" target="_blank" rel="noopener noreferrer">Connect</a></li>
-      </ul>
-      <button
-        type="button"
-        class="site-nav__course-btn"
-        id="course-signup-open"
-        aria-haspopup="dialog"
-        aria-controls="coaching-modal"
-      >
-        <span class="site-nav__course-btn-label">Free Coaching Course</span>
-        <span class="site-nav__course-btn-sub">The Rebuilding Room</span>
-      </button>
-    </div>
+    <ul class="site-nav__list">
+      <li><a class="site-nav__link" href="index.html" aria-current="page">Home</a></li>
+      <li><a class="site-nav__link" href="my-story.html">My Story</a></li>
+      <li><a class="site-nav__link" href="the-book.html">The Book</a></li>
+      <li><a class="site-nav__link" href="support.html">Support</a></li>
+      <li><a class="site-nav__link" href="https://www.instagram.com/redefiningms" target="_blank" rel="noopener noreferrer">Connect</a></li>
+    </ul>
   </nav>
-
-  <div id="coaching-modal" class="coaching-modal" hidden aria-hidden="true">
-    <button type="button" class="coaching-modal__backdrop" id="coaching-modal-backdrop" aria-label="Close dialog"></button>
-    <div class="coaching-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="coaching-modal-title">
-      <button type="button" class="coaching-modal__close" id="coaching-modal-close" aria-label="Close">×</button>
-      <h2 class="coaching-modal__title" id="coaching-modal-title">The Rebuilding Room</h2>
-      <p class="coaching-modal__lede">Start your free coaching course.</p>
-      <form class="coaching-modal__form" id="coaching-signup-form" name="coaching-signup" novalidate>
-        <input type="hidden" name="form-name" value="coaching-signup" />
-        <p class="visually-hidden">
-          <label>Do not fill this in<input name="bot-field" tabindex="-1" autocomplete="off" /></label>
-        </p>
-        <label class="coaching-modal__field">
-          <span>Name</span>
-          <input type="text" name="name" id="course-signup-name" autocomplete="name" required />
-        </label>
-        <label class="coaching-modal__field">
-          <span>Email Address</span>
-          <input type="email" name="email" id="course-signup-email" autocomplete="email" required />
-        </label>
-        <button type="submit" class="coaching-modal__submit">Request access</button>
-      </form>
-      <p class="coaching-modal__success" id="coaching-signup-success" hidden role="status" tabindex="-1">
-        I will send a link to my free coaching shortly.
-      </p>
-    </div>
-  </div>
 
   <p class="scroll-cue" id="scroll-cue" aria-hidden="true">
     <span class="scroll-cue__arrow" aria-hidden="true">↓</span>
@@ -1146,6 +1101,5 @@
     initAmbientParticles();
     initAmbientDepth();
   </script>
-  <script src="js/coaching-modal.js" defer></script>
 </body>
 </html>
