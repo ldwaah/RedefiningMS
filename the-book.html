@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>When My Body Said No | Redefining MS</title>
+  <meta name="description" content="When My Body Said No by Lloyd. A personal book on MS, resilience, identity, and rebuilding. Coming soon.">
+  <meta name="author" content="Lloyd">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="me" href="https://www.instagram.com/redefiningms">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:type" content="book">
+  <meta property="og:site_name" content="Redefining MS">
+  <meta property="og:title" content="When My Body Said No | Redefining MS">
+  <meta property="og:description" content="When My Body Said No by Lloyd. A personal book on MS, resilience, identity, and rebuilding. Coming soon.">
+  <meta property="og:image" content="book-cover.png">
+  <meta property="og:image:alt" content="When My Body Said No book cover">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="When My Body Said No | Redefining MS">
+  <meta name="twitter:description" content="When My Body Said No by Lloyd. A personal book on MS, resilience, identity, and rebuilding. Coming soon.">
+  <meta name="twitter:image" content="book-cover.png">
+  <meta name="twitter:image:alt" content="When My Body Said No book cover">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Book",
+      "name": "When My Body Said No",
+      "author": {
+        "@type": "Person",
+        "name": "Lloyd"
+      },
+      "description": "A personal book on life before, during, and after a Multiple Sclerosis diagnosis.",
+      "image": "book-cover.png",
+      "inLanguage": "en-GB",
+      "bookFormat": "https://schema.org/EBook",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Redefining MS"
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #f2f0eb;
+      --text-sage: #98a892;
+      --screen-gutter: clamp(2rem, 8vw, 5.5rem);
+      --reveal-duration: 1.25s;
+      --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    }
+
+    .book-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 20% 18%, rgba(118, 142, 118, 0.08), transparent 42%),
+        radial-gradient(circle at 80% 82%, rgba(88, 98, 86, 0.06), transparent 40%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.96) 0%, rgba(0, 0, 0, 0.9) 100%);
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    .book-grain {
+      position: fixed;
+      inset: -20%;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+      animation: book-grain 22s steps(10) infinite;
+    }
+
+    @keyframes book-grain {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      100% {
+        transform: translate3d(-3%, 2%, 0);
+      }
+    }
+
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      padding: 0.9rem var(--screen-gutter);
+      border-bottom: 1px solid rgba(152, 168, 146, 0.14);
+      background: rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .site-nav.is-menu-open {
+      background: transparent;
+      border-bottom-color: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .site-nav.is-menu-open .site-nav__inner {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      padding: 0.9rem var(--screen-gutter);
+    }
+
+    .site-nav__inner {
+      position: relative;
+      z-index: 52;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .site-nav__toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.35rem 0.15rem;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .site-nav__toggle-label {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .site-nav__toggle-lines {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .site-nav__toggle-lines span {
+      display: block;
+      width: 1.15rem;
+      height: 1px;
+      background: currentColor;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .site-nav.is-menu-open .site-nav__toggle-lines span:nth-child(1) {
+      transform: translateY(0.43rem) rotate(45deg);
+    }
+
+    .site-nav.is-menu-open .site-nav__toggle-lines span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .site-nav.is-menu-open .site-nav__toggle-lines span:nth-child(3) {
+      transform: translateY(-0.43rem) rotate(-45deg);
+    }
+
+    .site-nav__menu {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: var(--screen-gutter);
+      background: var(--bg);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.55s ease,
+        visibility 0.55s ease;
+    }
+
+    body.is-nav-open .site-nav__menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .site-nav__list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(2rem, 4.5vh, 3.25rem);
+      list-style: none;
+    }
+
+    .site-nav__link {
+      color: var(--text);
+      font-size: clamp(1.45rem, 4.2vw, 2.35rem);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      text-decoration: none;
+      opacity: 0.9;
+      transition: color 0.4s ease, opacity 0.4s ease;
+    }
+
+    .site-nav__link:hover,
+    .site-nav__link:focus-visible {
+      color: var(--text-sage);
+      opacity: 1;
+    }
+
+    .site-nav__link:focus-visible {
+      outline: 2px solid var(--text-sage);
+      outline-offset: 4px;
+    }
+
+    .site-nav__link--current {
+      color: var(--text-sage);
+    }
+
+    body.is-nav-open {
+      overflow: hidden;
+    }
+
+    .book-page {
+      position: relative;
+      z-index: 1;
+      padding:
+        calc(5.5rem + var(--screen-gutter))
+        var(--screen-gutter)
+        clamp(4rem, 10vh, 6rem);
+    }
+
+    .book-page__layout {
+      display: grid;
+      align-items: start;
+      gap: clamp(2.5rem, 6vw, 4.5rem);
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .book-page__cover {
+      display: block;
+      width: min(100%, 20rem);
+      margin: 0 auto;
+      box-shadow: 0 1.5rem 3.5rem rgba(0, 0, 0, 0.45);
+    }
+
+    .book-page__cover.is-visible {
+      animation: book-cover-float 8s ease-in-out 0.8s infinite;
+    }
+
+    .book-page__content {
+      width: min(100%, 42rem);
+    }
+
+    .book-page__eyebrow {
+      margin-bottom: 0.85rem;
+      color: var(--text-sage);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .book-page__title {
+      margin-bottom: clamp(1.75rem, 4vh, 2.5rem);
+      font-size: clamp(2.05rem, 6.4vw, 4.1rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      line-height: 1.08;
+      text-transform: uppercase;
+    }
+
+    .book-page__content p {
+      margin-bottom: clamp(1.35rem, 3vh, 1.85rem);
+      font-size: clamp(0.98rem, 1.95vw, 1.1rem);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1.75;
+    }
+
+    .book-page__content p:last-of-type {
+      margin-bottom: clamp(2rem, 5vh, 3rem);
+    }
+
+    .book-page__cta-row {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .book-page__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 12.5rem;
+      padding: 0.95rem 1.85rem;
+      border: 1px solid rgba(152, 168, 146, 0.45);
+      color: var(--text);
+      background: transparent;
+      font: inherit;
+      font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+      letter-spacing: 0.12em;
+      line-height: 1.2;
+      text-decoration: none;
+      transition:
+        color 0.5s ease,
+        border-color 0.5s ease,
+        background-color 0.5s ease;
+    }
+
+    .book-page__cta:hover,
+    .book-page__cta:focus-visible {
+      border-color: var(--text-sage);
+      background: rgba(152, 168, 146, 0.1);
+    }
+
+    .book-page__cta:focus-visible {
+      outline: 2px solid var(--text-sage);
+      outline-offset: 3px;
+    }
+
+    .book-page__cta--soon {
+      cursor: default;
+      opacity: 0.82;
+    }
+
+    .book-page__cta--soon:hover,
+    .book-page__cta--soon:focus-visible {
+      border-color: rgba(152, 168, 146, 0.45);
+      background: transparent;
+    }
+
+    .book-reveal {
+      opacity: 0;
+      filter: blur(10px);
+      transform: translate3d(0, 1.25rem, 0);
+      transition:
+        opacity var(--reveal-duration) var(--reveal-ease),
+        filter var(--reveal-duration) var(--reveal-ease),
+        transform calc(var(--reveal-duration) + 0.1s) var(--reveal-ease);
+      transition-delay: var(--reveal-delay, 0s);
+    }
+
+    .book-reveal.is-visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translate3d(0, 0, 0);
+    }
+
+    @keyframes book-cover-float {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      50% {
+        transform: translate3d(0, -0.45rem, 0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .book-grain {
+        animation: none;
+      }
+
+      .book-reveal,
+      .book-page__cover.is-visible {
+        opacity: 1;
+        filter: none;
+        transform: none;
+        transition: none;
+        animation: none;
+      }
+    }
+
+    @media (min-width: 900px) {
+      .book-page__layout {
+        grid-template-columns: minmax(16rem, 22rem) minmax(0, 1fr);
+        align-items: center;
+      }
+
+      .book-page__cover {
+        margin: 0;
+        width: 100%;
+      }
+
+      .book-page__content {
+        width: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="book-backdrop" id="book-backdrop" aria-hidden="true"></div>
+  <div class="book-grain" aria-hidden="true"></div>
+
+  <header class="site-nav" id="site-nav">
+    <div class="site-nav__inner">
+      <button type="button" class="site-nav__toggle" aria-expanded="false" aria-controls="site-nav-menu">
+        <span class="site-nav__toggle-label" id="site-nav-toggle-label">Menu</span>
+        <span class="site-nav__toggle-lines" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <nav id="site-nav-menu" class="site-nav__menu" aria-label="Primary" aria-hidden="true">
+    <ul class="site-nav__list">
+      <li><a class="site-nav__link" href="my-story.html">My Story</a></li>
+      <li><a class="site-nav__link site-nav__link--current" href="the-book.html" aria-current="page">The Book</a></li>
+      <li><a class="site-nav__link" href="support.html">Support</a></li>
+      <li><a class="site-nav__link" href="https://www.instagram.com/redefiningms" target="_blank" rel="noopener noreferrer">Connect</a></li>
+    </ul>
+  </nav>
+
+  <main class="book-page">
+    <div class="book-page__layout">
+      <img class="book-page__cover book-reveal" src="book-cover.png" alt="When My Body Said No book cover" style="--reveal-delay: 0s">
+      <article class="book-page__content">
+        <p class="book-page__eyebrow book-reveal" style="--reveal-delay: 0.1s">The Book</p>
+        <h1 class="book-page__title book-reveal" style="--reveal-delay: 0.18s">When My Body Said No</h1>
+        <p class="book-reveal" style="--reveal-delay: 0.26s"><strong>When My Body Said No</strong> is a raw and honest reflection on life before, during, and after a Multiple Sclerosis diagnosis.</p>
+        <p class="book-reveal" style="--reveal-delay: 0.34s">Through deeply personal experiences, Lloyd explores the invisible reality of living with MS, the uncertainty, fear, exhaustion, identity shifts, and emotional battles that often go unseen by the outside world. From football pitches and hospital waiting rooms to fatherhood, mentoring, and rebuilding purpose, the book documents the difficult transition between who he once was and who he is learning to become.</p>
+        <p class="book-reveal" style="--reveal-delay: 0.42s">More than a story about illness, this is a book about resilience, mindset, identity, and finding meaning when life suddenly changes direction.</p>
+        <p class="book-reveal" style="--reveal-delay: 0.5s">Written with honesty, vulnerability, and humanity, <em>When My Body Said No</em> aims to help others feel understood, less alone, and hopeful that diagnosis does not have to mean the end of who you are.</p>
+        <p class="book-page__cta-row book-reveal" style="--reveal-delay: 0.58s">
+          <span class="book-page__cta book-page__cta--soon" role="status">Coming Soon</span>
+        </p>
+      </article>
+    </div>
+  </main>
+
+  <script>
+    const siteNav = document.getElementById("site-nav");
+    const navToggle = document.querySelector(".site-nav__toggle");
+    const navToggleLabel = document.getElementById("site-nav-toggle-label");
+    const navMenu = document.getElementById("site-nav-menu");
+    const mobileNavQuery = window.matchMedia("(max-width: 767px)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const bookBackdrop = document.getElementById("book-backdrop");
+    const revealElements = document.querySelectorAll(".book-reveal");
+
+    const setMenuOpen = (open) => {
+      siteNav.classList.toggle("is-menu-open", open);
+      navToggle.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("is-nav-open", open);
+      navMenu.setAttribute("aria-hidden", String(!open));
+
+      if (navToggleLabel) {
+        navToggleLabel.textContent = open ? "Close" : "Menu";
+      }
+    };
+
+    navToggle.addEventListener("click", () => {
+      setMenuOpen(!siteNav.classList.contains("is-menu-open"));
+    });
+
+    navMenu.addEventListener("click", (event) => {
+      if (event.target.closest(".site-nav__link")) {
+        setMenuOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    });
+
+    mobileNavQuery.addEventListener("change", () => {
+      setMenuOpen(false);
+    });
+
+    if (!reducedMotionQuery.matches) {
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          });
+        },
+        {
+          threshold: 0.2,
+          rootMargin: "0px 0px -8% 0px",
+        }
+      );
+
+      revealElements.forEach((element) => revealObserver.observe(element));
+
+      if (bookBackdrop) {
+        let parallaxFrame = null;
+
+        const updateParallax = () => {
+          parallaxFrame = null;
+          bookBackdrop.style.transform = `translate3d(0, ${window.scrollY * 0.08}px, 0)`;
+        };
+
+        const queueParallax = () => {
+          if (parallaxFrame !== null) {
+            return;
+          }
+
+          parallaxFrame = window.requestAnimationFrame(updateParallax);
+        };
+
+        window.addEventListener("scroll", queueParallax, { passive: true });
+        window.addEventListener("resize", queueParallax);
+        queueParallax();
+      }
+    } else {
+      revealElements.forEach((element) => element.classList.add("is-visible"));
+    }
+  </script>
+</body>
+</html>

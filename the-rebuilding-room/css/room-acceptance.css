@@ -1,0 +1,755 @@
+/* Room 1 (Acceptance) visuals: html.room-acceptance. Ceremony audio UI (rooms 1–2): html.room-ceremony-audio. */
+
+html.room-acceptance {
+  --acc-ink: rgba(245, 240, 232, 0.94);
+  --acc-ink-soft: rgba(235, 228, 216, 0.72);
+  --acc-ink-faint: rgba(220, 210, 195, 0.45);
+  --acc-gold: rgba(198, 172, 128, 0.55);
+  --acc-gold-deep: rgba(165, 138, 98, 0.35);
+  --acc-scene-ease: cubic-bezier(0.32, 0.72, 0.28, 1);
+  --acc-scene-ms: 880ms;
+}
+
+html.room-acceptance .room-bg {
+  background:
+    radial-gradient(ellipse 85% 70% at 50% 42%, rgba(120, 95, 68, 0.09), transparent 58%),
+    radial-gradient(ellipse 50% 45% at 20% 88%, rgba(85, 72, 58, 0.07), transparent 52%),
+    radial-gradient(ellipse 55% 50% at 82% 18%, rgba(95, 82, 68, 0.05), transparent 55%),
+    var(--bg-base);
+  animation: acc-bg-breathe 42s var(--ease-soft) infinite;
+}
+
+@keyframes acc-bg-breathe {
+  0%,
+  100% {
+    filter: brightness(1) saturate(1);
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    filter: brightness(1.03) saturate(1.04);
+    transform: scale(1.012) translate3d(0.2%, -0.15%, 0);
+  }
+}
+
+html.room-acceptance .room-grain {
+  opacity: 0.038;
+  animation: acc-grain-shift 28s steps(12) infinite;
+}
+
+@keyframes acc-grain-shift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-2.5%, 1.8%, 0);
+  }
+}
+
+html.room-acceptance .acc-atmo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+html.room-acceptance .acc-atmo__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 72% 65% at 50% 45%, transparent 35%, rgba(0, 0, 0, 0.55) 100%);
+  opacity: 0.85;
+}
+
+html.room-acceptance .acc-atmo__warm {
+  position: absolute;
+  inset: -15%;
+  background: radial-gradient(ellipse 48% 42% at 50% 48%, rgba(185, 155, 115, 0.14), transparent 62%);
+  animation: acc-warm-pulse 16s ease-in-out infinite;
+}
+
+@keyframes acc-warm-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.95;
+    transform: scale(1.04);
+  }
+}
+
+html.room-acceptance .acc-atmo__drift {
+  position: absolute;
+  inset: -25%;
+  background:
+    radial-gradient(ellipse 40% 35% at 30% 40%, rgba(155, 130, 100, 0.06), transparent 55%),
+    radial-gradient(ellipse 45% 38% at 70% 60%, rgba(120, 100, 82, 0.05), transparent 58%);
+  animation: acc-drift 55s linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes acc-drift {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-3%, 2%, 0) rotate(4deg);
+  }
+}
+
+html.room-acceptance .acc-atmo__particles {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  background-image:
+    radial-gradient(circle at 12% 22%, rgba(235, 220, 200, 0.09) 0, transparent 0.35%),
+    radial-gradient(circle at 88% 18%, rgba(220, 200, 175, 0.07) 0, transparent 0.3%),
+    radial-gradient(circle at 40% 78%, rgba(210, 190, 165, 0.06) 0, transparent 0.28%),
+    radial-gradient(circle at 72% 62%, rgba(225, 205, 180, 0.05) 0, transparent 0.32%),
+    radial-gradient(circle at 22% 55%, rgba(200, 180, 155, 0.05) 0, transparent 0.25%);
+  background-size:
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%;
+  animation: acc-particles 38s ease-in-out infinite;
+}
+
+html.room-acceptance.acc-audio-active .acc-atmo__particles {
+  opacity: 1;
+}
+
+@keyframes acc-particles {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(1.5%, -1.2%, 0);
+  }
+}
+
+html.room-ceremony-audio.acc-audio-active .room-bg {
+  filter: brightness(0.88) saturate(0.95);
+  transition: filter 1.2s ease;
+}
+
+html.room-acceptance .room-page {
+  max-width: 36rem;
+  z-index: 2;
+}
+
+html.room-acceptance .room-page__nav {
+  opacity: 0.85;
+}
+
+html.room-acceptance .room-eyebrow {
+  color: var(--acc-ink-faint);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-style: normal;
+  font-size: 0.72rem;
+}
+
+html.room-acceptance .room-title {
+  color: var(--acc-ink);
+  font-weight: 500;
+  font-size: clamp(1.55rem, 5vw, 2.15rem);
+  line-height: 1.12;
+  letter-spacing: var(--heading-tracking, 0.02em);
+}
+
+html.room-acceptance .room-intro {
+  color: var(--acc-ink-soft);
+  font-size: clamp(0.98rem, 3.1vw, 1.06rem);
+  font-weight: 300;
+  line-height: 1.85;
+  max-width: 28rem;
+  margin-top: 1.35rem;
+}
+
+/* Ceremonial audio: minimal control, reflection is the focal point */
+html.room-acceptance .room-page > nav,
+html.room-acceptance .room-page > main > header {
+  animation: acc-page-rise 1.15s var(--acc-scene-ease) 0.1s both;
+}
+
+@keyframes acc-page-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+html.room-ceremony-audio .room-audio-block {
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  animation: acc-page-rise 1.15s var(--acc-scene-ease) 0.22s both;
+}
+
+html.room-ceremony-audio #room-prompt-flow {
+  animation: acc-page-rise 1.15s var(--acc-scene-ease) 0.38s both;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: clamp(1.85rem, 5.5vh, 2.85rem);
+}
+
+html.room-ceremony-audio .room-acc-audio-minimal {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+html.room-ceremony-audio .room-acc-minimal-play {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0;
+  border: none;
+  border-bottom: 1px solid rgba(185, 155, 115, 0.28);
+  background: transparent;
+  color: rgba(232, 224, 210, 0.88);
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  touch-action: manipulation;
+  transition:
+    color 0.45s ease,
+    border-color 0.45s ease,
+    opacity 0.45s ease;
+}
+
+html.room-ceremony-audio .room-acc-minimal-play:hover {
+  color: rgba(245, 238, 226, 0.98);
+  border-bottom-color: rgba(210, 185, 145, 0.55);
+}
+
+html.room-ceremony-audio .room-acc-minimal-play:focus-visible {
+  color: rgba(245, 238, 226, 0.98);
+  border-bottom-color: rgba(210, 185, 145, 0.55);
+  outline: 1px solid rgba(210, 185, 145, 0.35);
+  outline-offset: 0.35rem;
+}
+
+html.room-ceremony-audio .room-acc-wave-inline {
+  display: none;
+  align-items: flex-end;
+  gap: 2px;
+  height: 0.95rem;
+  opacity: 0.55;
+}
+
+html.room-ceremony-audio.acc-audio-active .room-acc-wave-inline {
+  display: inline-flex;
+}
+
+html.room-ceremony-audio .room-acc-wave-inline span {
+  width: 2px;
+  border-radius: 1px;
+  background: linear-gradient(to top, rgba(165, 140, 105, 0.2), rgba(210, 190, 160, 0.5));
+  animation: acc-wave-mini 1s ease-in-out infinite;
+}
+
+html.room-ceremony-audio .room-acc-wave-inline span:nth-child(1) {
+  height: 40%;
+  animation-delay: 0ms;
+}
+html.room-ceremony-audio .room-acc-wave-inline span:nth-child(2) {
+  height: 65%;
+  animation-delay: 100ms;
+}
+html.room-ceremony-audio .room-acc-wave-inline span:nth-child(3) {
+  height: 90%;
+  animation-delay: 200ms;
+}
+html.room-ceremony-audio .room-acc-wave-inline span:nth-child(4) {
+  height: 55%;
+  animation-delay: 300ms;
+}
+html.room-ceremony-audio .room-acc-wave-inline span:nth-child(5) {
+  height: 42%;
+  animation-delay: 400ms;
+}
+
+@keyframes acc-wave-mini {
+  0%,
+  100% {
+    transform: scaleY(0.6);
+    opacity: 0.45;
+  }
+  50% {
+    transform: scaleY(1);
+    opacity: 0.95;
+  }
+}
+
+html.room-ceremony-audio:not(.acc-audio-scrub-revealed) .room-acc-scrub-wrap {
+  display: none;
+}
+
+html.room-ceremony-audio .room-acc-scrub-wrap {
+  width: 100%;
+  max-width: 22rem;
+  margin-top: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+html.room-ceremony-audio .room-acc-scrub {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 0.35rem;
+  margin: 0;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    rgba(200, 175, 130, 0.45) 0%,
+    rgba(200, 175, 130, 0.45) var(--acc-scrub-pct, 0%),
+    rgba(185, 155, 115, 0.12) var(--acc-scrub-pct, 0%),
+    rgba(185, 155, 115, 0.12) 100%
+  );
+  cursor: pointer;
+  touch-action: none;
+}
+
+html.room-ceremony-audio .room-acc-scrub:disabled {
+  cursor: default;
+  opacity: 0.45;
+}
+
+html.room-ceremony-audio .room-acc-scrub::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 0.85rem;
+  height: 0.85rem;
+  margin-top: -0.25rem;
+  border-radius: 50%;
+  border: 1px solid rgba(220, 200, 170, 0.35);
+  background: radial-gradient(circle at 35% 30%, rgba(248, 240, 228, 0.95), rgba(175, 150, 115, 0.75));
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 12px rgba(185, 155, 115, 0.25);
+}
+
+html.room-ceremony-audio .room-acc-scrub::-moz-range-thumb {
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 50%;
+  border: 1px solid rgba(220, 200, 170, 0.35);
+  background: radial-gradient(circle at 35% 30%, rgba(248, 240, 228, 0.95), rgba(175, 150, 115, 0.75));
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 0 12px rgba(185, 155, 115, 0.25);
+}
+
+html.room-ceremony-audio .room-acc-scrub:focus-visible {
+  outline: 1px solid rgba(210, 185, 145, 0.45);
+  outline-offset: 0.35rem;
+}
+
+html.room-ceremony-audio .room-acc-scrub::-webkit-slider-runnable-track {
+  height: 0.35rem;
+  border-radius: 999px;
+  background: transparent;
+}
+
+html.room-ceremony-audio .room-acc-scrub::-moz-range-track {
+  height: 0.35rem;
+  border-radius: 999px;
+  background: rgba(185, 155, 115, 0.12);
+}
+
+html.room-ceremony-audio .room-acc-scrub-times {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 0.35rem;
+  margin-top: 0.45rem;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 300;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+  color: rgba(200, 192, 180, 0.48);
+}
+
+html.room-ceremony-audio .room-acc-scrub-sep {
+  opacity: 0.45;
+}
+
+html.room-ceremony-audio .room-acc-scrub::-moz-range-progress {
+  height: 0.35rem;
+  border-radius: 999px;
+  background: rgba(200, 175, 130, 0.45);
+}
+
+html.room-ceremony-audio .room-acc-audio-caption {
+  margin-top: 0.65rem;
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: rgba(200, 192, 180, 0.42);
+  line-height: 1.5;
+}
+
+/* Prompt scene transitions */
+html.room-acceptance .room-prompt__scene {
+  transition:
+    opacity var(--acc-scene-ms) var(--acc-scene-ease),
+    filter var(--acc-scene-ms) var(--acc-scene-ease),
+    transform var(--acc-scene-ms) var(--acc-scene-ease);
+  will-change: opacity, filter, transform;
+}
+
+html.room-acceptance .room-prompt__scene.is-exiting {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(-0.65rem);
+  pointer-events: none;
+}
+
+html.room-acceptance .room-prompt__scene.is-entering {
+  animation: acc-scene-enter var(--acc-scene-ms) var(--acc-scene-ease) forwards;
+}
+
+@keyframes acc-scene-enter {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+html.room-acceptance .room-prompt__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.06rem, 3.5vw, 1.32rem);
+  font-weight: 500;
+  color: var(--acc-ink);
+  line-height: 1.42;
+  letter-spacing: var(--heading-tracking, 0.02em);
+  margin-bottom: 0.85rem;
+}
+
+html.room-acceptance .room-prompt__body {
+  margin-top: 0;
+  margin-bottom: clamp(1.2rem, 3.5vh, 1.9rem);
+  color: var(--acc-ink-soft);
+  font-size: clamp(0.9rem, 2.8vw, 0.98rem);
+  font-weight: 300;
+  line-height: 1.82;
+  letter-spacing: 0.02em;
+}
+
+html.room-acceptance .room-reflect__q {
+  color: var(--acc-ink-soft);
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.65rem;
+}
+
+html.room-acceptance .room-reflect__ta {
+  border: 1px solid rgba(185, 155, 115, 0.12);
+  border-radius: 0.75rem;
+  background: rgba(8, 7, 6, 0.42);
+  color: var(--acc-ink);
+  font-family: var(--font-body);
+  font-size: max(16px, 1rem);
+  line-height: 1.75;
+  min-height: clamp(8.5rem, 28vh, 12rem);
+  padding: 1.1rem 1.15rem;
+  box-shadow: 0 0 0 0 rgba(185, 155, 115, 0);
+  transition:
+    border-color 0.5s ease,
+    box-shadow 0.55s ease,
+    background 0.55s ease,
+    min-height 0.6s var(--acc-scene-ease),
+    color 0.45s ease;
+}
+
+html.room-acceptance .room-reflect__ta::placeholder {
+  color: rgba(200, 190, 175, 0.28);
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+html.room-acceptance .room-reflect__ta:hover {
+  border-color: rgba(185, 155, 115, 0.2);
+}
+
+html.room-acceptance .room-reflect__ta:focus {
+  outline: none;
+  border-color: rgba(200, 175, 130, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(185, 155, 115, 0.12),
+    0 0 36px rgba(185, 155, 115, 0.08) inset,
+    0 0 48px rgba(0, 0, 0, 0.25);
+  background: rgba(12, 10, 9, 0.55);
+  min-height: clamp(10rem, 32vh, 14rem);
+}
+
+html.room-acceptance .room-reflect__ta:not(:placeholder-shown) {
+  color: rgba(248, 244, 238, 0.98);
+  box-shadow: 0 0 28px rgba(185, 155, 115, 0.06) inset;
+}
+
+html.room-acceptance .room-prompt__nav {
+  margin-top: clamp(1.75rem, 5vh, 2.5rem);
+  gap: 0.85rem;
+}
+
+html.room-acceptance .room-prompt__nav .room-btn--ghost {
+  border: 1px solid rgba(185, 155, 115, 0.18);
+  color: var(--acc-ink-soft);
+  background: rgba(12, 10, 9, 0.25);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: box-shadow 0.55s ease, border-color 0.45s ease, color 0.45s ease, background 0.45s ease;
+}
+
+html.room-acceptance .room-prompt__nav .room-btn--ghost:hover,
+html.room-acceptance .room-prompt__nav .room-btn--ghost:focus-visible {
+  border-color: rgba(200, 175, 130, 0.35);
+  color: var(--acc-ink);
+  box-shadow: 0 0 28px rgba(185, 155, 115, 0.12);
+  background: rgba(18, 15, 13, 0.45);
+}
+
+html.room-acceptance .room-prompt__nav #prompt-next {
+  border-color: rgba(200, 175, 130, 0.28);
+}
+
+html:not(.room-ceremony-audio) .room-audio-ceremony-wrap {
+  display: none !important;
+}
+
+html.room-ceremony-audio .room-audio-legacy-wrap {
+  display: none !important;
+}
+
+html:not(.room-acceptance) .acc-atmo,
+html:not(.room-acceptance) .acc-interlude,
+html:not(.room-acceptance) .acc-outro {
+  display: none !important;
+}
+
+/* Interlude + outro overlays */
+.acc-interlude,
+.acc-outro {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  padding: max(1.5rem, env(safe-area-inset-top)) max(1.25rem, env(safe-area-inset-right))
+    max(1.5rem, env(safe-area-inset-bottom)) max(1.25rem, env(safe-area-inset-left));
+  background: rgba(3, 2, 2, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 1s ease, visibility 1s linear;
+}
+
+.acc-interlude.is-open,
+.acc-outro.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.acc-interlude__inner,
+.acc-outro__inner {
+  max-width: 26rem;
+  text-align: center;
+}
+
+.acc-interlude__line {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 4.5vw, 1.55rem);
+  font-weight: 400;
+  color: rgba(240, 232, 220, 0.92);
+  line-height: 1.45;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  opacity: 0;
+}
+
+.acc-interlude.is-open .acc-interlude__line {
+  animation: acc-line-rise 1.2s var(--acc-scene-ease) forwards;
+}
+
+@keyframes acc-line-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.acc-interlude__continue,
+.acc-outro__continue {
+  margin-top: 2rem;
+  padding: 0.85rem 1.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(200, 175, 130, 0.35);
+  background: rgba(18, 15, 12, 0.55);
+  color: rgba(235, 226, 210, 0.9);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: box-shadow 0.5s ease, border-color 0.45s ease;
+}
+
+.acc-interlude__continue:hover,
+.acc-outro__continue:hover,
+.acc-interlude__continue:focus-visible,
+.acc-outro__continue:focus-visible {
+  box-shadow: 0 0 32px rgba(185, 155, 115, 0.15);
+  border-color: rgba(220, 195, 150, 0.45);
+  outline: none;
+}
+
+.acc-outro {
+  background: radial-gradient(ellipse 70% 60% at 50% 45%, rgba(45, 38, 32, 0.55), rgba(5, 4, 3, 0.88));
+}
+
+.acc-outro.is-open {
+  animation: acc-outro-brighten 2.4s ease forwards;
+}
+
+@keyframes acc-outro-brighten {
+  from {
+    filter: brightness(0.85);
+  }
+  to {
+    filter: brightness(1.05);
+  }
+}
+
+.acc-outro__branch {
+  width: min(12rem, 42vw);
+  height: auto;
+  margin: 0 auto 1.75rem;
+  opacity: 0.35;
+  animation: acc-branch-grow 3.5s var(--acc-scene-ease) forwards;
+}
+
+@keyframes acc-branch-grow {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(0.5rem);
+  }
+  to {
+    opacity: 0.4;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.acc-outro__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 500;
+  color: rgba(248, 242, 232, 0.96);
+  letter-spacing: -0.02em;
+  margin-bottom: 1.35rem;
+}
+
+.acc-outro__verse {
+  font-family: var(--font-display);
+  font-size: clamp(1.02rem, 3.4vw, 1.18rem);
+  font-weight: 400;
+  color: rgba(228, 218, 205, 0.88);
+  line-height: 1.65;
+  text-wrap: balance;
+  margin-bottom: 0.65rem;
+}
+
+.acc-outro__hint {
+  margin-top: 1.75rem;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(195, 185, 170, 0.5);
+}
+
+html.room-acceptance .room-actions .room-btn {
+  border-radius: 999px;
+}
+
+html.room-acceptance .room-actions .room-btn--primary {
+  box-shadow: 0 0 32px rgba(185, 155, 115, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.room-ceremony-audio .room-page > nav,
+  html.room-ceremony-audio .room-page > main > header,
+  html.room-ceremony-audio .room-audio-block,
+  html.room-ceremony-audio #room-prompt-flow {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  html.room-acceptance .room-bg,
+  html.room-acceptance .room-grain,
+  html.room-acceptance .acc-atmo__warm,
+  html.room-acceptance .acc-atmo__drift,
+  html.room-acceptance .acc-atmo__particles,
+  html.room-ceremony-audio .room-acc-wave-inline span {
+    animation: none !important;
+  }
+
+  html.room-ceremony-audio.acc-audio-active .room-bg {
+    filter: none;
+  }
+
+  html.room-ceremony-audio .room-prompt__scene.is-exiting,
+  html.room-ceremony-audio .room-prompt__scene.is-entering {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  html.room-acceptance .acc-atmo__particles {
+    opacity: 0 !important;
+  }
+
+  .acc-outro__branch {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>You’ve completed: The Rebuilding Room</title>
+  <meta name="description" content="You finished The Rebuilding Room. Book a call or download your reflections.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#070605">
+  <link rel="stylesheet" href="css/coaching-theme.css">
+  <style>
+    :root {
+      --gutter: clamp(1rem, 4vw + 0.35rem, 3rem);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    body {
+      min-height: 100%;
+      min-height: 100dvh;
+    }
+
+    .complete-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 72% 58% at 50% 22%, var(--accent-glow), transparent 58%),
+        radial-gradient(ellipse 45% 38% at 20% 88%, rgba(95, 88, 78, 0.07), transparent 52%),
+        var(--bg-base);
+      animation: coaching-ambient 26s var(--ease-soft) infinite;
+    }
+
+    .complete-main {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+      padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+      padding-top: max(var(--gutter), env(safe-area-inset-top, 0px));
+      padding-bottom: max(var(--gutter), env(safe-area-inset-bottom, 0px));
+      text-align: center;
+    }
+
+    .complete-inner {
+      width: min(100%, 36rem);
+      animation: coaching-rise var(--dur-long) var(--ease-soft) forwards;
+    }
+
+    .complete-eyebrow {
+      margin-bottom: 0.65rem;
+      color: var(--text-faint);
+      font-size: 0.88rem;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: 0.02em;
+    }
+
+    .complete-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.65rem, 4.5vw, 2.35rem);
+      font-weight: 500;
+      letter-spacing: var(--heading-tracking, 0.02em);
+      line-height: 1.14;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+    }
+
+    .complete-message {
+      margin-top: 1.35rem;
+      color: var(--text-quiet);
+      font-size: clamp(1rem, 1.85vw, 1.1rem);
+      font-weight: 300;
+      line-height: 1.78;
+      text-wrap: pretty;
+    }
+
+    .complete-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0.85rem;
+      margin-top: clamp(2rem, 5vw, 2.75rem);
+    }
+
+    @media (min-width: 32em) {
+      .complete-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .complete-actions__secondary {
+        order: 2;
+      }
+
+      .complete-actions__primary {
+        order: 1;
+        flex: 1 1 auto;
+        min-width: min(100%, 14rem);
+      }
+    }
+
+    .complete-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: max(2.75rem, 48px);
+      padding: 0.92rem 1.4rem;
+      border-radius: 0.55rem;
+      font: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      cursor: pointer;
+      border: 1px solid transparent;
+      touch-action: manipulation;
+      transition: border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-medium) var(--ease-soft), transform var(--dur-medium) var(--ease-soft);
+    }
+
+    .complete-btn--primary {
+      border-color: var(--line-strong);
+      color: #171310;
+      background: linear-gradient(165deg, rgba(232, 212, 184, 0.98) 0%, var(--accent-mid) 50%, #8f734d 100%);
+      box-shadow: 0 0 1.5rem var(--accent-glow);
+    }
+
+    .complete-btn--primary:hover,
+    .complete-btn--primary:focus-visible {
+      box-shadow: 0 0 2rem rgba(185, 155, 115, 0.22);
+      transform: translateY(-2px);
+    }
+
+    .complete-btn--secondary {
+      border: 1px solid var(--line);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .complete-btn--secondary:hover,
+    .complete-btn--secondary:focus-visible {
+      border-color: var(--line-strong);
+      background: var(--bg-card);
+    }
+
+    .complete-btn:focus-visible {
+      outline: 2px solid var(--line-strong);
+      outline-offset: 3px;
+    }
+
+    .complete-nav {
+      margin-top: clamp(2.25rem, 5vw, 3rem);
+      font-size: 0.86rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+    }
+
+    .complete-nav a {
+      color: var(--text-quiet);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
+    }
+
+    .complete-nav a:hover,
+    .complete-nav a:focus-visible {
+      color: var(--accent);
+      border-bottom-color: var(--accent-soft);
+    }
+
+    .complete-nav-sep {
+      margin: 0 0.5rem;
+      color: var(--text-faint);
+    }
+
+    .complete-download-status {
+      margin-top: 1rem;
+      min-height: 1.25rem;
+      color: var(--text-quiet);
+      font-size: 0.86rem;
+      font-weight: 300;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .complete-bg {
+        animation: none;
+      }
+
+      .complete-inner {
+        animation: none;
+      }
+
+      .complete-btn--primary:hover,
+      .complete-btn--primary:focus-visible {
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="complete-bg" aria-hidden="true"></div>
+
+  <main class="complete-main">
+    <div class="complete-inner">
+      <p class="complete-eyebrow">The Rebuilding Room</p>
+      <h1 class="complete-title" id="complete-title">You’ve completed The Rebuilding Room</h1>
+      <p class="complete-message">
+        You showed up for six rooms of honest reflection. That takes courage. Carry what you’ve written with you;
+        it’s proof of how far you’ve already come. When you’re ready, the next step is yours to choose.
+      </p>
+
+      <div class="complete-actions">
+        <!-- Replace href with your real booking link (e.g. Calendly). -->
+        <a
+          class="complete-btn complete-btn--primary complete-actions__primary"
+          id="book-rebuilding-call"
+          href="https://calendly.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Book a rebuilding call</a>
+        <button type="button" class="complete-btn complete-btn--secondary complete-actions__secondary" id="download-reflections">
+          Download my reflections
+        </button>
+      </div>
+
+      <p class="complete-download-status" id="download-status" role="status" aria-live="polite"></p>
+
+      <nav class="complete-nav" aria-label="Footer">
+        <a href="dashboard.html">Course dashboard</a>
+        <span class="complete-nav-sep" aria-hidden="true">/</span>
+        <a href="./">Home</a>
+      </nav>
+    </div>
+  </main>
+
+  <script src="js/course-progress.js"></script>
+  <script>
+    (function () {
+      if (!window.RRCourseProgress || !window.RRCourseProgress.hasCompletedCourse()) {
+        window.location.replace("dashboard.html");
+        return;
+      }
+
+      var statusEl = document.getElementById("download-status");
+
+      document.getElementById("download-reflections")?.addEventListener("click", function () {
+        try {
+          var text = window.RRCourseProgress.getReflectionsExportText();
+          var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+          var url = URL.createObjectURL(blob);
+          var a = document.createElement("a");
+          a.href = url;
+          a.download = "rebuilding-room-my-reflections.txt";
+          a.rel = "noopener";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+          if (statusEl) {
+            statusEl.textContent = "Your file should begin downloading.";
+          }
+        } catch (e) {
+          if (statusEl) {
+            statusEl.textContent = "Something interrupted the download. You can still copy your words from each room.";
+          }
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

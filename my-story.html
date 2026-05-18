@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Story | Redefining MS</title>
+  <meta name="description" content="Lloyd on the relief and uncertainty of an MS diagnosis, living with harder days, and why Redefining MS began as a place for honest rebuilding.">
+  <meta name="author" content="Lloyd">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="me" href="https://www.instagram.com/redefiningms">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Redefining MS">
+  <meta property="og:title" content="My Story | Redefining MS">
+  <meta property="og:description" content="Lloyd on the relief and uncertainty of an MS diagnosis, living with harder days, and why Redefining MS began as a place for honest rebuilding.">
+  <meta property="og:image" content="my-story-background.jpg">
+  <meta property="og:image:alt" content="Football boots on a pitch at night">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="My Story | Redefining MS">
+  <meta name="twitter:description" content="Lloyd on the relief and uncertainty of an MS diagnosis, living with harder days, and why Redefining MS began as a place for honest rebuilding.">
+  <meta name="twitter:image" content="my-story-background.jpg">
+  <meta name="twitter:image:alt" content="Football boots on a pitch at night">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "My Story",
+      "description": "Lloyd on the relief and uncertainty of an MS diagnosis, and why Redefining MS began as a place for honest rebuilding.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Redefining MS"
+      },
+      "inLanguage": "en-GB",
+      "about": {
+        "@type": "MedicalCondition",
+        "name": "Multiple Sclerosis"
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #f2f0eb;
+      --text-muted: rgba(242, 240, 235, 0.62);
+      --text-sage: #98a892;
+      --glow-sage: rgba(131, 148, 131, 0.14);
+      --reveal-duration: 1.35s;
+      --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --screen-gutter: clamp(2rem, 8vw, 5.5rem);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    }
+
+    .story-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(118, 142, 118, 0.08), transparent 42%),
+        radial-gradient(circle at 82% 78%, rgba(88, 98, 86, 0.06), transparent 40%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.84) 45%, rgba(0, 0, 0, 0.94) 100%),
+        url("my-story-background.jpg") center center / cover no-repeat;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    .story-grain {
+      position: fixed;
+      inset: -20%;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+      animation: story-grain 22s steps(10) infinite;
+    }
+
+    @keyframes story-grain {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      100% {
+        transform: translate3d(-3%, 2%, 0);
+      }
+    }
+
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      padding: 0.9rem var(--screen-gutter);
+      border-bottom: 1px solid rgba(152, 168, 146, 0.14);
+      background: rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .site-nav.is-menu-open {
+      background: transparent;
+      border-bottom-color: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .site-nav.is-menu-open .site-nav__inner {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      padding: 0.9rem var(--screen-gutter);
+    }
+
+    .site-nav__inner {
+      position: relative;
+      z-index: 52;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .site-nav__toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.35rem 0.15rem;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .site-nav__toggle-label {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .site-nav__toggle-lines {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .site-nav__toggle-lines span {
+      display: block;
+      width: 1.15rem;
+      height: 1px;
+      background: currentColor;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .site-nav.is-menu-open .site-nav__toggle-lines span:nth-child(1) {
+      transform: translateY(0.43rem) rotate(45deg);
+    }
+
+    .site-nav.is-menu-open .site-nav__toggle-lines span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .site-nav.is-menu-open .site-nav__toggle-lines span:nth-child(3) {
+      transform: translateY(-0.43rem) rotate(-45deg);
+    }
+
+    .site-nav__menu {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: var(--screen-gutter);
+      background: var(--bg);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.55s ease,
+        visibility 0.55s ease;
+    }
+
+    body.is-nav-open .site-nav__menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .site-nav__list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(2rem, 4.5vh, 3.25rem);
+      list-style: none;
+    }
+
+    .site-nav__link {
+      color: var(--text);
+      font-size: clamp(1.45rem, 4.2vw, 2.35rem);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      text-decoration: none;
+      opacity: 0.9;
+      transition: color 0.4s ease, opacity 0.4s ease;
+    }
+
+    .site-nav__link:hover,
+    .site-nav__link:focus-visible {
+      color: var(--text-sage);
+      opacity: 1;
+    }
+
+    .site-nav__link:focus-visible {
+      outline: 2px solid var(--text-sage);
+      outline-offset: 4px;
+    }
+
+    .site-nav__link--current {
+      color: var(--text-sage);
+    }
+
+    body.is-nav-open,
+    body.is-meaning-open {
+      overflow: hidden;
+    }
+
+    .scroll-cue {
+      position: fixed;
+      left: 50%;
+      bottom: clamp(1.25rem, 3vh, 2.25rem);
+      z-index: 25;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: rgba(242, 240, 235, 0.62);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      transform: translateX(-50%);
+      transition: opacity 0.9s ease;
+    }
+
+    .scroll-cue.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .scroll-cue__arrow {
+      display: inline-block;
+      color: var(--text-sage);
+      animation: scroll-cue-bob 3.2s ease-in-out infinite;
+    }
+
+    @keyframes scroll-cue-bob {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(0.28rem);
+      }
+    }
+
+    .story {
+      position: relative;
+      z-index: 2;
+    }
+
+    .story-screen {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 62dvh;
+      padding:
+        calc(4.25rem + clamp(0.35rem, 1.5vh, 0.75rem))
+        var(--screen-gutter)
+        clamp(2rem, 5vh, 3rem);
+    }
+
+    .story-hero {
+      min-height: 88dvh;
+      padding-bottom: clamp(2.5rem, 6vh, 3.5rem);
+    }
+
+    .story-scene {
+      min-height: 52dvh;
+    }
+
+    .story-body,
+    .story-mission,
+    .story-identity,
+    .story-reflection {
+      min-height: auto;
+    }
+
+    .story-screen__inner {
+      width: min(100%, 46rem);
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .story-screen__inner--wide {
+      width: min(100%, 52rem);
+    }
+
+    .story-screen__inner--narrow {
+      width: min(100%, 34rem);
+    }
+
+    .story-hero__title {
+      margin-bottom: clamp(1rem, 2.5vh, 1.5rem);
+      font-size: clamp(2.8rem, 10vw, 5.5rem);
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      line-height: 1.02;
+      text-transform: uppercase;
+    }
+
+    .story-hero__lead {
+      margin-bottom: clamp(0.85rem, 2vh, 1.25rem);
+      font-size: clamp(1.45rem, 4.2vw, 2.35rem);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      line-height: 1.35;
+    }
+
+    .story-hero__sub {
+      max-width: 34rem;
+      margin: 0 auto;
+      color: var(--text-muted);
+      font-size: clamp(0.98rem, 2vw, 1.12rem);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1.75;
+    }
+
+    .story-scene__line {
+      font-size: clamp(1.75rem, 5.8vw, 3.35rem);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      line-height: 1.28;
+      text-wrap: balance;
+    }
+
+    .story-scene--shift .story-screen__inner {
+      text-align: left;
+    }
+
+    .story-scene--shift-right .story-screen__inner {
+      text-align: right;
+    }
+
+    .story-body__block {
+      margin-bottom: clamp(1.5rem, 4vh, 2.35rem);
+      color: var(--text-muted);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(0.98rem, 1.9vw, 1.08rem);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      line-height: 1.85;
+      text-wrap: balance;
+    }
+
+    .story-body__block:last-child {
+      margin-bottom: 0;
+    }
+
+    .story-mission {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .story-mission::before {
+      content: "";
+      position: absolute;
+      inset: -30% -20%;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, var(--glow-sage), transparent 72%);
+      opacity: 0.85;
+    }
+
+    .story-mission__lead {
+      margin-bottom: clamp(0.9rem, 2.2vh, 1.25rem);
+      font-size: clamp(1.55rem, 4.2vw, 2.35rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      line-height: 1.35;
+    }
+
+    .story-mission__copy {
+      max-width: 30rem;
+      margin: 0 auto;
+      color: var(--text-muted);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(0.95rem, 1.85vw, 1.05rem);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      line-height: 1.9;
+      text-transform: uppercase;
+    }
+
+    .story-identity__list {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.55rem, 1.6vh, 0.9rem);
+      list-style: none;
+    }
+
+    .story-identity__line {
+      font-size: clamp(1.35rem, 4vw, 2.15rem);
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      opacity: 0;
+      transform: translate3d(0, 1rem, 0);
+      transition:
+        opacity var(--reveal-duration) var(--reveal-ease),
+        transform calc(var(--reveal-duration) + 0.1s) var(--reveal-ease);
+      transition-delay: var(--delay, 0s);
+    }
+
+    .story-identity.is-visible .story-identity__line {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .story-reflection {
+      padding-bottom: clamp(3rem, 7vh, 4.5rem);
+    }
+
+    .story-reflection__eyebrow {
+      margin-bottom: clamp(0.75rem, 2vh, 1.1rem);
+      color: var(--text-sage);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+
+    .story-reflection__copy {
+      max-width: 28rem;
+      margin: 0 auto clamp(1.25rem, 3vh, 1.75rem);
+      color: var(--text-muted);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(0.92rem, 1.75vw, 1rem);
+      line-height: 1.75;
+    }
+
+    .story-meaning__button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 14rem;
+      padding: 0.95rem 1.85rem;
+      border: 1px solid rgba(152, 168, 146, 0.45);
+      color: var(--text);
+      background: rgba(0, 0, 0, 0.28);
+      font: inherit;
+      font-size: clamp(0.72rem, 1.25vw, 0.84rem);
+      letter-spacing: 0.14em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition:
+        color 0.5s ease,
+        border-color 0.5s ease,
+        background-color 0.5s ease,
+        box-shadow 0.5s ease;
+    }
+
+    .story-meaning__button:hover,
+    .story-meaning__button:focus-visible {
+      border-color: var(--text-sage);
+      background: rgba(152, 168, 146, 0.12);
+      box-shadow: 0 0 2rem rgba(118, 148, 142, 0.12);
+    }
+
+    .story-meaning__button:focus-visible {
+      outline: 2px solid var(--text-sage);
+      outline-offset: 3px;
+    }
+
+    .story-meaning__reveal {
+      position: fixed;
+      inset: 0;
+      z-index: 40;
+      display: grid;
+      place-items: center;
+      padding: calc(4.5rem + var(--screen-gutter)) var(--screen-gutter) var(--screen-gutter);
+      background: rgba(0, 0, 0, 0.94);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.65s ease,
+        visibility 0.65s ease;
+    }
+
+    .story-meaning__reveal.is-open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .story-meaning__frame {
+      position: relative;
+      width: min(100%, 56rem);
+      max-height: min(82dvh, 52rem);
+    }
+
+    .story-meaning__image {
+      display: block;
+      width: 100%;
+      max-height: min(82dvh, 52rem);
+      object-fit: contain;
+      opacity: 0;
+      transform: translate3d(0, 0.75rem, 0) scale(0.985);
+      transition:
+        opacity 0.85s ease,
+        transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .story-meaning__reveal.is-open .story-meaning__image {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    .story-meaning__close {
+      position: absolute;
+      top: calc(0.9rem + env(safe-area-inset-top, 0px));
+      right: var(--screen-gutter);
+      z-index: 41;
+      padding: 0.35rem 0.15rem;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      font: inherit;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      line-height: 1;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .story-meaning__close:hover,
+    .story-meaning__close:focus-visible {
+      color: var(--text-sage);
+    }
+
+    .story-meaning__close:focus-visible {
+      outline: 2px solid var(--text-sage);
+      outline-offset: 4px;
+    }
+
+    .story-reveal {
+      opacity: 0;
+      filter: blur(10px);
+      transform: translate3d(0, 1.5rem, 0);
+      transition:
+        opacity var(--reveal-duration) var(--reveal-ease),
+        filter var(--reveal-duration) var(--reveal-ease),
+        transform calc(var(--reveal-duration) + 0.15s) var(--reveal-ease);
+      transition-delay: var(--reveal-delay, 0s);
+    }
+
+    .story-reveal.is-visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translate3d(0, 0, 0);
+    }
+
+    @media (min-width: 900px) {
+      .story-scene--shift .story-screen__inner {
+        margin-left: 0;
+        margin-right: auto;
+        padding-left: clamp(1rem, 6vw, 5rem);
+      }
+
+      .story-scene--shift-right .story-screen__inner {
+        margin-left: auto;
+        margin-right: 0;
+        padding-right: clamp(1rem, 6vw, 5rem);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .story-grain,
+      .scroll-cue__arrow {
+        animation: none;
+      }
+
+      .story-reveal,
+      .story-identity__line {
+        opacity: 1;
+        filter: none;
+        transform: none;
+        transition: none;
+      }
+
+      .story-meaning__reveal,
+      .story-meaning__image {
+        transition: none;
+      }
+
+      .story-meaning__reveal.is-open .story-meaning__image {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="story-backdrop" id="story-backdrop" aria-hidden="true"></div>
+  <div class="story-grain" aria-hidden="true"></div>
+
+  <header class="site-nav" id="site-nav">
+    <div class="site-nav__inner">
+      <button type="button" class="site-nav__toggle" aria-expanded="false" aria-controls="site-nav-menu">
+        <span class="site-nav__toggle-label" id="site-nav-toggle-label">Menu</span>
+        <span class="site-nav__toggle-lines" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <nav id="site-nav-menu" class="site-nav__menu" aria-label="Primary" aria-hidden="true">
+    <ul class="site-nav__list">
+      <li><a class="site-nav__link site-nav__link--current" href="my-story.html" aria-current="page">My Story</a></li>
+      <li><a class="site-nav__link" href="the-book.html">The Book</a></li>
+      <li><a class="site-nav__link" href="support.html">Support</a></li>
+      <li><a class="site-nav__link" href="https://www.instagram.com/redefiningms" target="_blank" rel="noopener noreferrer">Connect</a></li>
+    </ul>
+  </nav>
+
+  <p class="scroll-cue" id="scroll-cue" aria-hidden="true">
+    <span class="scroll-cue__arrow" aria-hidden="true">↓</span>
+    <span class="scroll-cue__label">Scroll to begin</span>
+  </p>
+
+  <main class="story">
+    <section class="story-screen story-hero" aria-labelledby="story-hero-title">
+      <div class="story-screen__inner story-reveal">
+        <h1 class="story-hero__title" id="story-hero-title">My Story</h1>
+        <p class="story-hero__lead">Late 2023 changed everything.</p>
+        <p class="story-hero__sub">What started as strange symptoms became a diagnosis that forced me to rethink movement, identity, purpose, and the future.</p>
+      </div>
+    </section>
+
+    <section class="story-screen story-scene" aria-label="A sense of relief after diagnosis">
+      <div class="story-screen__inner story-reveal">
+        <p class="story-scene__line">Oddly, when I was finally diagnosed with MS, there was also a sense of relief.</p>
+      </div>
+    </section>
+
+    <section class="story-screen story-scene story-scene--shift" aria-label="Finally knowing what I was facing">
+      <div class="story-screen__inner story-reveal">
+        <p class="story-scene__line">At least with a diagnosis, I finally knew what I was facing.</p>
+      </div>
+    </section>
+
+    <section class="story-screen story-scene" aria-label="The journey did not suddenly become easy">
+      <div class="story-screen__inner story-reveal">
+        <p class="story-scene__line">That does not mean the journey suddenly became easy.</p>
+      </div>
+    </section>
+
+    <section class="story-screen story-scene story-scene--shift-right" aria-label="Continuing to push forward">
+      <div class="story-screen__inner story-reveal">
+        <p class="story-scene__line">But I continue to push forward.</p>
+      </div>
+    </section>
+
+    <section class="story-screen story-scene" aria-label="Refusing to let diagnosis determine who I am">
+      <div class="story-screen__inner story-reveal">
+        <p class="story-scene__line">Not because I ignore the reality of MS, but because I refuse to let my diagnosis determine who I am.</p>
+      </div>
+    </section>
+
+    <section class="story-screen story-body" aria-label="Living with uncertainty and MS">
+      <div class="story-screen__inner story-screen__inner--wide">
+        <p class="story-body__block story-reveal" style="--reveal-delay: 0s">For so long, not knowing what was happening to my body and the uncertainty was frightening.</p>
+        <p class="story-body__block story-reveal" style="--reveal-delay: 0.08s">Living without answers can allow fear to fill the gaps.</p>
+        <p class="story-body__block story-reveal" style="--reveal-delay: 0.16s">In many ways, the longer I have lived with MS, the harder certain days have become.</p>
+        <p class="story-body__block story-reveal" style="--reveal-delay: 0.24s">Some days my body challenges me more than ever.<br>The fatigue. The frustration. The constant adapting.</p>
+        <p class="story-body__block story-reveal" style="--reveal-delay: 0.32s">It can be exhausting physically and mentally.</p>
+        <p class="story-body__block story-reveal" style="--reveal-delay: 0.4s">If this journey helps even one person feel less alone, then it has meaning.</p>
+      </div>
+    </section>
+
+    <section class="story-screen story-mission" aria-label="Why Redefining MS exists">
+      <div class="story-screen__inner story-screen__inner--narrow story-reveal">
+        <p class="story-mission__lead">Redefining MS was created from that journey.</p>
+      </div>
+    </section>
+
+    <section class="story-screen story-identity story-reveal" id="story-identity" aria-label="Identity">
+      <div class="story-screen__inner story-screen__inner--narrow">
+        <ul class="story-identity__list">
+          <li class="story-identity__line" style="--delay: 0s">Father.</li>
+          <li class="story-identity__line" style="--delay: 0.18s">Mentor.</li>
+          <li class="story-identity__line" style="--delay: 0.36s">Educator.</li>
+          <li class="story-identity__line" style="--delay: 0.54s">Human first.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="story-screen story-reflection" aria-label="Meaning beyond Redefining MS">
+      <div class="story-screen__inner story-screen__inner--narrow story-reveal">
+        <p class="story-reflection__eyebrow">A final reflection</p>
+        <p class="story-reflection__copy">Beyond the diagnosis, there is still meaning. This is the deeper truth behind the journey.</p>
+        <button type="button" class="story-meaning__button" id="story-meaning-toggle" aria-expanded="false" aria-controls="story-meaning-reveal">
+          Meaning Beyond Redefining MS
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <div class="story-meaning__reveal" id="story-meaning-reveal" hidden>
+    <button type="button" class="story-meaning__close" id="story-meaning-close">Close</button>
+    <div class="story-meaning__frame">
+      <img class="story-meaning__image" src="meaning.png" alt="Meaning beyond Redefining MS">
+    </div>
+  </div>
+
+  <script>
+    const siteNav = document.getElementById("site-nav");
+    const navToggle = document.querySelector(".site-nav__toggle");
+    const navToggleLabel = document.getElementById("site-nav-toggle-label");
+    const navMenu = document.getElementById("site-nav-menu");
+    const mobileNavQuery = window.matchMedia("(max-width: 767px)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const scrollCue = document.getElementById("scroll-cue");
+    const storyBackdrop = document.getElementById("story-backdrop");
+    const meaningToggle = document.getElementById("story-meaning-toggle");
+    const meaningReveal = document.getElementById("story-meaning-reveal");
+    const meaningClose = document.getElementById("story-meaning-close");
+    const revealElements = document.querySelectorAll(".story-reveal, .story-identity");
+    const storyHero = document.querySelector(".story-hero");
+
+    const setMeaningOpen = (open) => {
+      if (!meaningReveal || !meaningToggle) {
+        return;
+      }
+
+      meaningReveal.classList.toggle("is-open", open);
+      meaningReveal.hidden = !open;
+      meaningToggle.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("is-meaning-open", open);
+    };
+
+    const setMenuOpen = (open) => {
+      siteNav.classList.toggle("is-menu-open", open);
+      navToggle.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("is-nav-open", open);
+      navMenu.setAttribute("aria-hidden", String(!open));
+
+      if (navToggleLabel) {
+        navToggleLabel.textContent = open ? "Close" : "Menu";
+      }
+    };
+
+    const setScrollCueVisible = (visible) => {
+      if (!scrollCue) {
+        return;
+      }
+
+      scrollCue.classList.toggle("is-hidden", !visible);
+      scrollCue.setAttribute("aria-hidden", String(!visible));
+    };
+
+    const updateScrollCue = () => {
+      if (!scrollCue || !storyHero) {
+        return;
+      }
+
+      const pastHero = storyHero.getBoundingClientRect().bottom <= window.innerHeight * 0.72;
+      setScrollCueVisible(!pastHero);
+    };
+
+    if (!reducedMotionQuery.matches) {
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          });
+        },
+        {
+          threshold: 0.28,
+          rootMargin: "0px 0px -8% 0px",
+        }
+      );
+
+      revealElements.forEach((element) => revealObserver.observe(element));
+    } else {
+      revealElements.forEach((element) => element.classList.add("is-visible"));
+    }
+
+    const heroReveal = document.querySelector(".story-hero .story-reveal");
+
+    if (heroReveal) {
+      heroReveal.classList.add("is-visible");
+    }
+
+    if (!reducedMotionQuery.matches && storyBackdrop) {
+      let parallaxFrame = null;
+
+      const updateParallax = () => {
+        parallaxFrame = null;
+        storyBackdrop.style.transform = `translate3d(0, ${window.scrollY * 0.1}px, 0)`;
+      };
+
+      const queueParallax = () => {
+        if (parallaxFrame !== null) {
+          return;
+        }
+
+        parallaxFrame = window.requestAnimationFrame(updateParallax);
+      };
+
+      window.addEventListener("scroll", queueParallax, { passive: true });
+      window.addEventListener("resize", queueParallax);
+      queueParallax();
+    }
+
+    updateScrollCue();
+
+    let scrollCueTicking = false;
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (scrollCueTicking) {
+          return;
+        }
+
+        scrollCueTicking = true;
+        window.requestAnimationFrame(() => {
+          updateScrollCue();
+          scrollCueTicking = false;
+        });
+      },
+      { passive: true }
+    );
+
+    window.addEventListener("resize", updateScrollCue);
+
+    navToggle.addEventListener("click", () => {
+      setMenuOpen(!siteNav.classList.contains("is-menu-open"));
+    });
+
+    navMenu.addEventListener("click", (event) => {
+      if (event.target.closest(".site-nav__link")) {
+        setMenuOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        if (meaningReveal && meaningReveal.classList.contains("is-open")) {
+          setMeaningOpen(false);
+          return;
+        }
+
+        setMenuOpen(false);
+      }
+    });
+
+    if (meaningToggle && meaningReveal) {
+      meaningToggle.addEventListener("click", () => {
+        setMeaningOpen(!meaningReveal.classList.contains("is-open"));
+      });
+
+      meaningReveal.addEventListener("click", (event) => {
+        if (event.target === meaningReveal) {
+          setMeaningOpen(false);
+        }
+      });
+    }
+
+    if (meaningClose) {
+      meaningClose.addEventListener("click", () => {
+        setMeaningOpen(false);
+      });
+    }
+
+    mobileNavQuery.addEventListener("change", () => {
+      setMenuOpen(false);
+    });
+  </script>
+</body>
+</html>

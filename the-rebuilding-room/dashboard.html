@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Your rooms: The Rebuilding Room</title>
+  <meta name="description" content="Your rooms in The Rebuilding Room: a free step-by-step coaching course.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#070605">
+  <link rel="stylesheet" href="css/coaching-theme.css">
+  <style>
+    :root {
+      --gutter: clamp(1rem, 4vw + 0.35rem, 3rem);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    body {
+      min-height: 100%;
+      min-height: 100dvh;
+    }
+
+    .dash-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 70% 55% at 45% 38%, var(--accent-glow), transparent 62%),
+        radial-gradient(ellipse 50% 45% at 80% 70%, rgba(120, 110, 95, 0.06), transparent 55%),
+        var(--bg-base);
+      animation: coaching-ambient 28s var(--ease-soft) infinite;
+    }
+
+    .dash-grain {
+      position: fixed;
+      inset: -20%;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.026;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+    }
+
+    .dash-main {
+      position: relative;
+      z-index: 2;
+      max-width: 72rem;
+      margin: 0 auto;
+      padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+      padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+      padding-top: max(var(--gutter), env(safe-area-inset-top, 0px));
+      padding-bottom: max(clamp(3rem, 8vh, 5rem), env(safe-area-inset-bottom, 0px));
+    }
+
+    .dash-header {
+      margin-bottom: clamp(2rem, 5vw, 3rem);
+    }
+
+    .dash-header__eyebrow {
+      margin-bottom: 0.5rem;
+      color: var(--text-faint);
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: 0.02em;
+    }
+
+    .dash-header__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.65rem, 3.8vw, 2.25rem);
+      font-weight: 500;
+      letter-spacing: var(--heading-tracking, 0.02em);
+      line-height: 1.14;
+    }
+
+    .dash-header__lead {
+      margin-top: 1rem;
+      max-width: 34rem;
+      color: var(--text-quiet);
+      font-size: clamp(0.98rem, 1.65vw, 1.06rem);
+      font-weight: 300;
+      line-height: 1.72;
+    }
+
+    .dash-back {
+      display: inline-block;
+      margin-top: 1.35rem;
+      color: var(--text-quiet);
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      text-decoration: underline;
+      text-decoration-color: var(--accent-soft);
+      text-underline-offset: 0.3em;
+    }
+
+    .dash-back:hover,
+    .dash-back:focus-visible {
+      color: var(--accent);
+    }
+
+    .dash-back:focus-visible {
+      outline: 2px solid var(--line-strong);
+      outline-offset: 4px;
+    }
+
+    .dash-complete-banner {
+      margin-bottom: clamp(1.5rem, 4vw, 2rem);
+      padding: 1.15rem 1.35rem;
+      border: 1px solid var(--line);
+      border-radius: 0.75rem;
+      background: var(--bg-card);
+      color: var(--text-quiet);
+      font-size: clamp(0.95rem, 1.55vw, 1.02rem);
+      font-weight: 300;
+      line-height: 1.65;
+      text-wrap: pretty;
+    }
+
+    .dash-complete-banner a {
+      display: inline-block;
+      margin-top: 0.55rem;
+      color: var(--accent);
+      font-size: 0.95rem;
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-color: var(--accent-soft);
+      text-underline-offset: 0.25em;
+    }
+
+    .dash-complete-banner a:hover,
+    .dash-complete-banner a:focus-visible {
+      color: var(--text);
+    }
+
+    .dash-complete-banner a:focus-visible {
+      outline: 2px solid var(--line-strong);
+      outline-offset: 3px;
+    }
+
+    .dash-grid {
+      display: grid;
+      gap: clamp(1rem, 2.5vw, 1.35rem);
+      grid-template-columns: 1fr;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .dash-grid__cell {
+      margin: 0;
+      padding: 0;
+      min-width: 0;
+    }
+
+    .dash-grid__cell > a,
+    .dash-grid__cell > article {
+      height: 100%;
+    }
+
+    .dash-grid__cell {
+      opacity: 0;
+      animation: coaching-rise var(--dur-long) var(--ease-soft) forwards;
+    }
+
+    .dash-grid__cell:nth-child(1) {
+      animation-delay: 0.06s;
+    }
+
+    .dash-grid__cell:nth-child(2) {
+      animation-delay: 0.12s;
+    }
+
+    .dash-grid__cell:nth-child(3) {
+      animation-delay: 0.18s;
+    }
+
+    .dash-grid__cell:nth-child(4) {
+      animation-delay: 0.24s;
+    }
+
+    .dash-grid__cell:nth-child(5) {
+      animation-delay: 0.3s;
+    }
+
+    .dash-grid__cell:nth-child(6) {
+      animation-delay: 0.36s;
+    }
+
+    @media (min-width: 34em) {
+      .dash-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 56em) {
+      .dash-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .dash-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      min-height: 12.5rem;
+      padding: 1.5rem 1.35rem 1.35rem;
+      border: 1px solid var(--line);
+      border-radius: 0.85rem;
+      background: var(--bg-card-solid);
+      text-align: center;
+      overflow: hidden;
+      backdrop-filter: blur(12px);
+    }
+
+    .dash-card--unlocked {
+      color: inherit;
+      text-decoration: none;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition:
+        border-color var(--dur-short) var(--ease-out),
+        box-shadow var(--dur-medium) var(--ease-soft),
+        transform var(--dur-medium) var(--ease-soft);
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .dash-card--unlocked:hover {
+        border-color: var(--line-strong);
+        box-shadow: 0 0 0 1px var(--accent-glow), 0 1.25rem 3rem rgba(0, 0, 0, 0.35);
+        transform: translateY(-3px);
+      }
+
+      .dash-card--unlocked:focus-visible {
+        border-color: var(--line-strong);
+        box-shadow: 0 0 0 1px var(--accent-glow), 0 1.25rem 3rem rgba(0, 0, 0, 0.35);
+        transform: translateY(-3px);
+      }
+    }
+
+    .dash-card--unlocked:focus-visible {
+      outline: 2px solid var(--line-strong);
+      outline-offset: 3px;
+    }
+
+    .dash-card__n {
+      display: block;
+      margin-bottom: 0.55rem;
+      color: var(--text-faint);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+    }
+
+    .dash-card__title {
+      font-family: var(--font-display);
+      font-size: clamp(1.4rem, 2.6vw, 1.65rem);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+      line-height: 1.18;
+      overflow-wrap: break-word;
+    }
+
+    .dash-card__cta {
+      margin-top: auto;
+      padding-top: 1.15rem;
+      color: var(--accent);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .dash-card__trail {
+      display: block;
+      margin-top: 0.45rem;
+      color: var(--text-faint);
+      font-size: 0.8rem;
+      font-weight: 300;
+      font-style: italic;
+      line-height: 1.35;
+    }
+
+    .dash-card--await {
+      border-color: rgba(210, 190, 155, 0.08);
+      background: rgba(10, 9, 8, 0.65);
+    }
+
+    .dash-card__veil {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      filter: blur(2px);
+      opacity: 0.42;
+      pointer-events: none;
+      user-select: none;
+      transition: opacity var(--dur-medium) var(--ease-soft);
+    }
+
+    .dash-card--await .dash-card__title {
+      color: rgba(235, 232, 225, 0.75);
+    }
+
+    .dash-card__await-note {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem 1.5rem;
+      margin: 0;
+      color: var(--text-quiet);
+      font-size: clamp(0.88rem, 1.45vw, 0.98rem);
+      font-weight: 300;
+      line-height: 1.55;
+      text-align: center;
+      text-wrap: balance;
+      pointer-events: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dash-backdrop {
+        animation: none;
+      }
+
+      .dash-grid__cell {
+        opacity: 1;
+        animation: none;
+      }
+
+      .dash-card--unlocked {
+        transition: none;
+      }
+
+      .dash-card--unlocked:hover,
+      .dash-card--unlocked:focus-visible {
+        transform: none;
+      }
+
+      .dash-card__veil {
+        filter: blur(1px);
+        opacity: 0.36;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="dash-backdrop" aria-hidden="true"></div>
+  <div class="dash-grain" aria-hidden="true"></div>
+
+  <main class="dash-main" id="main">
+    <header class="dash-header">
+      <p class="dash-header__eyebrow">The Rebuilding Room</p>
+      <h1 class="dash-header__title">Your rooms</h1>
+      <p class="dash-header__lead">Each space stands on its own, but they’re written to be walked in order, at the pace that feels right for you.</p>
+      <a class="dash-back" href="./">Back to home</a>
+    </header>
+
+    <p class="dash-complete-banner" id="dash-complete-banner" hidden>
+      You’ve finished all six rooms.
+      <a href="completion.html">View your completion screen</a>
+    </p>
+
+    <ul class="dash-grid" id="dash-grid"></ul>
+  </main>
+
+  <script src="js/course-progress.js"></script>
+  <script>
+    (function () {
+      const rooms = [
+        { id: 1, name: "Acceptance" },
+        { id: 2, name: "Identity" },
+        { id: 3, name: "Control" },
+        { id: 4, name: "Confidence" },
+        { id: 5, name: "Direction" },
+        { id: 6, name: "Rebuild" },
+      ];
+
+      const progress = window.RRCourseProgress.load();
+      const unlockedUpTo = progress.unlockedUpTo;
+      const completed = progress.completedRoomIds;
+
+      const banner = document.getElementById("dash-complete-banner");
+      if (banner && window.RRCourseProgress.hasCompletedCourse()) {
+        banner.removeAttribute("hidden");
+      }
+
+      const grid = document.getElementById("dash-grid");
+      if (!grid) {
+        return;
+      }
+
+      const frag = document.createDocumentFragment();
+
+      rooms.forEach((room) => {
+        const li = document.createElement("li");
+        li.className = "dash-grid__cell";
+
+        if (room.id <= unlockedUpTo) {
+          const a = document.createElement("a");
+          const isDone = completed.indexOf(room.id) !== -1;
+          a.className = "dash-card dash-card--unlocked" + (isDone ? " dash-card--complete" : "");
+          a.href = `room.html?room=${room.id}`;
+          let inner =
+            `<span class="dash-card__n">Room ${room.id}</span>` +
+            `<span class="dash-card__title">${room.name}</span>`;
+          if (isDone) {
+            inner += `<span class="dash-card__trail">You’ve already spent time here.</span>`;
+          }
+          inner += `<span class="dash-card__cta">Step inside</span>`;
+          a.innerHTML = inner;
+          li.appendChild(a);
+        } else {
+          const article = document.createElement("article");
+          article.className = "dash-card dash-card--await";
+          article.setAttribute("aria-disabled", "true");
+          article.innerHTML =
+            `<div class="dash-card__veil">` +
+            `<span class="dash-card__n">Room ${room.id}</span>` +
+            `<h2 class="dash-card__title">${room.name}</h2>` +
+            `</div>` +
+            `<p class="dash-card__await-note">When the room before feels complete, this one will open naturally.</p>`;
+          li.appendChild(article);
+        }
+
+        frag.appendChild(li);
+      });
+
+      grid.appendChild(frag);
+    })();
+  </script>
+</body>
+</html>

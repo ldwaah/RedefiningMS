@@ -1,0 +1,1104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redefining MS | Beyond the Diagnosis</title>
+  <meta name="description" content="Redefining MS is an honest space for life after MS. Mindset, identity, support, and the work of rebuilding when life changes.">
+  <meta name="author" content="Lloyd">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="me" href="https://www.instagram.com/redefiningms">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Redefining MS">
+  <meta property="og:title" content="Redefining MS | Beyond the Diagnosis">
+  <meta property="og:description" content="Redefining MS is an honest space for life after MS. Mindset, identity, support, and the work of rebuilding when life changes.">
+  <meta property="og:image" content="book-cover.png">
+  <meta property="og:image:alt" content="When My Body Said No book cover">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Redefining MS | Beyond the Diagnosis">
+  <meta name="twitter:description" content="Redefining MS is an honest space for life after MS. Mindset, identity, support, and the work of rebuilding when life changes.">
+  <meta name="twitter:image" content="book-cover.png">
+  <meta name="twitter:image:alt" content="When My Body Said No book cover">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Redefining MS",
+      "description": "An honest space for life after an MS diagnosis, focused on mindset, identity, support, and rebuilding.",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@type": "Person",
+        "name": "Lloyd",
+        "sameAs": "https://www.instagram.com/redefiningms"
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #f2f0eb;
+      --text-sage: #98a892;
+      --sage-glow: rgba(131, 148, 131, 0.16);
+      --sage-glow-soft: rgba(131, 148, 131, 0.07);
+      --reveal-duration: 4.75s;
+      --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --reveal-blur: 11px;
+      --screen-gutter: clamp(2rem, 8vw, 5.5rem);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+    }
+
+    body {
+      position: relative;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      isolation: isolate;
+    }
+
+    .ambient {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      background: var(--bg);
+    }
+
+    .ambient__depth,
+    .ambient__glow,
+    .ambient__particles,
+    .ambient__noise {
+      position: absolute;
+      inset: 0;
+    }
+
+    .ambient__depth {
+      background:
+        radial-gradient(ellipse 120% 80% at 18% 24%, rgba(98, 112, 96, 0.08), transparent 58%),
+        radial-gradient(ellipse 90% 70% at 82% 76%, rgba(72, 82, 70, 0.06), transparent 62%);
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    .ambient__glow {
+      opacity: 0.55;
+      filter: blur(72px);
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    .ambient__glow--one {
+      inset: auto;
+      top: -18%;
+      left: -10%;
+      width: 58%;
+      height: 58%;
+      background: radial-gradient(circle, rgba(118, 132, 114, 0.12) 0%, transparent 72%);
+      animation: ambient-drift-a 42s ease-in-out infinite;
+    }
+
+    .ambient__glow--two {
+      inset: auto;
+      right: -12%;
+      bottom: -20%;
+      width: 62%;
+      height: 62%;
+      background: radial-gradient(circle, rgba(88, 98, 86, 0.1) 0%, transparent 74%);
+      animation: ambient-drift-b 54s ease-in-out infinite;
+    }
+
+    .ambient__particles {
+      width: 100%;
+      height: 100%;
+      opacity: 0.42;
+    }
+
+    .ambient__noise {
+      opacity: 0.028;
+      mix-blend-mode: soft-light;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+      animation: ambient-grain 18s steps(10) infinite;
+    }
+
+    @keyframes ambient-drift-a {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate3d(2.5%, -2%, 0) scale(1.04);
+      }
+    }
+
+    @keyframes ambient-drift-b {
+      0%,
+      100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate3d(-2%, 2.5%, 0) scale(1.05);
+      }
+    }
+
+    @keyframes ambient-grain {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      100% {
+        transform: translate3d(-4%, 3%, 0);
+      }
+    }
+
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      padding: 0.9rem var(--screen-gutter);
+      border-bottom: 1px solid transparent;
+      opacity: 0;
+      transform: translateY(-0.35rem);
+      pointer-events: none;
+      transition:
+        opacity 0.9s ease,
+        transform 0.9s ease,
+        background-color 0.9s ease,
+        border-color 0.9s ease,
+        backdrop-filter 0.9s ease;
+    }
+
+    .site-nav.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .site-nav.is-visible:not(.is-menu-open) {
+      background: rgba(0, 0, 0, 0.42);
+      border-bottom-color: rgba(152, 168, 146, 0.14);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .site-nav.is-menu-open {
+      background: transparent;
+      border-bottom-color: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .site-nav.is-menu-open .site-nav__inner {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      padding: 0.9rem var(--screen-gutter);
+    }
+
+    .site-nav__inner {
+      position: relative;
+      z-index: 52;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .site-nav__toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.35rem 0.15rem;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .site-nav__toggle-label {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .site-nav__toggle-lines {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .site-nav__toggle-lines span {
+      display: block;
+      width: 1.15rem;
+      height: 1px;
+      background: currentColor;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .site-nav.is-menu-open .site-nav__toggle-lines span:nth-child(1) {
+      transform: translateY(0.43rem) rotate(45deg);
+    }
+
+    .site-nav.is-menu-open .site-nav__toggle-lines span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .site-nav.is-menu-open .site-nav__toggle-lines span:nth-child(3) {
+      transform: translateY(-0.43rem) rotate(-45deg);
+    }
+
+    .site-nav__menu {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: var(--screen-gutter);
+      background: var(--bg);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.55s ease,
+        visibility 0.55s ease;
+    }
+
+    body.is-nav-open .site-nav__menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .site-nav__list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(2rem, 4.5vh, 3.25rem);
+      list-style: none;
+    }
+
+    .site-nav__link {
+      color: var(--text);
+      font-size: clamp(1.45rem, 4.2vw, 2.35rem);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      text-decoration: none;
+      text-transform: none;
+      opacity: 0.9;
+      transition: color 0.4s ease, opacity 0.4s ease;
+    }
+
+    .site-nav__link:hover,
+    .site-nav__link:focus-visible {
+      color: var(--text-sage);
+      opacity: 1;
+    }
+
+    .site-nav__link:focus-visible {
+      outline: 2px solid var(--text-sage);
+      outline-offset: 4px;
+    }
+
+    body.is-nav-open {
+      overflow: hidden;
+    }
+
+    body.is-nav-open .scroll-cue {
+      opacity: 0;
+    }
+
+    .screen {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: grid;
+      place-items: center;
+      padding: var(--screen-gutter);
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .screen__content {
+      width: min(100%, 46rem);
+      margin-inline: auto;
+    }
+
+    .screen__content--ways {
+      width: min(100%, 52rem);
+    }
+
+    .screen__line {
+      font-size: clamp(2.15rem, 6.4vw, 4.75rem);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      line-height: 1.18;
+      text-align: center;
+      text-wrap: balance;
+    }
+
+    .screen__line--verse {
+      font-size: clamp(1.9rem, 5.4vw, 3.6rem);
+      line-height: 1.3;
+    }
+
+    .screen__stack--ways {
+      gap: clamp(1.35rem, 3.5vh, 2.35rem);
+    }
+
+    .screen__line--single {
+      white-space: nowrap;
+      text-wrap: nowrap;
+    }
+
+    @media (max-width: 480px) {
+      .screen__line--single {
+        font-size: clamp(1.65rem, 5.8vw, 2.15rem);
+        letter-spacing: 0.02em;
+      }
+    }
+
+    .screen__story-heading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(0.85rem, 2.2vh, 1.35rem);
+      width: min(100%, 50rem);
+    }
+
+    .screen__story-sub {
+      max-width: 34rem;
+      color: rgba(242, 240, 235, 0.84);
+      font-size: clamp(1rem, 2.2vw, 1.3rem);
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      line-height: 1.55;
+      text-align: center;
+      text-wrap: balance;
+    }
+
+    .screen__line--on-load {
+      opacity: 0;
+      filter: blur(var(--reveal-blur));
+      transform: translateY(1.1rem);
+      animation: reveal-on-load var(--reveal-duration) var(--reveal-ease) forwards;
+    }
+
+    .screen--change {
+      --reveal-duration: 2.1s;
+      scroll-snap-stop: normal;
+    }
+
+    .screen--change .screen__line--in-view {
+      filter: none;
+      transform: translate3d(0, 1.1rem, 0);
+      transition:
+        opacity var(--reveal-duration) var(--reveal-ease),
+        transform calc(var(--reveal-duration) * 0.9) var(--reveal-ease);
+    }
+
+    .screen--change .screen__line--in-view.is-visible {
+      filter: none;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .screen__line--in-view {
+      opacity: 0;
+      filter: blur(var(--reveal-blur));
+      transform: translateY(1.1rem);
+      transition:
+        opacity var(--reveal-duration) var(--reveal-ease),
+        filter var(--reveal-duration) var(--reveal-ease),
+        transform calc(var(--reveal-duration) + 0.35s) var(--reveal-ease);
+    }
+
+    .screen__line--in-view.is-visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+
+    .screen__stack {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(1rem, 3vh, 2rem);
+    }
+
+    .screen__line--stagger {
+      opacity: 0;
+      filter: blur(var(--reveal-blur));
+      transform: translateY(1rem);
+      transition:
+        opacity var(--reveal-duration) var(--reveal-ease),
+        filter var(--reveal-duration) var(--reveal-ease),
+        transform calc(var(--reveal-duration) + 0.35s) var(--reveal-ease);
+      transition-delay: var(--delay, 0s);
+    }
+
+    .screen--in-view.is-visible .screen__line--stagger {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+
+    .screen__proclamation {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .screen__proclamation::before {
+      content: "";
+      position: absolute;
+      inset: -45% -25%;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(
+        ellipse at center,
+        var(--sage-glow) 0%,
+        var(--sage-glow-soft) 42%,
+        transparent 72%
+      );
+      opacity: 0;
+      transition: opacity 5s ease;
+    }
+
+    .screen--in-view.is-visible .screen__proclamation::before {
+      opacity: 1;
+    }
+
+    .screen__line--lift {
+      opacity: 0;
+      filter: blur(var(--reveal-blur));
+      transform: translateY(1.35rem);
+      transition:
+        opacity var(--reveal-duration) var(--reveal-ease),
+        filter var(--reveal-duration) var(--reveal-ease),
+        transform calc(var(--reveal-duration) + 0.35s) var(--reveal-ease);
+    }
+
+    .screen--in-view.is-visible .screen__line--lift {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+
+    .screen__title-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: clamp(1.75rem, 4.5vh, 3rem);
+      width: min(100%, 52rem);
+    }
+
+    .screen__title-mark {
+      display: block;
+      height: clamp(6.5rem, 20vh, 11rem);
+      width: auto;
+      object-fit: contain;
+    }
+
+    .screen__brand {
+      font-size: clamp(2.35rem, 7.8vw, 5.5rem);
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+
+    .screen__brand-ms {
+      color: var(--text-sage);
+    }
+
+    .screen__brand-sub {
+      font-size: clamp(0.95rem, 2.1vw, 1.2rem);
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      line-height: 1.5;
+      text-transform: none;
+    }
+
+    .screen__title-piece {
+      opacity: 0;
+      filter: blur(var(--reveal-blur));
+      transform: translateY(1.2rem);
+      transition:
+        opacity var(--reveal-duration) var(--reveal-ease),
+        filter var(--reveal-duration) var(--reveal-ease),
+        transform calc(var(--reveal-duration) + 0.5s) var(--reveal-ease);
+      transition-delay: var(--delay, 0s);
+    }
+
+    .screen--in-view.is-visible .screen__title-piece {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+
+    .screen__cta-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: clamp(3rem, 7vh, 4.75rem);
+      width: min(100%, 50rem);
+    }
+
+    .screen__cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: clamp(0.85rem, 2vw, 1.25rem);
+    }
+
+    .screen__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 12.5rem;
+      padding: 0.95rem 1.85rem;
+      border: 1px solid rgba(152, 168, 146, 0.45);
+      color: var(--text);
+      background: transparent;
+      font: inherit;
+      font-size: clamp(0.85rem, 1.4vw, 0.95rem);
+      letter-spacing: 0.12em;
+      line-height: 1.2;
+      text-decoration: none;
+      transition:
+        color 0.5s ease,
+        border-color 0.5s ease,
+        background-color 0.5s ease,
+        transform 0.5s ease;
+    }
+
+    .screen__cta:hover,
+    .screen__cta:focus-visible {
+      border-color: var(--text-sage);
+      background: rgba(152, 168, 146, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .screen__cta:focus-visible {
+      outline: 2px solid var(--text-sage);
+      outline-offset: 3px;
+    }
+
+    .scroll-cue {
+      position: fixed;
+      left: 50%;
+      bottom: clamp(1.25rem, 3vh, 2.25rem);
+      z-index: 25;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: rgba(242, 240, 235, 0.62);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.14em;
+      line-height: 1.2;
+      text-transform: uppercase;
+      transform: translateX(-50%);
+      opacity: 1;
+      pointer-events: none;
+      transition: opacity 0.9s ease;
+    }
+
+    .scroll-cue.is-hidden {
+      opacity: 0;
+    }
+
+    .scroll-cue__label {
+      transition: opacity 0.55s ease;
+    }
+
+    .scroll-cue__arrow {
+      display: inline-block;
+      color: var(--text-sage);
+      animation: scroll-cue-bob 3.2s ease-in-out infinite;
+    }
+
+    @keyframes scroll-cue-bob {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(0.28rem);
+      }
+    }
+
+    @keyframes reveal-on-load {
+      from {
+        opacity: 0;
+        filter: blur(var(--reveal-blur));
+        transform: translateY(1.1rem);
+      }
+
+      to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .ambient__glow--one,
+      .ambient__glow--two,
+      .ambient__noise {
+        animation: none;
+      }
+
+      .ambient__particles {
+        display: none;
+      }
+
+      .screen__line--on-load {
+        animation: none;
+        opacity: 1;
+        filter: none;
+        transform: none;
+      }
+
+      .screen__line--in-view,
+      .screen__line--stagger,
+      .screen__line--lift,
+      .screen__title-piece {
+        opacity: 1;
+        filter: none;
+        transform: none;
+        transition: none;
+      }
+
+      .screen__proclamation::before {
+        opacity: 1;
+        transition: none;
+      }
+
+      .site-nav {
+        transform: none;
+        transition: none;
+      }
+
+      .scroll-cue__arrow {
+        animation: none;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="ambient" aria-hidden="true">
+    <div class="ambient__depth"></div>
+    <div class="ambient__glow ambient__glow--one"></div>
+    <div class="ambient__glow ambient__glow--two"></div>
+    <canvas class="ambient__particles"></canvas>
+    <div class="ambient__noise"></div>
+  </div>
+
+  <header class="site-nav" id="site-nav" aria-hidden="true">
+    <div class="site-nav__inner">
+      <button type="button" class="site-nav__toggle" aria-expanded="false" aria-controls="site-nav-menu">
+        <span class="site-nav__toggle-label" id="site-nav-toggle-label">Menu</span>
+        <span class="site-nav__toggle-lines" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <nav id="site-nav-menu" class="site-nav__menu" aria-label="Primary" aria-hidden="true">
+    <ul class="site-nav__list">
+      <li><a class="site-nav__link" href="my-story.html">My Story</a></li>
+      <li><a class="site-nav__link" href="the-book.html">The Book</a></li>
+      <li><a class="site-nav__link" href="support.html">Support</a></li>
+      <li><a class="site-nav__link" href="https://www.instagram.com/redefiningms" target="_blank" rel="noopener noreferrer">Connect</a></li>
+    </ul>
+  </nav>
+
+  <p class="scroll-cue" id="scroll-cue" aria-hidden="true">
+    <span class="scroll-cue__arrow" aria-hidden="true">↓</span>
+    <span class="scroll-cue__label" id="scroll-cue-label">Scroll to begin</span>
+  </p>
+
+  <main class="screen screen--opening">
+    <div class="screen__content">
+      <p class="screen__line screen__line--on-load">When your body says no…</p>
+    </div>
+  </main>
+
+  <section class="screen screen--change screen--in-view" aria-label="Everything changes">
+    <div class="screen__content">
+      <p class="screen__line screen__line--in-view">Everything changes.</p>
+    </div>
+  </section>
+
+  <section class="screen screen--ways screen--in-view" aria-label="The way you move, think, and see yourself">
+    <div class="screen__content screen__content--ways">
+      <div class="screen__stack screen__stack--ways">
+        <p class="screen__line screen__line--stagger" style="--delay: 0s">The way you move.</p>
+        <p class="screen__line screen__line--stagger" style="--delay: 0.75s">The way you think.</p>
+        <p class="screen__line screen__line--stagger screen__line--single" style="--delay: 1.5s">The way you see yourself.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen screen--identity screen--in-view" aria-label="We are more than what happens to us">
+    <div class="screen__content">
+      <div class="screen__proclamation">
+        <p class="screen__line screen__line--lift">But we are more than what happens to us.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen screen--brand screen--in-view" aria-labelledby="brand-title">
+    <div class="screen__title-card">
+      <img class="screen__title-mark screen__title-piece" src="icon.svg" alt="" aria-hidden="true" style="--delay: 0s">
+      <h1 id="brand-title" class="screen__brand screen__title-piece" style="--delay: 0.65s">
+        REDEFINING <span class="screen__brand-ms">MS</span>
+      </h1>
+      <p class="screen__brand-sub screen__title-piece" style="--delay: 1.35s">Beyond the diagnosis.</p>
+    </div>
+  </section>
+
+  <section class="screen screen--invitation screen--in-view" aria-labelledby="invitation-story">
+    <div class="screen__cta-card">
+      <div class="screen__story-heading">
+        <p id="invitation-story" class="screen__line screen__line--verse screen__title-piece" style="--delay: 0s">Life after my MS diagnosis<br>felt impossible.</p>
+        <p class="screen__story-sub screen__title-piece" style="--delay: 0.55s">This is the story of how I rebuilt myself.</p>
+      </div>
+      <div class="screen__cta-row screen__title-piece" style="--delay: 1.1s">
+        <a class="screen__cta" href="my-story.html">Read My Story</a>
+        <a class="screen__cta" href="support.html">Explore Support</a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const revealTargets = document.querySelectorAll(".screen__line--in-view, .screen--in-view");
+    const openingScreen = document.querySelector(".screen--opening");
+    const invitationScreen = document.querySelector(".screen--invitation");
+    const scrollCue = document.getElementById("scroll-cue");
+    const scrollCueLabel = document.getElementById("scroll-cue-label");
+    const siteNav = document.getElementById("site-nav");
+    const navToggle = document.querySelector(".site-nav__toggle");
+    const navToggleLabel = document.getElementById("site-nav-toggle-label");
+    const navMenu = document.getElementById("site-nav-menu");
+    const mobileNavQuery = window.matchMedia("(max-width: 767px)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const ambientDepth = document.querySelector(".ambient__depth");
+    const ambientCanvas = document.querySelector(".ambient__particles");
+
+    const setNavVisible = (visible) => {
+      siteNav.classList.toggle("is-visible", visible);
+      siteNav.setAttribute("aria-hidden", String(!visible));
+
+      if (!visible) {
+        setMenuOpen(false);
+      }
+    };
+
+    const setMenuOpen = (open) => {
+      siteNav.classList.toggle("is-menu-open", open);
+      navToggle.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("is-nav-open", open);
+      navMenu.setAttribute("aria-hidden", String(!open));
+
+      if (navToggleLabel) {
+        navToggleLabel.textContent = open ? "Close" : "Menu";
+      }
+    };
+
+    const setScrollCueVisible = (visible) => {
+      if (!scrollCue) {
+        return;
+      }
+
+      scrollCue.classList.toggle("is-hidden", !visible);
+      scrollCue.setAttribute("aria-hidden", String(!visible));
+    };
+
+    const updateScrollCue = () => {
+      if (!scrollCue || !scrollCueLabel || !openingScreen) {
+        return;
+      }
+
+      if (invitationScreen) {
+        const invitationRect = invitationScreen.getBoundingClientRect();
+
+        if (invitationRect.top <= window.innerHeight * 0.72) {
+          setScrollCueVisible(false);
+          return;
+        }
+      }
+
+      setScrollCueVisible(true);
+
+      const pastOpening = openingScreen.getBoundingClientRect().bottom <= window.innerHeight * 0.84;
+      const nextLabel = pastOpening ? "Continue scrolling" : "Scroll to begin";
+
+      if (scrollCueLabel.textContent !== nextLabel) {
+        scrollCueLabel.textContent = nextLabel;
+      }
+    };
+
+    if (!reducedMotionQuery.matches) {
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+            entry.target.classList.add("is-visible");
+            revealObserver.unobserve(entry.target);
+          });
+        },
+        {
+          threshold: 0.45,
+        }
+      );
+
+      const changeObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+            entry.target.classList.add("is-visible");
+            changeObserver.unobserve(entry.target);
+          });
+        },
+        {
+          threshold: 0.18,
+          rootMargin: "0px 0px -6% 0px",
+        }
+      );
+
+      revealTargets.forEach((target) => {
+        if (target.classList.contains("screen--change") || target.closest(".screen--change")) {
+          changeObserver.observe(target);
+          return;
+        }
+
+        revealObserver.observe(target);
+      });
+    } else {
+      revealTargets.forEach((target) => target.classList.add("is-visible"));
+    }
+
+    if (openingScreen && siteNav) {
+      const navObserver = new IntersectionObserver(
+        ([entry]) => {
+          setNavVisible(entry.boundingClientRect.bottom <= 72);
+        },
+        {
+          threshold: [0, 0.15, 0.35, 0.65, 1],
+        }
+      );
+
+      navObserver.observe(openingScreen);
+    }
+
+    updateScrollCue();
+
+    let scrollCueTicking = false;
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        if (scrollCueTicking) {
+          return;
+        }
+
+        scrollCueTicking = true;
+        window.requestAnimationFrame(() => {
+          updateScrollCue();
+          scrollCueTicking = false;
+        });
+      },
+      { passive: true }
+    );
+
+    window.addEventListener("resize", updateScrollCue);
+
+    navToggle.addEventListener("click", () => {
+      setMenuOpen(!siteNav.classList.contains("is-menu-open"));
+    });
+
+    navMenu.addEventListener("click", (event) => {
+      if (event.target.closest(".site-nav__link")) {
+        setMenuOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    });
+
+    mobileNavQuery.addEventListener("change", () => {
+      setMenuOpen(false);
+    });
+
+    const initAmbientParticles = () => {
+      if (!ambientCanvas || reducedMotionQuery.matches) {
+        return;
+      }
+
+      const context = ambientCanvas.getContext("2d");
+      let width = 0;
+      let height = 0;
+      const particles = [];
+      const particleCount = 28;
+
+      const resizeCanvas = () => {
+        width = ambientCanvas.clientWidth;
+        height = ambientCanvas.clientHeight;
+        ambientCanvas.width = Math.floor(width * window.devicePixelRatio);
+        ambientCanvas.height = Math.floor(height * window.devicePixelRatio);
+        context.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
+      };
+
+      const createParticle = () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 1.1 + 0.35,
+        driftX: (Math.random() - 0.5) * 0.08,
+        driftY: (Math.random() - 0.5) * 0.06,
+        alpha: Math.random() * 0.16 + 0.04,
+      });
+
+      const resetParticles = () => {
+        particles.length = 0;
+
+        for (let index = 0; index < particleCount; index += 1) {
+          particles.push(createParticle());
+        }
+      };
+
+      const drawParticles = () => {
+        context.clearRect(0, 0, width, height);
+
+        particles.forEach((particle) => {
+          particle.x += particle.driftX;
+          particle.y += particle.driftY;
+
+          if (particle.x < -8) {
+            particle.x = width + 8;
+          }
+
+          if (particle.x > width + 8) {
+            particle.x = -8;
+          }
+
+          if (particle.y < -8) {
+            particle.y = height + 8;
+          }
+
+          if (particle.y > height + 8) {
+            particle.y = -8;
+          }
+
+          context.beginPath();
+          context.fillStyle = `rgba(214, 210, 200, ${particle.alpha})`;
+          context.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+          context.fill();
+        });
+      };
+
+      const tick = () => {
+        drawParticles();
+        window.requestAnimationFrame(tick);
+      };
+
+      resizeCanvas();
+      resetParticles();
+      tick();
+
+      window.addEventListener("resize", () => {
+        resizeCanvas();
+        resetParticles();
+      });
+    };
+
+    const initAmbientDepth = () => {
+      if (reducedMotionQuery.matches || !ambientDepth) {
+        return;
+      }
+
+      let ticking = false;
+
+      const updateDepth = () => {
+        ambientDepth.style.transform = `translate3d(0, ${window.scrollY * 0.04}px, 0)`;
+        ticking = false;
+      };
+
+      window.addEventListener(
+        "scroll",
+        () => {
+          if (ticking) {
+            return;
+          }
+
+          ticking = true;
+          window.requestAnimationFrame(updateDepth);
+        },
+        { passive: true }
+      );
+
+      updateDepth();
+    };
+
+    initAmbientParticles();
+    initAmbientDepth();
+  </script>
+</body>
+</html>

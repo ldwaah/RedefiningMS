@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>The Rebuilding Room</title>
+  <meta name="description" content="A free step-by-step rebuilding experience for people navigating life-changing moments.">
+  <meta name="author" content="Lloyd">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#070605">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="The Rebuilding Room">
+  <meta property="og:title" content="The Rebuilding Room">
+  <meta property="og:description" content="A free step-by-step rebuilding experience for people navigating life-changing moments.">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="The Rebuilding Room">
+  <meta name="twitter:description" content="A free step-by-step rebuilding experience for people navigating life-changing moments.">
+  <link rel="stylesheet" href="css/coaching-theme.css">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "The Rebuilding Room",
+          "description": "A free step-by-step rebuilding experience for people navigating life-changing moments.",
+          "inLanguage": "en-GB"
+        },
+        {
+          "@type": "Course",
+          "name": "The Rebuilding Room",
+          "description": "A free step-by-step rebuilding experience for people navigating life-changing moments.",
+          "isAccessibleForFree": true,
+          "provider": {
+            "@type": "Person",
+            "name": "Lloyd"
+          },
+          "inLanguage": "en-GB"
+        }
+      ]
+    }
+  </script>
+  <style>
+    :root {
+      --text-muted: var(--text-quiet);
+      --gold: var(--accent);
+      --gold-soft: var(--accent-mid);
+      --screen-gutter: clamp(1.1rem, 5vw, 4rem);
+      --reveal-duration: 2.2s;
+      --reveal-ease: var(--ease-soft);
+      --reveal-blur: 7px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+    }
+
+    body {
+      min-height: 100%;
+      background: var(--bg-base);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-weight: 300;
+    }
+
+    .room-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 65% 50% at 50% 42%, var(--accent-glow), transparent 68%),
+        radial-gradient(ellipse 40% 35% at 70% 80%, rgba(100, 90, 78, 0.06), transparent 55%),
+        var(--bg-base);
+      animation: coaching-ambient 32s var(--ease-soft) infinite;
+    }
+
+    .room-grain {
+      position: fixed;
+      inset: -20%;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+      animation: room-grain 22s steps(10) infinite;
+    }
+
+    @keyframes room-grain {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      100% {
+        transform: translate3d(-3%, 2%, 0);
+      }
+    }
+
+    .room-scroll {
+      position: relative;
+      z-index: 1;
+      padding-bottom: max(0px, env(safe-area-inset-bottom, 0px));
+    }
+
+    .room-screen {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: max(var(--screen-gutter), env(safe-area-inset-top, 0px))
+        max(var(--screen-gutter), env(safe-area-inset-right, 0px))
+        max(var(--screen-gutter), env(safe-area-inset-bottom, 0px))
+        max(var(--screen-gutter), env(safe-area-inset-left, 0px));
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .room-screen__inner {
+      width: min(100%, 40rem);
+      margin-inline: auto;
+      text-align: center;
+    }
+
+    .room-screen__title {
+      color: var(--text);
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5.8vw, 3.2rem);
+      font-weight: 500;
+      letter-spacing: var(--heading-tracking, 0.02em);
+      line-height: 1.12;
+      text-wrap: balance;
+    }
+
+    .room-screen__line--on-load {
+      opacity: 0;
+      filter: blur(var(--reveal-blur));
+      transform: translateY(1.1rem);
+      animation: room-reveal-on-load var(--reveal-duration) var(--reveal-ease) forwards;
+    }
+
+    .room-screen__lead {
+      margin-top: 1.15rem;
+      color: var(--text-muted);
+      font-size: clamp(0.98rem, 1.75vw, 1.08rem);
+      font-weight: 300;
+      line-height: 1.82;
+      letter-spacing: 0.01em;
+      text-wrap: balance;
+    }
+
+    .room-screen__line--in-view {
+      opacity: 0;
+      filter: blur(var(--reveal-blur));
+      transform: translateY(1.1rem);
+      transition:
+        opacity var(--reveal-duration) var(--reveal-ease),
+        filter var(--reveal-duration) var(--reveal-ease),
+        transform calc(var(--reveal-duration) + 0.35s) var(--reveal-ease);
+    }
+
+    .room-screen--reveal.is-visible .room-screen__line--in-view {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateY(0);
+    }
+
+    .room-screen__cta-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .room-scroll-cue {
+      position: fixed;
+      left: 50%;
+      bottom: max(clamp(1.25rem, 3vh, 2.25rem), env(safe-area-inset-bottom, 0px));
+      z-index: 25;
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--text-faint);
+      font-size: 0.82rem;
+      font-weight: 300;
+      letter-spacing: 0.03em;
+      line-height: 1.35;
+      transform: translateX(-50%);
+      opacity: 1;
+      pointer-events: none;
+      transition: opacity var(--dur-medium) var(--ease-soft);
+    }
+
+    .room-scroll-cue.is-hidden {
+      opacity: 0;
+    }
+
+    .room-scroll-cue__arrow {
+      display: inline-block;
+      color: var(--accent);
+      opacity: 0.65;
+      animation: room-scroll-cue-bob 4.5s var(--ease-soft) infinite;
+    }
+
+    @keyframes room-scroll-cue-bob {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(0.2rem);
+      }
+    }
+
+    @keyframes room-reveal-on-load {
+      from {
+        opacity: 0;
+        filter: blur(var(--reveal-blur));
+        transform: translateY(1.1rem);
+      }
+
+      to {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+    }
+
+    .room-landing__cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.45rem;
+      min-width: min(100%, 20rem);
+      min-height: max(3.15rem, 44px);
+      touch-action: manipulation;
+      padding: 1.05rem 1.5rem;
+      border: 1px solid var(--line-strong);
+      border-radius: 0.65rem;
+      color: var(--accent);
+      background: rgba(12, 11, 10, 0.35);
+      box-shadow: 0 0 0 1px var(--accent-glow);
+      font-family: var(--font-display);
+      font-size: clamp(1rem, 2.2vw, 1.12rem);
+      font-weight: 500;
+      letter-spacing: var(--heading-tracking, 0.02em);
+      line-height: 1.25;
+      text-decoration: none;
+      cursor: pointer;
+      transition:
+        color var(--dur-short) var(--ease-out),
+        border-color var(--dur-short) var(--ease-out),
+        box-shadow var(--dur-medium) var(--ease-soft),
+        transform var(--dur-medium) var(--ease-soft);
+    }
+
+    .room-landing__cta:hover,
+    .room-landing__cta:focus-visible {
+      border-color: var(--accent);
+      color: var(--text);
+      box-shadow: 0 0 0 1px var(--line), 0 1rem 2.5rem rgba(0, 0, 0, 0.35);
+      transform: translate3d(0, -2px, 0);
+    }
+
+    .room-landing__cta:focus-visible {
+      outline: 2px solid var(--line-strong);
+      outline-offset: 4px;
+    }
+
+    .landing-blackout {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      background: #000;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.45s var(--ease-soft), visibility 0.45s var(--ease-soft);
+    }
+
+    .landing-blackout.is-active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .landing-blackout__inner {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      align-content: end;
+      justify-items: center;
+      min-height: 100%;
+      padding: clamp(1.75rem, 6vw, 4rem);
+      padding-bottom: max(clamp(3.25rem, 14vh, 7.5rem), env(safe-area-inset-bottom, 0px));
+    }
+
+    .landing-intro-stage {
+      position: relative;
+      width: min(62vw, 520px);
+      aspect-ratio: 1 / 1;
+      display: grid;
+      place-items: center;
+    }
+
+    .landing-intro-logo {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transform: translateY(2px) scale(0.992);
+      filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
+      transition: opacity 600ms var(--ease-soft), transform 900ms var(--ease-soft);
+      will-change: opacity, transform, filter;
+    }
+
+    .landing-intro-logo__clip {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      clip-path: inset(100% 0% 0% 0% round 0px);
+      will-change: clip-path;
+    }
+
+    .landing-intro-logo__clip img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      transform: translateY(6%);
+      -webkit-user-drag: none;
+      user-select: none;
+      -webkit-mask-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 1) 82%,
+        rgba(0, 0, 0, 0) 100%
+      );
+      mask-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 1) 0%,
+        rgba(0, 0, 0, 1) 82%,
+        rgba(0, 0, 0, 0) 100%
+      );
+    }
+
+    .landing-intro-logo::before {
+      content: "";
+      position: absolute;
+      inset: -14%;
+      background:
+        radial-gradient(60% 60% at 50% 45%, rgba(245, 237, 223, 0.08), rgba(0, 0, 0, 0) 62%),
+        radial-gradient(70% 70% at 50% 50%, rgba(211, 176, 108, 0.09), rgba(0, 0, 0, 0) 64%);
+      opacity: 0;
+      filter: blur(18px);
+      transform: scale(0.98);
+      transition: opacity 900ms var(--ease-soft), transform 1200ms var(--ease-soft);
+      pointer-events: none;
+    }
+
+    .landing-intro-logo::after {
+      content: "";
+      position: absolute;
+      inset: -10%;
+      opacity: 0;
+      pointer-events: none;
+      mix-blend-mode: screen;
+      background:
+        radial-gradient(80% 80% at 45% 40%, rgba(245, 237, 223, 0.14), rgba(0, 0, 0, 0) 58%),
+        radial-gradient(90% 90% at 55% 55%, rgba(211, 176, 108, 0.14), rgba(0, 0, 0, 0) 66%),
+        repeating-linear-gradient(
+          115deg,
+          rgba(245, 237, 223, 0.00) 0px,
+          rgba(245, 237, 223, 0.00) 10px,
+          rgba(245, 237, 223, 0.05) 12px,
+          rgba(245, 237, 223, 0.00) 18px
+        );
+      filter: blur(9px);
+      transform: translateY(0px);
+    }
+
+    .landing-blackout.is-active .landing-intro-logo {
+      animation: landing-intro-breathe 12.5s ease-in-out infinite;
+      animation-delay: 0s;
+    }
+
+    .landing-blackout.is-active .landing-intro-logo[data-phase="visible"] {
+      opacity: 1;
+      transform: translateY(0px) scale(1);
+      filter:
+        drop-shadow(0 0 18px rgba(211, 176, 108, 0.10))
+        drop-shadow(0 0 42px rgba(245, 237, 223, 0.06));
+    }
+
+    .landing-blackout.is-active .landing-intro-logo[data-phase="visible"]::before {
+      opacity: 1;
+      transform: scale(1);
+      animation: landing-intro-aura 18s ease-in-out infinite;
+      animation-delay: 0s;
+    }
+
+    .landing-blackout.is-active .landing-intro-logo[data-phase="visible"]::after {
+      opacity: 0.55;
+      animation: landing-intro-ink 22s ease-in-out infinite;
+      animation-delay: 0s;
+    }
+
+    .landing-blackout.is-active .landing-intro-logo[data-phase="visible"] .landing-intro-logo__clip {
+      animation: landing-intro-draw-up 78s var(--ease-soft) 0s forwards;
+    }
+
+    @keyframes landing-intro-breathe {
+      0% {
+        transform: translateY(0px) scale(1);
+      }
+      50% {
+        transform: translateY(-1px) scale(1.006);
+      }
+      100% {
+        transform: translateY(0px) scale(1);
+      }
+    }
+
+    @keyframes landing-intro-aura {
+      0% {
+        opacity: 0.0;
+        filter: blur(20px);
+      }
+      35% {
+        opacity: 0.85;
+        filter: blur(18px);
+      }
+      70% {
+        opacity: 0.62;
+        filter: blur(22px);
+      }
+      100% {
+        opacity: 0.75;
+        filter: blur(19px);
+      }
+    }
+
+    @keyframes landing-intro-ink {
+      0% {
+        opacity: 0.0;
+        transform: translateY(0px);
+      }
+      20% {
+        opacity: 0.36;
+        transform: translateY(-0.5px);
+      }
+      45% {
+        opacity: 0.60;
+        transform: translateY(0.2px);
+      }
+      70% {
+        opacity: 0.44;
+        transform: translateY(-0.3px);
+      }
+      100% {
+        opacity: 0.55;
+        transform: translateY(0px);
+      }
+    }
+
+    @keyframes landing-intro-draw-up {
+      0% {
+        clip-path: inset(100% 0% 0% 0% round 0px);
+      }
+      12% {
+        clip-path: inset(82% 0% 0% 0% round 0px);
+      }
+      28% {
+        clip-path: inset(62% 0% 0% 0% round 0px);
+      }
+      46% {
+        clip-path: inset(38% 0% 0% 0% round 0px);
+      }
+      68% {
+        clip-path: inset(14% 0% 0% 0% round 0px);
+      }
+      100% {
+        clip-path: inset(0% 0% 0% 0% round 0px);
+      }
+    }
+
+    .landing-volume-hint {
+      position: fixed;
+      left: 50%;
+      top: 56%;
+      transform: translate(-50%, -50%);
+      color: rgba(245, 237, 223, 0.72);
+      font-size: 14px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-shadow: 0 0 20px rgba(211, 176, 108, 0.10);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 500ms var(--ease-soft);
+      z-index: 61;
+    }
+
+    .landing-blackout.is-active .landing-volume-hint {
+      opacity: 1;
+    }
+
+    .landing-blackout.is-active .landing-volume-hint.is-hidden {
+      opacity: 0;
+    }
+
+    .landing-blackout.is-active .landing-volume-hint .type {
+      display: inline-block;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0ch;
+      animation: landing-intro-type-on 1200ms steps(18, end) 0ms forwards;
+    }
+
+    @keyframes landing-intro-type-on {
+      from {
+        width: 0ch;
+      }
+      to {
+        width: 18ch;
+      }
+    }
+
+    .landing-skip {
+      position: fixed;
+      right: max(clamp(1rem, 4vw, 2rem), env(safe-area-inset-right, 0px));
+      top: max(clamp(1rem, 3.6vh, 2rem), env(safe-area-inset-top, 0px));
+      z-index: 61;
+      min-height: 44px;
+      min-width: 44px;
+      padding: 10px 12px;
+      border: 0;
+      background: transparent;
+      color: rgba(245, 237, 223, 0.72);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 300;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 4px;
+      touch-action: manipulation;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--dur-medium) var(--ease-soft), color var(--dur-medium) var(--ease-soft);
+    }
+
+    .landing-blackout.is-active .landing-skip.is-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .landing-skip:hover,
+    .landing-skip:focus-visible {
+      color: rgba(245, 237, 223, 0.92);
+      outline: none;
+    }
+
+    .landing-skip:focus-visible {
+      outline: 2px solid rgba(245, 237, 223, 0.22);
+      outline-offset: 6px;
+      border-radius: 8px;
+    }
+
+    body.is-intro-playing {
+      overflow: hidden;
+    }
+
+    @media (max-width: 24rem) {
+      .room-screen__title {
+        font-size: clamp(1.65rem, 8vw, 2.45rem);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+        scroll-snap-type: none;
+      }
+
+      .room-backdrop {
+        animation: none;
+      }
+
+      .room-grain {
+        animation: none;
+      }
+
+      .room-screen__line--on-load {
+        animation: none;
+        opacity: 1;
+        filter: none;
+        transform: none;
+      }
+
+      .room-screen--reveal.is-visible .room-screen__line--in-view,
+      .room-screen__line--in-view {
+        opacity: 1;
+        filter: none;
+        transform: none;
+        transition: none;
+      }
+
+      .room-scroll-cue__arrow {
+        animation: none;
+      }
+
+      .room-landing__cta:hover,
+      .room-landing__cta:focus-visible {
+        transform: none;
+      }
+
+      .landing-blackout.is-active .landing-intro-logo,
+      .landing-blackout.is-active .landing-intro-logo::before,
+      .landing-blackout.is-active .landing-intro-logo::after {
+        animation: none !important;
+      }
+
+      .landing-blackout.is-active .landing-intro-logo[data-phase="visible"] .landing-intro-logo__clip {
+        animation: none !important;
+        clip-path: inset(0% 0% 0% 0% round 0px);
+      }
+
+    }
+  </style>
+</head>
+<body>
+  <div class="room-backdrop" aria-hidden="true"></div>
+  <div class="room-grain" aria-hidden="true"></div>
+  <div class="landing-blackout" id="landing-blackout" aria-hidden="true">
+    <div class="landing-blackout__inner" aria-hidden="true">
+      <div class="landing-intro-stage" aria-hidden="true">
+        <div class="landing-intro-logo" id="landing-intro-logo" aria-hidden="true">
+          <div class="landing-intro-logo__clip" aria-hidden="true">
+            <img src="icon copy.svg" alt="" draggable="false" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="landing-volume-hint" id="landing-volume-hint" aria-live="polite">
+      <span class="type">Turn on volume...</span>
+    </div>
+    <button type="button" class="landing-skip" id="landing-skip">Skip</button>
+  </div>
+
+  <main class="room-scroll" id="room-landing">
+    <section class="room-screen room-screen--hero" aria-label="The Rebuilding Room">
+      <div class="room-screen__inner">
+        <h1 class="room-screen__title room-screen__line--on-load">The Rebuilding Room</h1>
+      </div>
+    </section>
+
+    <section class="room-screen room-screen--reveal" id="room-screen-lead" aria-label="About this experience">
+      <div class="room-screen__inner">
+        <p class="room-screen__lead room-screen__line--in-view">A free step-by-step rebuilding experience for people navigating life-changing moments.</p>
+      </div>
+    </section>
+
+    <section class="room-screen room-screen--reveal room-screen--cta" id="room-screen-cta" aria-label="Begin">
+      <div class="room-screen__inner">
+        <div class="room-screen__cta-wrap room-screen__line--in-view">
+          <button type="button" class="room-landing__cta" id="room-enter">Take your first step</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <p class="room-scroll-cue" id="room-scroll-cue" aria-hidden="true">
+    <span class="room-scroll-cue__arrow" aria-hidden="true">↓</span>
+    <span id="room-scroll-cue-label">Scroll gently to begin</span>
+  </p>
+
+  <script>
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const screenRevealTargets = document.querySelectorAll(".room-screen--reveal");
+    const roomHero = document.querySelector(".room-screen--hero");
+    const roomCtaScreen = document.getElementById("room-screen-cta");
+    const roomScrollCue = document.getElementById("room-scroll-cue");
+    const roomScrollCueLabel = document.getElementById("room-scroll-cue-label");
+    const roomEnter = document.getElementById("room-enter");
+    const landingBlackout = document.getElementById("landing-blackout");
+    const landingIntroLogo = document.getElementById("landing-intro-logo");
+    const landingVolumeHint = document.getElementById("landing-volume-hint");
+    const landingSkipBtn = document.getElementById("landing-skip");
+    let scrollCueFrame = null;
+    let introStarted = false;
+    let introAudioRef = null;
+    const VISITED_KEY = "rebuilding_room_visited_v1";
+
+    const goToDashboard = () => window.location.assign("dashboard.html");
+
+    const showSkipIfReturning = () => {
+      const hasVisited = window.localStorage.getItem(VISITED_KEY) === "1";
+      landingSkipBtn?.classList.toggle("is-visible", hasVisited);
+    };
+
+    showSkipIfReturning();
+
+    if (landingSkipBtn) {
+      landingSkipBtn.addEventListener("click", () => {
+        try {
+          introAudioRef?.pause?.();
+        } catch (err) {
+          // ignore
+        }
+        goToDashboard();
+      });
+    }
+
+    const playIntroAndContinue = async () => {
+      if (introStarted) {
+        return;
+      }
+      introStarted = true;
+      window.localStorage.setItem(VISITED_KEY, "1");
+
+      document.body.classList.add("is-intro-playing");
+      landingBlackout?.classList.add("is-active");
+      landingIntroLogo?.removeAttribute("data-phase");
+      landingVolumeHint?.classList.remove("is-hidden");
+      landingSkipBtn?.classList.add("is-visible");
+      setScrollCueVisible(false);
+
+      const introAudio = new Audio("rebuildingroom.m4a");
+      introAudio.preload = "auto";
+      introAudioRef = introAudio;
+
+      // Autoplay policies: a play() call is most reliable inside the click gesture.
+      // To approximate a 1s delay without losing the gesture, start muted, then fade up.
+      introAudio.volume = 0;
+
+      try {
+        await introAudio.play();
+      } catch (err) {
+        goToDashboard();
+        return;
+      }
+
+      window.setTimeout(() => {
+        introAudio.volume = 1;
+      }, 1000);
+
+      // Text hint fades away after ~3 seconds.
+      window.setTimeout(() => {
+        landingVolumeHint?.classList.add("is-hidden");
+      }, 3000);
+
+      // Pure black for the opening lines, then the logo begins to emerge/draw upward.
+      window.setTimeout(() => {
+        landingIntroLogo?.setAttribute("data-phase", "visible");
+      }, 9000);
+
+      const endTimer = window.setTimeout(() => {
+        goToDashboard();
+      }, 120000);
+
+      introAudio.addEventListener(
+        "ended",
+        () => {
+          window.clearTimeout(endTimer);
+          goToDashboard();
+        },
+        { once: true }
+      );
+    };
+
+    if (roomEnter) {
+      roomEnter.addEventListener("click", playIntroAndContinue);
+    }
+
+    const setScrollCueVisible = (visible) => {
+      if (!roomScrollCue) {
+        return;
+      }
+
+      roomScrollCue.classList.toggle("is-hidden", !visible);
+      roomScrollCue.setAttribute("aria-hidden", String(!visible));
+    };
+
+    const updateScrollCue = () => {
+      scrollCueFrame = null;
+
+      if (!roomScrollCue || !roomHero) {
+        return;
+      }
+
+      if (roomCtaScreen) {
+        const ctaRect = roomCtaScreen.getBoundingClientRect();
+
+        if (ctaRect.top <= window.innerHeight * 0.72) {
+          setScrollCueVisible(false);
+          return;
+        }
+      }
+
+      setScrollCueVisible(true);
+
+      if (roomScrollCueLabel) {
+        const pastHero = roomHero.getBoundingClientRect().bottom <= window.innerHeight * 0.84;
+        roomScrollCueLabel.textContent = pastHero ? "There’s more below" : "Scroll gently to begin";
+      }
+    };
+
+    const queueScrollCueUpdate = () => {
+      if (scrollCueFrame !== null) {
+        return;
+      }
+
+      scrollCueFrame = window.requestAnimationFrame(updateScrollCue);
+    };
+
+    if (!reducedMotionQuery.matches) {
+      const revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) {
+              return;
+            }
+
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          });
+        },
+        {
+          threshold: 0.45,
+        }
+      );
+
+      screenRevealTargets.forEach((target) => revealObserver.observe(target));
+    } else {
+      screenRevealTargets.forEach((target) => target.classList.add("is-visible"));
+    }
+
+    window.addEventListener("scroll", queueScrollCueUpdate, { passive: true });
+    window.addEventListener("resize", queueScrollCueUpdate);
+    updateScrollCue();
+  </script>
+</body>
+</html>

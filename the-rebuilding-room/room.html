@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Room: The Rebuilding Room</title>
+  <meta name="description" content="A guided room in The Rebuilding Room: reflection, audio, and a small step forward.">
+  <meta name="robots" content="index, follow">
+  <meta name="theme-color" content="#070605">
+  <link rel="stylesheet" href="css/coaching-theme.css">
+  <link rel="stylesheet" href="css/room-acceptance.css">
+  <link rel="stylesheet" href="css/room-identity.css">
+  <style>
+    :root {
+      --ease: var(--ease-soft);
+      --gutter: clamp(1rem, 4vw + 0.35rem, 3rem);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    body {
+      min-height: 100%;
+      min-height: 100dvh;
+    }
+
+    .room-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 48% at 50% 0%, var(--accent-glow), transparent 62%),
+        radial-gradient(ellipse 45% 35% at 15% 85%, rgba(90, 82, 72, 0.06), transparent 55%),
+        var(--bg-base);
+      animation: coaching-ambient 30s var(--ease-soft) infinite;
+    }
+
+    .room-grain {
+      position: fixed;
+      inset: -20%;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.022;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+    }
+
+    .room-page {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 42rem;
+      margin: 0 auto;
+      padding-left: max(var(--gutter), env(safe-area-inset-left, 0px));
+      padding-right: max(var(--gutter), env(safe-area-inset-right, 0px));
+      padding-top: max(clamp(1.5rem, 4vw, 2.25rem), env(safe-area-inset-top, 0px));
+      padding-bottom: max(clamp(2.5rem, 6vh, 4rem), env(safe-area-inset-bottom, 0px));
+    }
+
+    .room-page__nav {
+      margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+      font-size: 0.86rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.35rem 0.5rem;
+      row-gap: 0.35rem;
+    }
+
+    .room-page__nav a {
+      color: var(--text-quiet);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
+      overflow-wrap: anywhere;
+    }
+
+    .room-page__nav a:hover,
+    .room-page__nav a:focus-visible {
+      color: var(--accent);
+      border-bottom-color: var(--accent-soft);
+    }
+
+    .room-page__nav a:focus-visible {
+      outline: 2px solid var(--line-strong);
+      outline-offset: 3px;
+    }
+
+    .room-page__nav-sep {
+      margin: 0 0.5rem;
+      color: var(--text-faint);
+    }
+
+    .room-block {
+      margin-bottom: clamp(1.75rem, 4vw, 2.25rem);
+    }
+
+    .room-visually-hidden {
+      position: absolute !important;
+      width: 1px !important;
+      height: 1px !important;
+      padding: 0 !important;
+      margin: -1px !important;
+      overflow: hidden !important;
+      clip: rect(0, 0, 0, 0) !important;
+      white-space: nowrap !important;
+      border: 0 !important;
+    }
+
+    .room-eyebrow {
+      margin-bottom: 0.45rem;
+      color: var(--text-faint);
+      font-size: 0.86rem;
+      font-weight: 400;
+      font-style: italic;
+      letter-spacing: 0.02em;
+    }
+
+    .room-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.45rem, 4.8vw, 2.1rem);
+      font-weight: 500;
+      letter-spacing: var(--heading-tracking, 0.02em);
+      line-height: 1.14;
+      text-wrap: balance;
+      overflow-wrap: break-word;
+    }
+
+    .room-intro {
+      margin-top: 1.35rem;
+      color: var(--text-quiet);
+      font-size: clamp(0.98rem, 1.85vw, 1.06rem);
+      font-weight: 300;
+      line-height: 1.82;
+      letter-spacing: 0.01em;
+      text-wrap: pretty;
+    }
+
+    /* Legacy guided control (hidden when ceremony player is active; all rooms 1–6 use ceremony audio). */
+
+    .room-audio__play-guided {
+      display: inline-flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 0.45rem;
+      width: auto;
+      max-width: 100%;
+      min-height: 0;
+      padding: 0.55rem 0;
+      border: none;
+      border-bottom: 1px solid rgba(185, 155, 115, 0.28);
+      border-radius: 0;
+      background: transparent;
+      color: rgba(232, 224, 210, 0.88);
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out),
+        opacity var(--dur-short) var(--ease-out);
+    }
+
+    .room-audio__play-guided:hover,
+    .room-audio__play-guided:focus-visible {
+      color: rgba(245, 238, 226, 0.96);
+      border-bottom-color: rgba(210, 185, 145, 0.5);
+    }
+
+    @media (hover: none) {
+      .room-audio__play-guided:hover {
+        color: rgba(232, 224, 210, 0.88);
+        border-bottom-color: rgba(185, 155, 115, 0.28);
+      }
+    }
+
+    .room-audio__play-guided:focus-visible {
+      outline: 1px solid rgba(210, 185, 145, 0.35);
+      outline-offset: 0.35rem;
+    }
+
+    .room-audio-block + .room-block {
+      margin-top: clamp(1.25rem, 4vh, 2.5rem);
+    }
+
+    .room-audio__fake-controls {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(245, 242, 235, 0.45);
+      font-variant-numeric: tabular-nums;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+    }
+
+    .room-audio__play {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 160, 106, 0.4);
+      background: rgba(201, 160, 106, 0.08);
+    }
+
+    .room-reflect__heading {
+      margin-bottom: 0;
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: var(--heading-tracking, 0.02em);
+      line-height: 1.35;
+    }
+
+    .room-reflect__field {
+      margin-bottom: 1.35rem;
+    }
+
+    .room-reflect__field:last-of-type {
+      margin-bottom: 0;
+    }
+
+    .room-prompt__title {
+      margin-bottom: 1.1rem;
+      font-family: var(--font-display);
+      font-size: clamp(1.02rem, 3.6vw, 1.18rem);
+      font-weight: 500;
+      letter-spacing: var(--heading-tracking, 0.02em);
+      line-height: 1.38;
+      overflow-wrap: break-word;
+    }
+
+    .room-prompt__body {
+      margin-bottom: 1rem;
+      color: var(--text-quiet);
+      font-size: clamp(0.92rem, 3.6vw, 0.98rem);
+      font-weight: 300;
+      line-height: 1.75;
+      white-space: pre-wrap;
+      text-wrap: pretty;
+      overflow-wrap: break-word;
+    }
+
+    .room-reflect__q {
+      display: block;
+      margin-bottom: 0.5rem;
+      color: var(--text-quiet);
+      font-size: 0.92rem;
+      font-weight: 400;
+      line-height: 1.55;
+    }
+
+    .room-prompt__rest {
+      margin-top: 0.55rem;
+      color: var(--text-faint);
+      font-size: 0.82rem;
+      font-weight: 300;
+      line-height: 1.45;
+    }
+
+    .room-prompt__nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-top: 1.1rem;
+      align-items: stretch;
+    }
+
+    .room-prompt__nav .room-btn {
+      flex: 1 1 auto;
+      min-width: min(100%, 8rem);
+      min-height: max(2.75rem, 44px);
+      touch-action: manipulation;
+    }
+
+    .room-prompt__nav #prompt-next {
+      margin-left: auto;
+    }
+
+    @media (max-width: 26rem) {
+      .room-prompt__nav {
+        flex-direction: column;
+      }
+
+      .room-prompt__nav #prompt-next {
+        margin-left: 0;
+      }
+
+      .room-prompt__nav .room-btn {
+        width: 100%;
+        min-width: 0;
+      }
+    }
+
+    .room-reflect__ta {
+      width: 100%;
+      min-height: 6rem;
+      padding: 0.95rem 1.05rem;
+      border: 1px solid var(--line);
+      border-radius: 0.55rem;
+      background: rgba(8, 7, 6, 0.45);
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: max(16px, 1rem);
+      font-weight: 300;
+      line-height: 1.75;
+      letter-spacing: 0.01em;
+      resize: vertical;
+      scroll-margin-bottom: 5rem;
+      transition: border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-medium) var(--ease-soft);
+    }
+
+    .room-reflect__ta::placeholder {
+      color: rgba(235, 232, 225, 0.42);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.55;
+      white-space: pre-wrap;
+    }
+
+    .room-reflect__ta:focus-visible {
+      outline: none;
+      border-color: var(--line-strong);
+      box-shadow: 0 0 0 1px var(--accent-glow);
+    }
+
+    .room-action {
+      padding: 1.15rem 1.2rem;
+      border-left: 2px solid var(--accent-soft);
+      border-radius: 0 0.55rem 0.55rem 0;
+      background: rgba(185, 155, 115, 0.06);
+    }
+
+    .room-action__label {
+      margin-bottom: 0.4rem;
+      color: var(--text-quiet);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+
+    .room-action__text {
+      font-family: var(--font-display);
+      font-size: 0.98rem;
+      font-weight: 400;
+      line-height: 1.65;
+      color: rgba(242, 240, 235, 0.94);
+    }
+
+    .room-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      margin-top: 0.25rem;
+    }
+
+    @media (min-width: 30em) {
+      .room-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+
+      .room-actions__primary {
+        margin-left: auto;
+      }
+    }
+
+    .room-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: max(2.75rem, 44px);
+      padding: 0.78rem 1.15rem;
+      border-radius: 0.5rem;
+      font: inherit;
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      border: 1px solid transparent;
+      touch-action: manipulation;
+      transition: border-color var(--dur-short) var(--ease-out), box-shadow var(--dur-medium) var(--ease-soft), transform var(--dur-medium) var(--ease-soft), background var(--dur-short) var(--ease-out);
+    }
+
+    .room-btn--ghost {
+      border-color: var(--line);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .room-btn--ghost:hover,
+    .room-btn--ghost:focus-visible {
+      border-color: var(--line-strong);
+      background: var(--bg-card);
+    }
+
+    .room-btn--primary {
+      border-color: var(--line-strong);
+      color: #171310;
+      background: linear-gradient(165deg, rgba(232, 212, 184, 0.98) 0%, var(--accent-mid) 50%, #8f734d 100%);
+      box-shadow: 0 0 1.25rem var(--accent-glow);
+    }
+
+    .room-btn--primary:hover,
+    .room-btn--primary:focus-visible {
+      box-shadow: 0 0 1.75rem rgba(185, 155, 115, 0.2);
+      transform: translateY(-2px);
+    }
+
+    @media (hover: none) {
+      .room-btn--primary:hover {
+        box-shadow: 0 0 1.25rem var(--accent-glow);
+        transform: none;
+      }
+    }
+
+    .room-btn:focus-visible {
+      outline: 2px solid var(--line-strong);
+      outline-offset: 3px;
+    }
+
+    .room-status {
+      margin-top: 1rem;
+      min-height: 1.25rem;
+      color: var(--text-quiet);
+      font-size: 0.86rem;
+      font-weight: 300;
+      line-height: 1.45;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .room-bg {
+        animation: none;
+      }
+
+      .room-btn--primary:hover,
+      .room-btn--primary:focus-visible {
+        transform: none;
+      }
+    }
+
+    @media print {
+      .room-no-print {
+        display: none !important;
+      }
+
+      body {
+        background: #fff;
+        color: #111;
+      }
+
+      .room-bg {
+        display: none;
+      }
+
+      .room-page {
+        max-width: none;
+        padding: 0.75in;
+      }
+
+      .room-title {
+        color: #111;
+      }
+
+      .room-intro,
+      .room-reflect__q {
+        color: #333;
+      }
+
+      .room-reflect__ta {
+        border: 1px solid #999;
+        background: #fff;
+        color: #111;
+        min-height: 4rem;
+      }
+
+      .room-action {
+        background: #f4f1ea;
+        border-left-color: #8a7349;
+      }
+
+      .room-action__label {
+        color: #5c4a32;
+      }
+
+      .room-action__text {
+        color: #222;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="room-bg" aria-hidden="true"></div>
+  <div class="room-grain" aria-hidden="true"></div>
+
+  <div class="acc-atmo" id="acc-atmo" hidden>
+    <div class="acc-atmo__vignette" aria-hidden="true"></div>
+    <div class="acc-atmo__warm" aria-hidden="true"></div>
+    <div class="acc-atmo__drift" aria-hidden="true"></div>
+    <div class="acc-atmo__particles" aria-hidden="true"></div>
+  </div>
+
+  <div class="acc-interlude" id="acc-interlude" aria-hidden="true">
+    <div class="acc-interlude__inner">
+      <p class="acc-interlude__line" id="acc-interlude-line">You do not need to pretend in here.</p>
+      <button type="button" class="acc-interlude__continue" id="acc-interlude-continue">Continue</button>
+    </div>
+  </div>
+
+  <div class="acc-outro" id="acc-outro" aria-hidden="true">
+    <div class="acc-outro__inner">
+      <svg class="acc-outro__branch" viewBox="0 0 100 160" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M50 8C50 8 38 28 42 52C46 76 58 88 50 108C42 128 28 138 22 152" stroke="rgba(185,155,115,0.35)" stroke-width="1.2" stroke-linecap="round"/>
+        <path d="M50 8C50 8 62 32 58 54C54 76 44 92 52 112C60 132 78 142 84 152" stroke="rgba(165,140,105,0.28)" stroke-width="1" stroke-linecap="round"/>
+        <path d="M50 8V42" stroke="rgba(200,175,130,0.2)" stroke-width="0.8" stroke-linecap="round"/>
+      </svg>
+      <h2 class="acc-outro__title" id="acc-outro-title">Room 1 Complete</h2>
+      <p class="acc-outro__verse">Acceptance is not weakness.<br />Acceptance is honesty.<br />And honesty is often where rebuilding begins.</p>
+      <p class="acc-outro__hint">Continue when ready.</p>
+      <button type="button" class="acc-outro__continue" id="acc-outro-continue">Continue</button>
+    </div>
+  </div>
+
+  <div class="idm-atmo" id="idm-atmo" hidden>
+    <div class="idm-atmo__vignette" aria-hidden="true"></div>
+    <div class="idm-atmo__warm" aria-hidden="true"></div>
+    <div class="idm-atmo__drift" aria-hidden="true"></div>
+  </div>
+
+  <div class="room-page">
+    <nav class="room-page__nav room-no-print" aria-label="Room navigation">
+      <a href="dashboard.html">Course dashboard</a>
+      <span class="room-page__nav-sep" aria-hidden="true">/</span>
+      <a href="./">Home</a>
+    </nav>
+
+    <main>
+      <header class="room-block">
+        <p class="room-eyebrow" id="room-eyebrow">Room</p>
+        <h1 class="room-title" id="room-title">Title</h1>
+        <p class="room-intro" id="room-intro"></p>
+      </header>
+
+      <section class="room-block room-no-print room-audio-block" aria-label="Guided audio">
+        <div class="room-audio-ceremony-wrap">
+          <div class="room-acc-audio-minimal">
+            <button type="button" class="room-acc-minimal-play" id="play-guided-audio-acc" aria-pressed="false">
+              ▶ Play guided audio
+            </button>
+            <div class="room-acc-wave-inline" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+          <div class="room-acc-scrub-wrap">
+            <label class="room-visually-hidden" for="acc-audio-scrub">Playback position</label>
+            <input
+              type="range"
+              id="acc-audio-scrub"
+              class="room-acc-scrub"
+              min="0"
+              max="0"
+              value="0"
+              step="0.1"
+              disabled
+              aria-valuemin="0"
+              aria-valuemax="0"
+              aria-valuenow="0"
+              aria-valuetext="0:00"
+            />
+            <div class="room-acc-scrub-times" aria-hidden="true">
+              <span id="acc-audio-time-elapsed">0:00</span>
+              <span class="room-acc-scrub-sep">/</span>
+              <span id="acc-audio-time-total">0:00</span>
+            </div>
+          </div>
+          <p class="room-acc-audio-caption">Best experienced with headphones. Pause at any time.</p>
+        </div>
+        <div class="room-audio-legacy-wrap">
+          <button type="button" class="room-audio__play-guided" id="play-guided-audio">▶ Play guided audio</button>
+        </div>
+      </section>
+
+      <section class="room-block" aria-labelledby="room-reflect-heading">
+        <h2 class="room-reflect__heading room-visually-hidden" id="room-reflect-heading">Reflection</h2>
+
+        <div class="room-prompt" id="room-prompt-flow">
+          <div class="room-prompt__scene" id="prompt-scene">
+            <h3 class="room-prompt__title" id="prompt-title">Prompt</h3>
+            <p class="room-prompt__body" id="prompt-body"></p>
+            <label class="room-reflect__q room-visually-hidden" for="reflect-current" id="prompt-label">Writing</label>
+            <textarea class="room-reflect__ta" id="reflect-current" name="reflect-current" rows="7" autocomplete="off"></textarea>
+            <div id="identity-coda" class="room-identity-coda" hidden>
+              <p class="room-identity-coda__text" id="identity-coda-text"></p>
+            </div>
+            <p class="room-prompt__rest" hidden></p>
+          </div>
+
+          <div class="room-prompt__nav room-no-print">
+            <button type="button" class="room-btn room-btn--ghost" id="prompt-prev">Back</button>
+            <button type="button" class="room-btn room-btn--ghost" id="prompt-next">Next</button>
+          </div>
+        </div>
+
+        <div class="room-reflect__legacy" id="room-legacy-flow" hidden>
+          <div class="room-reflect__field">
+            <label class="room-reflect__q" for="reflect-1" id="label-1">Question 1</label>
+            <textarea class="room-reflect__ta" id="reflect-1" name="reflect-1" rows="5" autocomplete="off"></textarea>
+          </div>
+          <div class="room-reflect__field">
+            <label class="room-reflect__q" for="reflect-2" id="label-2">Question 2</label>
+            <textarea class="room-reflect__ta" id="reflect-2" name="reflect-2" rows="5" autocomplete="off"></textarea>
+          </div>
+          <div class="room-reflect__field">
+            <label class="room-reflect__q" for="reflect-3" id="label-3">Question 3</label>
+            <textarea class="room-reflect__ta" id="reflect-3" name="reflect-3" rows="5" autocomplete="off"></textarea>
+          </div>
+          <p class="room-prompt__rest" hidden></p>
+        </div>
+      </section>
+
+      <section class="room-block room-action" aria-labelledby="room-action-label">
+        <p class="room-action__label" id="room-action-label">A small move forward</p>
+        <p class="room-action__text" id="room-action-text"></p>
+      </section>
+
+      <div class="room-actions room-no-print" hidden>
+        <button type="button" class="room-btn room-btn--primary room-actions__primary" id="btn-complete">
+          Mark this room complete
+        </button>
+      </div>
+
+      <p class="room-status room-no-print" id="room-status" role="status" aria-live="polite"></p>
+    </main>
+  </div>
+
+  <script src="js/course-progress.js"></script>
+  <script>
+    (function () {
+      const ROOMS = {
+        1: {
+          slug: "acceptance",
+          eyebrow: "Room 1",
+          title: "Acceptance",
+          intro:
+            "In this room, you will name what is true right now, without rushing to fix it. Let your reflections be honest and kind.",
+          prompts: [
+            {
+              key: "r1",
+              kicker: "Prompt one.",
+              title: "What has changed most about your life recently?",
+              body: "",
+              placeholder: "The biggest change for me has been…",
+            },
+            {
+              key: "r2",
+              kicker: "Prompt two.",
+              title: "What feels hardest for you right now?",
+              body: "",
+              placeholder: "What feels hardest right now is…",
+            },
+            {
+              key: "r3",
+              kicker: "Prompt three.",
+              title: "What have you been finding difficult to talk about?",
+              body: "",
+              placeholder: "Something I haven’t really spoken about is…",
+            },
+            {
+              key: "anchor",
+              kicker: "Prompt four.",
+              title: "What do you need more of right now?",
+              body: "",
+              placeholder: "Right now, I think I need more…",
+            },
+            {
+              key: "nurture",
+              kicker: "Before you leave.",
+              title: "What is one small thing you can do for yourself this week?",
+              body: "",
+              placeholder: "One small thing I can do for myself this week is…",
+            },
+          ],
+          action: "",
+        },
+        2: {
+          slug: "identity",
+          eyebrow: "Room 2",
+          title: "Identity",
+          intro: "In this room, you'll reflect on how life has changed the way you see yourself.",
+          prompts: [
+            {
+              key: "r1",
+              title: "Before this chapter of your life, how would you have described yourself?",
+              body: "",
+              placeholder: "Before this chapter of my life, I would have described myself as…",
+            },
+            {
+              key: "r2",
+              title: "What feels different about you now?",
+              body: "",
+              placeholder: "Something that feels different about me now is…",
+            },
+            {
+              key: "r3",
+              title: "What parts of yourself do you feel are still the same?",
+              body: "",
+              placeholder: "One part of myself that still feels the same is…",
+            },
+            {
+              key: "r4",
+              title: "What have you handled better than you give yourself credit for?",
+              body: "",
+              placeholder: "Something I have handled better than I realise is…",
+            },
+            {
+              key: "r5",
+              title: "What helps you feel most like yourself again?",
+              body: "",
+              placeholder: "Something that helps me feel like myself again is…",
+            },
+            {
+              key: "forward",
+              title: "A small move forward",
+              body: "",
+              placeholder: "I am still someone who…",
+            },
+            {
+              type: "coda",
+              body:
+                "You are allowed to grow into a different version of yourself without losing your value.\n\nIdentity is not erased by change.\n\nSometimes it is rebuilt through it.",
+            },
+          ],
+          action: "",
+        },
+        3: {
+          slug: "control",
+          eyebrow: "Room 3",
+          title: "Control",
+          intro:
+            "In this room, you'll focus on the things that still belong to you, even when life feels unpredictable.",
+          prompts: [
+            {
+              key: "r1",
+              title: "What feels most outside of your control right now?",
+              body: "",
+              placeholder: "Something that feels outside of my control right now is…",
+            },
+            {
+              key: "r2",
+              title: "What situations tend to drain your energy the most?",
+              body: "",
+              placeholder: "Something that drains my energy the most is…",
+            },
+            {
+              key: "r3",
+              title: "What helps you feel more grounded on difficult days?",
+              body: "",
+              placeholder: "Something that helps me feel more grounded is…",
+            },
+            {
+              key: "r4",
+              title: "Where do you think you need stronger boundaries right now?",
+              body: "",
+              placeholder: "One boundary I probably need right now is…",
+            },
+            {
+              key: "r5",
+              title: "What is one small thing you can control this week?",
+              body: "",
+              placeholder: "One thing I can still control this week is…",
+            },
+            {
+              key: "forward",
+              title: "A small move forward",
+              body: "",
+              placeholder: "One thing I still have control over is…",
+            },
+            {
+              type: "coda",
+              body:
+                "Control is not about controlling everything.\n\nSometimes it is simply learning where your energy deserves to go.",
+            },
+          ],
+          action: "",
+        },
+        4: {
+          slug: "confidence",
+          eyebrow: "Room 4",
+          title: "Confidence",
+          intro:
+            "In this room, you'll reflect on your confidence and the pressure you place on yourself.",
+          prompts: [
+            {
+              key: "r1",
+              title: "What has affected your confidence the most recently?",
+              body: "",
+              placeholder: "Something that has affected my confidence recently is…",
+            },
+            {
+              key: "r2",
+              title: "When do you feel least like yourself?",
+              body: "",
+              placeholder: "I feel least like myself when…",
+            },
+            {
+              key: "r3",
+              title: "What pressure do you put on yourself that others might not see?",
+              body: "",
+              placeholder: "One pressure I put on myself is…",
+            },
+            {
+              key: "r4",
+              title: "What has helped you keep going on difficult days?",
+              body: "",
+              placeholder: "Something that has helped me keep going is…",
+            },
+            {
+              key: "r5",
+              title: "What would confidence look like for you right now?",
+              body: "",
+              placeholder: "Confidence for me right now would look like…",
+            },
+            {
+              key: "forward",
+              title: "A small move forward",
+              body: "",
+              placeholder: "I deserve to feel confident even when…",
+            },
+            {
+              type: "coda",
+              body:
+                "Confidence does not always return loudly.\n\nSometimes it rebuilds quietly through consistency, honesty, and self-respect.",
+            },
+          ],
+          action: "",
+        },
+        5: {
+          slug: "direction",
+          eyebrow: "Room 5",
+          title: "Direction",
+          intro:
+            "In this room, you'll reflect on what matters to you now and where you want life to move towards.",
+          prompts: [
+            {
+              key: "r1",
+              title: "What feels most uncertain about your future right now?",
+              body: "",
+              placeholder: "Something that feels uncertain for me right now is…",
+            },
+            {
+              key: "r2",
+              title: "What expectations have changed for you recently?",
+              body: "",
+              placeholder: "One expectation that has changed for me is…",
+            },
+            {
+              key: "r3",
+              title: "What still feels meaningful to you during difficult periods?",
+              body: "",
+              placeholder: "Something that still feels meaningful to me is…",
+            },
+            {
+              key: "r4",
+              title: "What do you want more of in your life moving forward?",
+              body: "",
+              placeholder: "Something I want more of in my life is…",
+            },
+            {
+              key: "r5",
+              title: "What kind of life do you want to build emotionally?",
+              body: "",
+              placeholder: "Emotionally, I want my life to feel more…",
+            },
+            {
+              key: "forward",
+              title: "A small move forward",
+              body: "",
+              placeholder: "A direction I want to move towards is…",
+            },
+            {
+              type: "coda",
+              body:
+                "You do not need to have your entire future figured out.\n\nSometimes direction begins with simply deciding not to give up on yourself.",
+            },
+          ],
+          action: "",
+        },
+        6: {
+          slug: "rebuild",
+          eyebrow: "Room 6",
+          title: "Rebuild",
+          intro:
+            "In this room, you'll reflect on how you've grown and what you want to carry forward.",
+          prompts: [
+            {
+              key: "r1",
+              title: "What have you got through that would surprise your past self?",
+              body: "",
+              placeholder: "Something I've got through that would surprise my past self is…",
+            },
+            {
+              key: "r2",
+              title: "How have you grown emotionally through this experience?",
+              body: "",
+              placeholder: "Emotionally, I think I've grown by…",
+            },
+            {
+              key: "r3",
+              title: "What do you understand about yourself now that you didn't before?",
+              body: "",
+              placeholder: "Something I understand about myself now is…",
+            },
+            {
+              key: "r4",
+              title: "What strengths have shown up in you during difficult moments?",
+              body: "",
+              placeholder: "One strength that has shown up in me is…",
+            },
+            {
+              key: "r5",
+              title: "What would you say to the version of you who first entered Room 1?",
+              body: "",
+              placeholder: "If I could speak to the version of me from Room 1, I would say…",
+            },
+            {
+              key: "forward",
+              title: "A small move forward",
+              body: "",
+              placeholder: "I am rebuilding into someone who…",
+            },
+            {
+              type: "coda",
+              body:
+                "Rebuilding is not becoming the person you were before.\n\nIt is learning how to carry everything you have lived through\nwithout losing yourself in the process.",
+            },
+          ],
+          action: "",
+        },
+      };
+
+      const params = new URLSearchParams(window.location.search);
+      let roomId = parseInt(params.get("room"), 10);
+      if (!Number.isFinite(roomId) || roomId < 1 || roomId > 6) {
+        roomId = 1;
+      }
+
+      if (!window.RRCourseProgress.isRoomUnlocked(roomId)) {
+        window.location.replace("dashboard.html");
+        return;
+      }
+
+      const data = ROOMS[roomId];
+      if (!data) {
+        window.location.replace("dashboard.html");
+        return;
+      }
+
+      window.RRCourseProgress.setLastOpenedRoom(roomId);
+      document.title = `${data.title}: The Rebuilding Room`;
+
+      document.getElementById("room-eyebrow").textContent = data.eyebrow;
+      document.getElementById("room-title").textContent = data.title;
+
+      const isAcceptanceRoom = roomId === 1;
+      const journeyWithCoda = roomId >= 2 && roomId <= 6;
+      const isPromptJourneyRoom = roomId >= 1 && roomId <= 6;
+      const isCeremonyAudioRoom = roomId >= 1 && roomId <= 6;
+
+      const introEl = document.getElementById("room-intro");
+      introEl.textContent = data.intro;
+      if (journeyWithCoda) {
+        introEl.classList.add("room-intro--preline");
+      } else {
+        introEl.classList.remove("room-intro--preline");
+      }
+      document.getElementById("room-action-text").textContent = journeyWithCoda ? "" : data.action;
+
+      if (isAcceptanceRoom) {
+        document.documentElement.classList.add("room-acceptance");
+        document.getElementById("acc-atmo")?.removeAttribute("hidden");
+      }
+      if (journeyWithCoda) {
+        document.documentElement.classList.add("room-identity");
+        document.getElementById("idm-atmo")?.removeAttribute("hidden");
+      }
+      if (isCeremonyAudioRoom) {
+        document.documentElement.classList.add("room-ceremony-audio");
+      }
+
+      const promptFlow = document.getElementById("room-prompt-flow");
+      const legacyFlow = document.getElementById("room-legacy-flow");
+
+      const reflectEl = document.getElementById("reflect-current");
+      const ta1 = document.getElementById("reflect-1");
+      const ta2 = document.getElementById("reflect-2");
+      const ta3 = document.getElementById("reflect-3");
+      const statusEl = document.getElementById("room-status");
+      const actionsWrap = document.querySelector(".room-actions");
+      const completeBtn = document.getElementById("btn-complete");
+      const playGuidedAudioBtn = document.getElementById(
+        isCeremonyAudioRoom ? "play-guided-audio-acc" : "play-guided-audio"
+      );
+      const syncAccPlayUi = () => {
+        if (!isCeremonyAudioRoom || !playGuidedAudioBtn) {
+          return;
+        }
+        const active = document.documentElement.classList.contains("acc-audio-active");
+        playGuidedAudioBtn.setAttribute("aria-pressed", active ? "true" : "false");
+        playGuidedAudioBtn.textContent = active ? "Pause guided audio" : "▶ Play guided audio";
+      };
+      const promptTitle = document.getElementById("prompt-title");
+      const promptBody = document.getElementById("prompt-body");
+      const promptPrev = document.getElementById("prompt-prev");
+      const promptNext = document.getElementById("prompt-next");
+      const actionSection = document.getElementById("room-action-text")?.closest("section");
+      const promptScene = document.getElementById("prompt-scene");
+      const identityCodaEl = document.getElementById("identity-coda");
+      const identityCodaText = document.getElementById("identity-coda-text");
+      const accInterlude = document.getElementById("acc-interlude");
+      const accOutro = document.getElementById("acc-outro");
+      const accInterludeContinue = document.getElementById("acc-interlude-continue");
+      const accOutroContinue = document.getElementById("acc-outro-continue");
+
+      let accGuideAudio = null;
+      let accGuideListenersAttached = false;
+      let accScrubbing = false;
+      const accScrubEl = isCeremonyAudioRoom ? document.getElementById("acc-audio-scrub") : null;
+      const accTimeElapsedEl = isCeremonyAudioRoom ? document.getElementById("acc-audio-time-elapsed") : null;
+      const accTimeTotalEl = isCeremonyAudioRoom ? document.getElementById("acc-audio-time-total") : null;
+
+      const formatAccTime = (sec) => {
+        if (!Number.isFinite(sec) || sec < 0) {
+          return "0:00";
+        }
+        const h = Math.floor(sec / 3600);
+        const m = Math.floor((sec % 3600) / 60);
+        const s = Math.floor(sec % 60);
+        if (h > 0) {
+          return `${h}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+        }
+        return `${m}:${String(s).padStart(2, "0")}`;
+      };
+
+      const syncAccScrubFromAudio = () => {
+        if (!isCeremonyAudioRoom || !accScrubEl || !accGuideAudio) {
+          return;
+        }
+        const d = accGuideAudio.duration;
+        const c = accGuideAudio.currentTime;
+        if (Number.isFinite(d) && d > 0) {
+          accScrubEl.max = String(d);
+          accScrubEl.setAttribute("aria-valuemax", String(Math.floor(d)));
+          if (!accScrubbing) {
+            accScrubEl.value = String(Math.min(Math.max(c, 0), d));
+          }
+          const thumbT = accScrubbing ? parseFloat(accScrubEl.value) : c;
+          const pct = Math.min(100, Math.max(0, (Number.isFinite(thumbT) ? thumbT : 0) / d) * 100);
+          accScrubEl.style.setProperty("--acc-scrub-pct", `${pct}%`);
+          accScrubEl.setAttribute("aria-valuenow", String(Math.floor(Number(accScrubEl.value) || 0)));
+          accScrubEl.setAttribute("aria-valuetext", formatAccTime(Number(accScrubEl.value) || 0));
+          if (accTimeTotalEl) {
+            accTimeTotalEl.textContent = formatAccTime(d);
+          }
+          accScrubEl.disabled = false;
+        }
+        if (accTimeElapsedEl) {
+          const showT =
+            accScrubbing && Number.isFinite(d) && d > 0
+              ? parseFloat(accScrubEl.value)
+              : Number.isFinite(c)
+                ? c
+                : 0;
+          accTimeElapsedEl.textContent = formatAccTime(showT);
+        }
+      };
+
+      const attachAccGuideListeners = () => {
+        if (accGuideListenersAttached || !accGuideAudio) {
+          return;
+        }
+        accGuideListenersAttached = true;
+        accGuideAudio.addEventListener(
+          "playing",
+          () => {
+            document.documentElement.classList.add("acc-audio-scrub-revealed");
+          },
+          { once: true }
+        );
+        accGuideAudio.addEventListener("loadedmetadata", syncAccScrubFromAudio);
+        accGuideAudio.addEventListener("durationchange", syncAccScrubFromAudio);
+        accGuideAudio.addEventListener("timeupdate", syncAccScrubFromAudio);
+        accGuideAudio.addEventListener("pause", syncAccScrubFromAudio);
+        accGuideAudio.addEventListener("play", syncAccScrubFromAudio);
+        accGuideAudio.addEventListener("ended", () => {
+          document.documentElement.classList.remove("acc-audio-active");
+          syncAccPlayUi();
+          accScrubbing = false;
+          syncAccScrubFromAudio();
+        });
+      };
+
+      const ensureAccGuideAudio = () => {
+        if (!accGuideAudio) {
+          const guideSrcByRoom = {
+            1: "Room One Audio.mp3",
+            2: "Room Two Audio.mp3",
+            3: "Room Three Audio.mp3",
+            4: "Room Four Audio.mp3",
+            5: "Room Five Audio.mp3",
+            6: "Room Six Audio.mp3",
+          };
+          const src = guideSrcByRoom[roomId] || "";
+          if (!src) {
+            return null;
+          }
+          accGuideAudio = new Audio(encodeURI(src));
+          accGuideAudio.preload = "auto";
+          attachAccGuideListeners();
+        }
+        return accGuideAudio;
+      };
+
+      if (isCeremonyAudioRoom && accScrubEl) {
+        const endScrub = () => {
+          accScrubbing = false;
+          syncAccScrubFromAudio();
+        };
+        accScrubEl.addEventListener("pointerdown", () => {
+          accScrubbing = true;
+        });
+        accScrubEl.addEventListener("pointerup", endScrub);
+        accScrubEl.addEventListener("pointercancel", endScrub);
+        accScrubEl.addEventListener("lostpointercapture", endScrub);
+        accScrubEl.addEventListener("input", () => {
+          const a = accGuideAudio || ensureAccGuideAudio();
+          const v = parseFloat(accScrubEl.value);
+          if (Number.isFinite(v) && Number.isFinite(a.duration) && a.duration > 0) {
+            a.currentTime = Math.min(Math.max(v, 0), a.duration);
+          }
+          syncAccScrubFromAudio();
+        });
+        ensureAccGuideAudio();
+      }
+      const accSceneMs = 880;
+      const motionReduceQ = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+      let promptIndex = 0;
+      let promptAnswers = { r1: "", r2: "", r3: "", r4: "", r5: "", forward: "", anchor: "", nurture: "" };
+      let acceptanceFinished = false;
+
+      const saveReflections = () => {
+        if (isPromptJourneyRoom) {
+          window.RRCourseProgress.saveReflections(roomId, promptAnswers);
+          return;
+        }
+        window.RRCourseProgress.saveReflections(roomId, {
+          r1: ta1 ? ta1.value : "",
+          r2: ta2 ? ta2.value : "",
+          r3: ta3 ? ta3.value : "",
+        });
+      };
+
+      const applyReflectionsToFields = () => {
+        const parsed = window.RRCourseProgress.getReflections(roomId);
+        if (isPromptJourneyRoom) {
+          promptAnswers = {
+            r1: parsed.r1 || "",
+            r2: parsed.r2 || "",
+            r3: parsed.r3 || "",
+            r4: parsed.r4 || "",
+            r5: parsed.r5 || "",
+            forward: parsed.forward || "",
+            anchor: parsed.anchor || "",
+            nurture: parsed.nurture || "",
+          };
+          return;
+        }
+        if (ta1) ta1.value = parsed.r1 || "";
+        if (ta2) ta2.value = parsed.r2 || "";
+        if (ta3) ta3.value = parsed.r3 || "";
+      };
+
+      const setStatus = (msg) => {
+        if (statusEl) {
+          statusEl.textContent = msg;
+        }
+      };
+
+      if (promptFlow) {
+        promptFlow.toggleAttribute("hidden", !isPromptJourneyRoom);
+      }
+      if (legacyFlow) {
+        legacyFlow.toggleAttribute("hidden", isPromptJourneyRoom);
+      }
+      if (!isPromptJourneyRoom && actionsWrap) {
+        actionsWrap.removeAttribute("hidden");
+      }
+
+      applyReflectionsToFields();
+
+      const prompts = isPromptJourneyRoom && Array.isArray(data.prompts) ? data.prompts : [];
+
+      const setTextareaValue = (value) => {
+        if (reflectEl) {
+          reflectEl.value = value || "";
+        }
+      };
+
+      const getTextareaValue = () => (reflectEl ? reflectEl.value : "");
+
+      const persistCurrentPrompt = () => {
+        const current = prompts[promptIndex];
+        if (!current || !current.key) {
+          return;
+        }
+        promptAnswers[current.key] = getTextareaValue();
+      };
+
+      const openAccOverlay = (el) => {
+        if (!el) {
+          return;
+        }
+        document.body.style.overflow = "hidden";
+        el.setAttribute("aria-hidden", "false");
+        window.requestAnimationFrame(() => {
+          el.classList.add("is-open");
+        });
+      };
+
+      const closeAccOverlay = (el) => {
+        if (!el) {
+          return;
+        }
+        el.classList.remove("is-open");
+        window.setTimeout(() => {
+          el.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        }, 1100);
+      };
+
+      const runPromptTransition = (applyIndexChange) => {
+        if (!isPromptJourneyRoom || !promptScene || motionReduceQ.matches) {
+          applyIndexChange();
+          syncPromptUI();
+          if (reflectEl && !reflectEl.hidden) {
+            reflectEl.focus();
+          }
+          return;
+        }
+        promptScene.classList.remove("is-entering");
+        promptScene.classList.add("is-exiting");
+        window.setTimeout(() => {
+          applyIndexChange();
+          syncPromptUI();
+          promptScene.classList.remove("is-exiting");
+          void promptScene.offsetWidth;
+          promptScene.classList.add("is-entering");
+          window.setTimeout(() => {
+            promptScene.classList.remove("is-entering");
+            if (reflectEl && !reflectEl.hidden) {
+              reflectEl.focus();
+            }
+          }, accSceneMs);
+        }, accSceneMs);
+      };
+
+      const syncPromptUI = () => {
+        if (!isPromptJourneyRoom) {
+          return;
+        }
+        const current = prompts[promptIndex];
+        if (!current) {
+          return;
+        }
+
+        const isCoda = current.type === "coda";
+
+        if (promptTitle) {
+          if (isCoda) {
+            promptTitle.textContent = "";
+            promptTitle.classList.add("room-visually-hidden");
+          } else {
+            promptTitle.classList.remove("room-visually-hidden");
+            promptTitle.textContent = current.title || "Prompt";
+          }
+        }
+        if (promptBody) {
+          promptBody.textContent = isCoda ? "" : current.body || "";
+          promptBody.toggleAttribute(
+            "hidden",
+            (isAcceptanceRoom || journeyWithCoda) && (isCoda || !String(current.body || "").trim())
+          );
+        }
+
+        if (identityCodaEl && identityCodaText) {
+          if (journeyWithCoda && isCoda) {
+            identityCodaEl.hidden = false;
+            identityCodaText.textContent = current.body || "";
+            identityCodaEl.classList.remove("is-revealed");
+            void identityCodaEl.offsetWidth;
+            window.requestAnimationFrame(() => {
+              identityCodaEl.classList.add("is-revealed");
+            });
+          } else {
+            identityCodaEl.hidden = true;
+            identityCodaEl.classList.remove("is-revealed");
+          }
+        }
+
+        if (reflectEl) {
+          reflectEl.hidden = Boolean(isCoda);
+          if (!isCoda && current.key) {
+            setTextareaValue(promptAnswers[current.key] || "");
+            reflectEl.placeholder = String(current.placeholder != null ? current.placeholder : "").trim();
+            const t = String(current.title || "").trim();
+            reflectEl.setAttribute("aria-label", t ? `Response: ${t}` : "Your response");
+          }
+        }
+
+        if (promptPrev) {
+          promptPrev.disabled = promptIndex === 0;
+          promptPrev.toggleAttribute("hidden", isAcceptanceRoom && acceptanceFinished);
+        }
+        if (promptNext) {
+          if (journeyWithCoda) {
+            promptNext.toggleAttribute("hidden", false);
+            promptNext.textContent = isCoda ? "Finish" : "Next";
+          } else {
+            promptNext.toggleAttribute("hidden", isAcceptanceRoom && acceptanceFinished);
+            promptNext.textContent = promptIndex >= prompts.length - 1 ? "Finish" : "Next";
+          }
+        }
+
+        if (completeBtn) {
+          if (isAcceptanceRoom) {
+            completeBtn.toggleAttribute("hidden", !(isAcceptanceRoom && acceptanceFinished));
+          } else if (journeyWithCoda) {
+            completeBtn.toggleAttribute("hidden", true);
+          }
+        }
+
+        if (actionsWrap) {
+          if (isAcceptanceRoom) {
+            actionsWrap.toggleAttribute("hidden", !acceptanceFinished);
+          } else if (journeyWithCoda) {
+            actionsWrap.toggleAttribute("hidden", true);
+          }
+        }
+
+        if (actionSection) {
+          const shouldShowAction = Boolean(data.action) && !journeyWithCoda;
+          actionSection.toggleAttribute("hidden", !shouldShowAction);
+        }
+      };
+
+      const renderPrompt = () => {
+        syncPromptUI();
+      };
+
+      let debounceId = null;
+      const scheduleAutosave = () => {
+        if (debounceId !== null) {
+          window.clearTimeout(debounceId);
+        }
+        debounceId = window.setTimeout(() => {
+          debounceId = null;
+          if (isPromptJourneyRoom) {
+            persistCurrentPrompt();
+            window.RRCourseProgress.saveReflections(roomId, promptAnswers);
+          } else {
+            saveReflections();
+          }
+        }, 600);
+      };
+
+      if (isPromptJourneyRoom) {
+        if (reflectEl) {
+          reflectEl.addEventListener("input", scheduleAutosave);
+        }
+      } else {
+        [ta1, ta2, ta3].forEach((ta) => ta?.addEventListener("input", scheduleAutosave));
+      }
+
+      window.addEventListener("pagehide", saveReflections);
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "hidden") {
+          saveReflections();
+        }
+      });
+
+      if (isPromptJourneyRoom) {
+        promptPrev?.addEventListener("click", () => {
+          persistCurrentPrompt();
+          if (isAcceptanceRoom) {
+            acceptanceFinished = false;
+          }
+          runPromptTransition(() => {
+            promptIndex = Math.max(0, promptIndex - 1);
+          });
+        });
+
+        promptNext?.addEventListener("click", () => {
+          persistCurrentPrompt();
+
+          if (isAcceptanceRoom) {
+            if (promptIndex === 2) {
+              try {
+                accGuideAudio?.pause?.();
+              } catch (e) {
+                /* ignore */
+              }
+              document.documentElement.classList.remove("acc-audio-active");
+              syncAccPlayUi();
+              openAccOverlay(accInterlude);
+              accInterludeContinue?.focus();
+              return;
+            }
+
+            if (promptIndex >= prompts.length - 1) {
+              window.RRCourseProgress.saveReflections(roomId, promptAnswers);
+              document.documentElement.classList.remove("acc-audio-active");
+              syncAccPlayUi();
+              try {
+                accGuideAudio?.pause?.();
+              } catch (e) {
+                /* ignore */
+              }
+              openAccOverlay(accOutro);
+              accOutroContinue?.focus();
+              return;
+            }
+
+            runPromptTransition(() => {
+              promptIndex = Math.min(prompts.length - 1, promptIndex + 1);
+            });
+            return;
+          }
+
+          if (journeyWithCoda) {
+            const atCoda = prompts[promptIndex] && prompts[promptIndex].type === "coda";
+            if (atCoda) {
+              try {
+                accGuideAudio?.pause?.();
+              } catch (e) {
+                /* ignore */
+              }
+              document.documentElement.classList.remove("acc-audio-active");
+              syncAccPlayUi();
+              finishRoomAndLeave();
+              return;
+            }
+            if (promptIndex >= prompts.length - 1) {
+              return;
+            }
+            runPromptTransition(() => {
+              promptIndex = Math.min(prompts.length - 1, promptIndex + 1);
+            });
+          }
+        });
+      }
+
+      if (isAcceptanceRoom) {
+        accInterludeContinue?.addEventListener("click", () => {
+          closeAccOverlay(accInterlude);
+          window.setTimeout(() => {
+            runPromptTransition(() => {
+              promptIndex = 3;
+            });
+          }, 400);
+        });
+
+        accOutroContinue?.addEventListener("click", () => {
+          closeAccOverlay(accOutro);
+          window.setTimeout(() => {
+            acceptanceFinished = true;
+            setStatus("");
+            if (actionsWrap) {
+              actionsWrap.removeAttribute("hidden");
+            }
+            syncPromptUI();
+          }, 450);
+        });
+      }
+
+      if (playGuidedAudioBtn) {
+        playGuidedAudioBtn.addEventListener("click", () => {
+          if (!isCeremonyAudioRoom) {
+            setStatus("Guided audio is coming soon.");
+            return;
+          }
+
+          const on = !document.documentElement.classList.contains("acc-audio-active");
+          document.documentElement.classList.toggle("acc-audio-active", on);
+          syncAccPlayUi();
+          if (on) {
+            setStatus("");
+            const audio = ensureAccGuideAudio();
+            if (!audio) {
+              return;
+            }
+            audio.volume = 0;
+            audio
+              .play()
+              .then(() => {
+                window.setTimeout(() => {
+                  audio.volume = 1;
+                }, 400);
+              })
+              .catch(() => {
+                setStatus("");
+                document.documentElement.classList.remove("acc-audio-active");
+                syncAccPlayUi();
+              });
+          } else {
+            try {
+              accGuideAudio?.pause?.();
+            } catch (e) {
+              /* ignore */
+            }
+          }
+        });
+      }
+
+      const finishRoomAndLeave = () => {
+        if (isPromptJourneyRoom) {
+          persistCurrentPrompt();
+        }
+        saveReflections();
+        window.RRCourseProgress.completeRoom(roomId);
+        if (roomId === 6) {
+          setStatus("Noted. A moment to land before the next screen.");
+          window.setTimeout(() => {
+            window.location.href = "completion.html";
+          }, 650);
+        } else {
+          setStatus("Noted. Returning to your spaces.");
+          window.setTimeout(() => {
+            window.location.href = "dashboard.html";
+          }, 650);
+        }
+      };
+
+      document.getElementById("btn-complete")?.addEventListener("click", () => {
+        finishRoomAndLeave();
+      });
+
+      // Initial render
+      if (isPromptJourneyRoom) {
+        renderPrompt();
+      } else {
+        const labels = ["label-1", "label-2", "label-3"];
+        (data.questions || []).forEach((q, i) => {
+          const el = document.getElementById(labels[i]);
+          if (el) el.textContent = q;
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

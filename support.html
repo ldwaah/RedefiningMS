@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support | Redefining MS</title>
+  <meta name="description" content="Conversation, mentorship, lifestyle rebuild, and community for people navigating life after an MS diagnosis.">
+  <meta name="author" content="Lloyd">
+  <meta name="robots" content="index, follow">
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="favicon.png">
+  <link rel="me" href="https://www.instagram.com/redefiningms">
+  <meta name="theme-color" content="#000000">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Redefining MS">
+  <meta property="og:title" content="Support | Redefining MS">
+  <meta property="og:description" content="Conversation, mentorship, lifestyle rebuild, and community for people navigating life after an MS diagnosis.">
+  <meta property="og:image" content="support-background.png">
+  <meta property="og:image:alt" content="Support page background artwork">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Support | Redefining MS">
+  <meta name="twitter:description" content="Conversation, mentorship, lifestyle rebuild, and community for people navigating life after an MS diagnosis.">
+  <meta name="twitter:image" content="support-background.png">
+  <meta name="twitter:image:alt" content="Support page background artwork">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Support",
+      "description": "Conversation, mentorship, lifestyle rebuild, and community for people navigating life after an MS diagnosis.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Redefining MS"
+      },
+      "inLanguage": "en-GB"
+    }
+  </script>
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #f4f0e8;
+      --text-muted: rgba(244, 240, 232, 0.58);
+      --text-sage: #a8b5a0;
+      --glow-teal: rgba(132, 156, 148, 0.16);
+      --warm-glow: rgba(168, 142, 118, 0.08);
+      --reveal-duration: 1.35s;
+      --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --screen-gutter: clamp(2rem, 8vw, 5.5rem);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    }
+
+    .support-page__backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-color: #000000;
+      background-image:
+        radial-gradient(circle at 18% 12%, var(--warm-glow), transparent 42%),
+        radial-gradient(circle at 82% 78%, rgba(118, 148, 142, 0.08), transparent 40%),
+        linear-gradient(180deg, rgba(0, 0, 0, 0.68) 0%, rgba(0, 0, 0, 0.8) 55%, rgba(0, 0, 0, 0.9) 100%),
+        url("support-background.png");
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      transform: translate3d(0, 0, 0);
+      will-change: transform;
+    }
+
+    .support-page__grain {
+      position: fixed;
+      inset: -20%;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 220px 220px;
+      animation: support-grain 22s steps(10) infinite;
+    }
+
+    @keyframes support-grain {
+      0% {
+        transform: translate3d(0, 0, 0);
+      }
+
+      100% {
+        transform: translate3d(-3%, 2%, 0);
+      }
+    }
+
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 30;
+      padding: 0.9rem var(--screen-gutter);
+      border-bottom: 1px solid rgba(152, 168, 146, 0.14);
+      background: rgba(0, 0, 0, 0.42);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .site-nav.is-menu-open {
+      background: transparent;
+      border-bottom-color: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+    }
+
+    .site-nav.is-menu-open .site-nav__inner {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      padding: 0.9rem var(--screen-gutter);
+    }
+
+    .site-nav__inner {
+      position: relative;
+      z-index: 52;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 72rem;
+      margin: 0 auto;
+    }
+
+    .site-nav__toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.35rem 0.15rem;
+      border: 0;
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+    }
+
+    .site-nav__toggle-label {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.16em;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .site-nav__toggle-lines {
+      display: grid;
+      gap: 0.35rem;
+    }
+
+    .site-nav__toggle-lines span {
+      display: block;
+      width: 1.15rem;
+      height: 1px;
+      background: currentColor;
+      transition: transform 0.35s ease, opacity 0.35s ease;
+    }
+
+    .site-nav.is-menu-open .site-nav__toggle-lines span:nth-child(1) {
+      transform: translateY(0.43rem) rotate(45deg);
+    }
+
+    .site-nav.is-menu-open .site-nav__toggle-lines span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .site-nav.is-menu-open .site-nav__toggle-lines span:nth-child(3) {
+      transform: translateY(-0.43rem) rotate(-45deg);
+    }
+
+    .site-nav__menu {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      display: grid;
+      place-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: var(--screen-gutter);
+      background: var(--bg);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition:
+        opacity 0.55s ease,
+        visibility 0.55s ease;
+    }
+
+    body.is-nav-open .site-nav__menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .site-nav__list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: clamp(2rem, 4.5vh, 3.25rem);
+      list-style: none;
+    }
+
+    .site-nav__link {
+      color: var(--text);
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: clamp(1.45rem, 4.2vw, 2.35rem);
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      text-decoration: none;
+      opacity: 0.9;
+      transition: color 0.4s ease, opacity 0.4s ease;
+    }
+
+    .site-nav__link:hover,
+    .site-nav__link:focus-visible {
+      color: var(--text-sage);
+      opacity: 1;
+    }
+
+    .site-nav__link:focus-visible {
+      outline: 2px solid var(--text-sage);
+      outline-offset: 4px;
+    }
+
+    .site-nav__link--current {
+      color: var(--text-sage);
+    }
+
+    body.is-nav-open {
+      overflow: hidden;
+    }
+
+    .support-page {
+      position: relative;
+      z-index: 1;
+      padding:
+        calc(5.5rem + var(--screen-gutter))
+        var(--screen-gutter)
+        clamp(4rem, 10vh, 6rem);
+    }
+
+    .voice-note {
+      max-width: 44rem;
+      margin: 0 auto clamp(4rem, 10vh, 6rem);
+    }
+
+    .voice-note > .support-reveal {
+      transition-delay: var(--reveal-delay, 0s);
+    }
+
+    .voice-note__header {
+      margin-bottom: clamp(2rem, 5vh, 3rem);
+      text-align: center;
+    }
+
+    .voice-note__header .support-reveal {
+      transition-delay: var(--reveal-delay, 0s);
+    }
+
+    .voice-note__title {
+      margin-bottom: 0.85rem;
+      color: var(--text);
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: clamp(1.85rem, 5vw, 2.75rem);
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      line-height: 1.2;
+    }
+
+    .voice-note__subtitle {
+      max-width: 30rem;
+      margin: 0 auto;
+      color: var(--text-muted);
+      font-size: clamp(0.95rem, 2vw, 1.05rem);
+      font-weight: 400;
+      letter-spacing: 0.01em;
+      line-height: 1.65;
+    }
+
+    .voice-note__card {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(1.5rem, 4vw, 2.25rem);
+      border: 1px solid rgba(242, 240, 235, 0.1);
+      border-radius: 1.35rem;
+      background:
+        radial-gradient(circle at 50% 0%, var(--glow-teal), transparent 58%),
+        linear-gradient(180deg, rgba(12, 12, 12, 0.98), rgba(0, 0, 0, 0.98));
+      box-shadow:
+        0 0 0 1px rgba(118, 148, 142, 0.08),
+        0 1.5rem 3.5rem rgba(0, 0, 0, 0.45),
+        0 0 4.5rem rgba(118, 148, 142, 0.08);
+      transition: box-shadow 0.45s ease;
+    }
+
+    .voice-note__card.is-playing {
+      animation: voice-note-card-glow 4.5s ease-in-out infinite;
+    }
+
+    .voice-note__card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+
+    .voice-note__waveform {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 0.22rem;
+      height: 2.75rem;
+      margin-bottom: 1.5rem;
+      opacity: 0.62;
+      transition: opacity 0.45s ease;
+    }
+
+    .voice-note__card.is-playing .voice-note__waveform {
+      opacity: 1;
+    }
+
+    .voice-note__waveform span {
+      display: block;
+      width: 0.18rem;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(242, 240, 235, 0.85), rgba(118, 148, 142, 0.55));
+      transform-origin: bottom;
+      will-change: transform;
+      animation: voice-note-wave-idle 2.8s ease-in-out infinite;
+      animation-delay: var(--bar-delay, 0s);
+    }
+
+    .voice-note__card.is-playing:not(.is-audio-live) .voice-note__waveform span {
+      animation: voice-note-wave-play 0.95s ease-in-out infinite;
+      animation-delay: var(--bar-delay, 0s);
+    }
+
+    .voice-note__card.is-audio-live .voice-note__waveform span {
+      animation: none;
+    }
+
+    .voice-note__player {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1rem 1.15rem;
+      align-items: center;
+    }
+
+    .voice-note__play {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 3.35rem;
+      height: 3.35rem;
+      padding: 0;
+      border: 1px solid rgba(242, 240, 235, 0.16);
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.03);
+      color: var(--text);
+      cursor: pointer;
+      transition:
+        border-color 0.35s ease,
+        background-color 0.35s ease,
+        box-shadow 0.35s ease;
+    }
+
+    .voice-note__card.is-playing .voice-note__play::before,
+    .voice-note__card.is-playing .voice-note__play::after {
+      content: "";
+      position: absolute;
+      inset: -0.35rem;
+      border-radius: 50%;
+      border: 1px solid rgba(118, 148, 142, 0.35);
+      pointer-events: none;
+      animation: voice-note-ring 2.1s ease-out infinite;
+    }
+
+    .voice-note__card.is-playing .voice-note__play::after {
+      animation-delay: 1.05s;
+    }
+
+    .voice-note__play:hover,
+    .voice-note__play:focus-visible {
+      border-color: rgba(118, 148, 142, 0.45);
+      background: rgba(118, 148, 142, 0.08);
+      box-shadow: 0 0 1.5rem rgba(118, 148, 142, 0.12);
+    }
+
+    .voice-note__play:focus-visible {
+      outline: 2px solid var(--text-sage);
+      outline-offset: 3px;
+    }
+
+    .voice-note__play-icon {
+      width: 0.95rem;
+      height: 0.95rem;
+    }
+
+    .voice-note__play-icon--pause {
+      display: none;
+    }
+
+    .voice-note__card.is-playing .voice-note__play-icon--play {
+      display: none;
+    }
+
+    .voice-note__card.is-playing .voice-note__play-icon--pause {
+      display: block;
+    }
+
+    .voice-note__controls {
+      min-width: 0;
+    }
+
+    .voice-note__progress {
+      position: relative;
+      height: 0.28rem;
+      margin-bottom: 0.7rem;
+      border-radius: 999px;
+      background: rgba(242, 240, 235, 0.1);
+      cursor: pointer;
+    }
+
+    .voice-note__progress-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, rgba(118, 148, 142, 0.85), rgba(242, 240, 235, 0.85));
+    }
+
+    .voice-note__card.is-playing .voice-note__progress-fill {
+      background:
+        linear-gradient(90deg, rgba(118, 148, 142, 0.85), rgba(242, 240, 235, 0.85)),
+        linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+      background-size: 100% 100%, 200% 100%;
+      animation: voice-note-progress-shimmer 2.4s linear infinite;
+    }
+
+    .voice-note__times {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .support-story {
+      position: relative;
+      z-index: 2;
+    }
+
+    .support-intro {
+      max-width: 32rem;
+      margin: 0 auto clamp(5rem, 14vh, 8rem);
+      text-align: center;
+    }
+
+    .support-intro p {
+      margin-bottom: clamp(1.35rem, 3.5vh, 2rem);
+      color: var(--text-muted);
+      font-size: clamp(0.95rem, 1.75vw, 1.05rem);
+      line-height: 1.9;
+    }
+
+    .support-intro p:last-child {
+      margin-bottom: 0;
+    }
+
+    .support-intro__lead {
+      margin-bottom: clamp(1.75rem, 4.5vh, 2.5rem);
+      color: var(--text);
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: clamp(1.55rem, 3.8vw, 2.15rem);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      line-height: 1.5;
+    }
+
+    .support-intro__emphasis {
+      color: rgba(244, 240, 232, 0.78);
+    }
+
+    .support-chapters {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4.5rem, 12vh, 8rem);
+      width: 100%;
+      margin: 0;
+      padding-bottom: clamp(4rem, 10vh, 7rem);
+    }
+
+    .support-chapter {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.25rem;
+      padding: clamp(3.5rem, 10vh, 5.5rem) var(--screen-gutter);
+    }
+
+    .support-chapter--light,
+    .support-chapter--dark {
+      background: transparent;
+      color: var(--text);
+    }
+
+    .support-chapter__mark {
+      position: absolute;
+      top: -1.5rem;
+      left: 50%;
+      z-index: 0;
+      color: rgba(244, 240, 232, 0.045);
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: clamp(6rem, 18vw, 13rem);
+      font-weight: 400;
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      pointer-events: none;
+      transform: translate3d(-50%, var(--parallax-y, 0px), 0);
+      will-change: transform;
+    }
+
+    .support-chapter__divider {
+      width: min(12rem, 28vw);
+      height: 1px;
+      margin: 0 auto 0.5rem;
+      background: linear-gradient(90deg, transparent, rgba(244, 240, 232, 0.22), transparent);
+      opacity: 0.55;
+      transition: opacity 0.6s ease, box-shadow 0.6s ease;
+    }
+
+    .support-chapter__content {
+      position: relative;
+      z-index: 1;
+      max-width: 30rem;
+      margin: 0 auto;
+      text-align: center;
+      opacity: 0.94;
+      transition:
+        opacity 0.7s ease,
+        filter 0.7s ease,
+        transform 0.7s ease;
+    }
+
+    .support-chapter:hover .support-chapter__content,
+    .support-chapter:focus-within .support-chapter__content {
+      opacity: 1;
+      transform: translate3d(0, -2px, 0);
+    }
+
+    .support-chapter:hover .support-chapter__divider,
+    .support-chapter:focus-within .support-chapter__divider {
+      opacity: 0.9;
+      box-shadow: 0 0 1.5rem rgba(132, 156, 148, 0.12);
+    }
+
+    .support-chapter__title {
+      margin-bottom: clamp(1rem, 2.5vh, 1.35rem);
+      color: inherit;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      font-size: clamp(1.35rem, 3vw, 1.85rem);
+      font-weight: 400;
+      letter-spacing: 0.03em;
+      line-height: 1.35;
+    }
+
+    .support-chapter__copy {
+      color: var(--text-muted);
+      font-size: clamp(0.94rem, 1.7vw, 1.02rem);
+      line-height: 1.85;
+    }
+
+    .support-reveal {
+      opacity: 0;
+      filter: blur(10px);
+      transform: translate3d(0, 1.75rem, 0);
+      transition:
+        opacity var(--reveal-duration) var(--reveal-ease),
+        filter var(--reveal-duration) var(--reveal-ease),
+        transform calc(var(--reveal-duration) + 0.15s) var(--reveal-ease);
+      transition-delay: var(--reveal-delay, 0s);
+    }
+
+    .support-reveal.is-visible {
+      opacity: 1;
+      filter: blur(0);
+      transform: translate3d(0, 0, 0);
+    }
+
+    @media (min-width: 900px) {
+      .support-chapter {
+        grid-template-columns: minmax(10rem, 1fr) minmax(0, 34rem) minmax(10rem, 1fr);
+        align-items: start;
+        gap: 0;
+        padding-inline: 0;
+      }
+
+      .support-chapter__mark {
+        top: -2rem;
+        left: auto;
+        right: calc(100% - 2rem);
+        transform: translate3d(0, var(--parallax-y, 0px), 0);
+        font-size: clamp(7rem, 12vw, 11rem);
+      }
+
+      .support-chapter__divider {
+        grid-column: 2;
+        margin: 0 auto 1.25rem;
+      }
+
+      .support-chapter__content {
+        grid-column: 2;
+        margin: 0;
+        text-align: left;
+      }
+
+      .support-chapter--shift .support-chapter__mark {
+        right: auto;
+        left: calc(100% - 2rem);
+      }
+
+      .support-chapter--shift {
+        grid-template-columns: minmax(10rem, 1fr) minmax(0, 34rem) minmax(10rem, 1fr);
+      }
+
+      .support-chapter--shift .support-chapter__divider,
+      .support-chapter--shift .support-chapter__content {
+        grid-column: 2;
+      }
+
+      .support-chapter--shift .support-chapter__content {
+        margin-left: auto;
+        margin-right: 0;
+        text-align: right;
+      }
+    }
+
+    @keyframes voice-note-card-glow {
+      0%,
+      100% {
+        box-shadow:
+          0 0 0 1px rgba(118, 148, 142, 0.08),
+          0 1.5rem 3.5rem rgba(0, 0, 0, 0.45),
+          0 0 4.5rem rgba(118, 148, 142, 0.08);
+      }
+
+      50% {
+        box-shadow:
+          0 0 0 1px rgba(118, 148, 142, 0.16),
+          0 1.5rem 3.5rem rgba(0, 0, 0, 0.45),
+          0 0 5.5rem rgba(118, 148, 142, 0.16);
+      }
+    }
+
+    @keyframes voice-note-wave-idle {
+      0%,
+      100% {
+        transform: scaleY(0.42);
+      }
+
+      50% {
+        transform: scaleY(0.72);
+      }
+    }
+
+    @keyframes voice-note-wave-play {
+      0%,
+      100% {
+        transform: scaleY(0.35);
+      }
+
+      50% {
+        transform: scaleY(1);
+      }
+    }
+
+    @keyframes voice-note-ring {
+      0% {
+        transform: scale(0.92);
+        opacity: 0.75;
+      }
+
+      100% {
+        transform: scale(1.28);
+        opacity: 0;
+      }
+    }
+
+    @keyframes voice-note-progress-shimmer {
+      0% {
+        background-position: 0 0, 200% 0;
+      }
+
+      100% {
+        background-position: 0 0, -200% 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .voice-note__card.is-playing {
+        animation: none;
+      }
+
+      .voice-note__waveform span,
+      .voice-note__card.is-playing .voice-note__waveform span {
+        animation: none;
+      }
+
+      .voice-note__card.is-playing .voice-note__play::before,
+      .voice-note__card.is-playing .voice-note__play::after,
+      .voice-note__card.is-playing .voice-note__progress-fill {
+        animation: none;
+      }
+
+      .support-page__grain {
+        animation: none;
+      }
+
+      .support-reveal {
+        opacity: 1;
+        filter: none;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    @media (max-width: 540px) {
+      .voice-note__player {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .voice-note__controls {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="support-page__backdrop" id="support-backdrop" aria-hidden="true"></div>
+  <div class="support-page__grain" aria-hidden="true"></div>
+
+  <header class="site-nav" id="site-nav">
+    <div class="site-nav__inner">
+      <button type="button" class="site-nav__toggle" aria-expanded="false" aria-controls="site-nav-menu">
+        <span class="site-nav__toggle-label" id="site-nav-toggle-label">Menu</span>
+        <span class="site-nav__toggle-lines" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </span>
+      </button>
+    </div>
+  </header>
+
+  <nav id="site-nav-menu" class="site-nav__menu" aria-label="Primary" aria-hidden="true">
+    <ul class="site-nav__list">
+      <li><a class="site-nav__link" href="my-story.html">My Story</a></li>
+      <li><a class="site-nav__link" href="the-book.html">The Book</a></li>
+      <li><a class="site-nav__link site-nav__link--current" href="support.html" aria-current="page">Support</a></li>
+      <li><a class="site-nav__link" href="https://www.instagram.com/redefiningms" target="_blank" rel="noopener noreferrer">Connect</a></li>
+    </ul>
+  </nav>
+
+  <main class="support-page">
+    <section class="voice-note" aria-labelledby="voice-note-title">
+      <div class="voice-note__header">
+        <h1 class="voice-note__title support-reveal" id="voice-note-title" style="--reveal-delay: 0s">A voice note from Lloyd</h1>
+        <p class="voice-note__subtitle support-reveal" style="--reveal-delay: 0.12s">Before anything else, I wanted you to hear this from me.</p>
+      </div>
+
+      <div class="voice-note__card support-reveal" id="voice-note-card" style="--reveal-delay: 0.22s">
+        <div class="voice-note__waveform" aria-hidden="true">
+          <span style="--bar-delay: 0s; height: 42%;"></span>
+          <span style="--bar-delay: 0.08s; height: 68%;"></span>
+          <span style="--bar-delay: 0.16s; height: 36%;"></span>
+          <span style="--bar-delay: 0.24s; height: 82%;"></span>
+          <span style="--bar-delay: 0.32s; height: 54%;"></span>
+          <span style="--bar-delay: 0.4s; height: 74%;"></span>
+          <span style="--bar-delay: 0.48s; height: 48%;"></span>
+          <span style="--bar-delay: 0.56s; height: 88%;"></span>
+          <span style="--bar-delay: 0.64s; height: 58%;"></span>
+          <span style="--bar-delay: 0.72s; height: 70%;"></span>
+          <span style="--bar-delay: 0.8s; height: 40%;"></span>
+          <span style="--bar-delay: 0.88s; height: 62%;"></span>
+        </div>
+
+        <div class="voice-note__player">
+          <button type="button" class="voice-note__play" id="voice-note-play" aria-label="Play voice note">
+            <svg class="voice-note__play-icon voice-note__play-icon--play" viewBox="0 0 16 16" aria-hidden="true">
+              <path fill="currentColor" d="M4.5 2.8v10.4c0 .7.8 1.1 1.4.7l8.1-5.2c.5-.3.5-1.1 0-1.4L5.9 2.1c-.6-.4-1.4 0-1.4.7z" />
+            </svg>
+            <svg class="voice-note__play-icon voice-note__play-icon--pause" viewBox="0 0 16 16" aria-hidden="true">
+              <path fill="currentColor" d="M4.5 2.5h2.5v11H4.5V2.5zm4.5 0h2.5v11H9V2.5z" />
+            </svg>
+          </button>
+
+          <div class="voice-note__controls">
+            <audio id="voice-note-audio" preload="metadata" src="audio/support-intro.m4a"></audio>
+
+            <div class="voice-note__progress" id="voice-note-progress" role="slider" aria-label="Playback position" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+              <div class="voice-note__progress-fill" id="voice-note-progress-fill"></div>
+            </div>
+            <div class="voice-note__times">
+              <span id="voice-note-current">0:00</span>
+              <span id="voice-note-duration">0:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="support-story" aria-label="Support">
+      <div class="support-intro">
+        <p class="support-intro__lead support-reveal" style="--reveal-delay: 0s">You are not alone in this.</p>
+        <p class="support-reveal" style="--reveal-delay: 0.1s">Living with MS can feel isolating.</p>
+        <p class="support-reveal" style="--reveal-delay: 0.2s">The physical symptoms are one part of it.<br>The mental exhaustion, identity shifts, fear, frustration, and pressure to still function normally can often feel even heavier.</p>
+        <p class="support-intro__emphasis support-reveal" style="--reveal-delay: 0.3s">Redefining MS was created to offer honest support through those moments.</p>
+      </div>
+
+      <div class="support-chapters">
+        <article class="support-chapter support-chapter--light support-reveal" style="--reveal-delay: 0s">
+          <span class="support-chapter__mark" data-parallax>01</span>
+          <div class="support-chapter__divider" aria-hidden="true"></div>
+          <div class="support-chapter__content">
+            <h2 class="support-chapter__title">Conversation &amp; Mentorship</h2>
+            <p class="support-chapter__copy">For people navigating diagnosis, identity changes, motivation, confidence, routine, and mindset.</p>
+          </div>
+        </article>
+
+        <article class="support-chapter support-chapter--dark support-chapter--shift support-reveal" style="--reveal-delay: 0.15s">
+          <span class="support-chapter__mark" data-parallax>02</span>
+          <div class="support-chapter__divider" aria-hidden="true"></div>
+          <div class="support-chapter__content">
+            <h2 class="support-chapter__title">Lifestyle &amp; Rebuilding</h2>
+            <p class="support-chapter__copy">Talking through structure, routine, movement, work-life balance, fatherhood, stress, purpose, and adapting to a different pace of life.</p>
+          </div>
+        </article>
+
+        <article class="support-chapter support-chapter--light support-reveal" style="--reveal-delay: 0.3s">
+          <span class="support-chapter__mark" data-parallax>03</span>
+          <div class="support-chapter__divider" aria-hidden="true"></div>
+          <div class="support-chapter__content">
+            <h2 class="support-chapter__title">Community &amp; Connection</h2>
+            <p class="support-chapter__copy">A space for honest conversations, shared experiences, and reminding people they are not fighting invisible battles alone.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const siteNav = document.getElementById("site-nav");
+    const navToggle = document.querySelector(".site-nav__toggle");
+    const navToggleLabel = document.getElementById("site-nav-toggle-label");
+    const navMenu = document.getElementById("site-nav-menu");
+    const mobileNavQuery = window.matchMedia("(max-width: 767px)");
+
+    const setMenuOpen = (open) => {
+      siteNav.classList.toggle("is-menu-open", open);
+      navToggle.setAttribute("aria-expanded", String(open));
+      document.body.classList.toggle("is-nav-open", open);
+      navMenu.setAttribute("aria-hidden", String(!open));
+
+      if (navToggleLabel) {
+        navToggleLabel.textContent = open ? "Close" : "Menu";
+      }
+    };
+
+    navToggle.addEventListener("click", () => {
+      setMenuOpen(!siteNav.classList.contains("is-menu-open"));
+    });
+
+    navMenu.addEventListener("click", (event) => {
+      if (event.target.closest(".site-nav__link")) {
+        setMenuOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+      }
+    });
+
+    mobileNavQuery.addEventListener("change", () => {
+      setMenuOpen(false);
+    });
+
+    const voiceNoteCard = document.getElementById("voice-note-card");
+    const voiceNoteAudio = document.getElementById("voice-note-audio");
+    const voiceNotePlay = document.getElementById("voice-note-play");
+    const voiceNoteProgress = document.getElementById("voice-note-progress");
+    const voiceNoteProgressFill = document.getElementById("voice-note-progress-fill");
+    const voiceNoteCurrent = document.getElementById("voice-note-current");
+    const voiceNoteDuration = document.getElementById("voice-note-duration");
+    const waveformBars = document.querySelectorAll(".voice-note__waveform span");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    const useAudioVisualizer = Boolean(AudioContextClass) && !reducedMotionQuery.matches;
+    let audioContext;
+    let analyser;
+    let mediaSource;
+    let visualizerFrame = 0;
+    let frequencyData;
+
+    const setupVisualizer = () => {
+      if (!useAudioVisualizer || audioContext) {
+        return;
+      }
+
+      audioContext = new AudioContextClass();
+      analyser = audioContext.createAnalyser();
+      analyser.fftSize = 128;
+      analyser.smoothingTimeConstant = 0.78;
+      frequencyData = new Uint8Array(analyser.frequencyBinCount);
+      mediaSource = audioContext.createMediaElementSource(voiceNoteAudio);
+      mediaSource.connect(analyser);
+      analyser.connect(audioContext.destination);
+    };
+
+    const resetWaveformBars = () => {
+      voiceNoteCard.classList.remove("is-audio-live");
+      waveformBars.forEach((bar) => {
+        bar.style.transform = "";
+      });
+    };
+
+    const stopVisualizer = () => {
+      if (visualizerFrame) {
+        cancelAnimationFrame(visualizerFrame);
+        visualizerFrame = 0;
+      }
+
+      resetWaveformBars();
+    };
+
+    const runVisualizer = () => {
+      if (!voiceNoteCard.classList.contains("is-playing") || !analyser || voiceNoteAudio.paused) {
+        stopVisualizer();
+        return;
+      }
+
+      voiceNoteCard.classList.add("is-audio-live");
+      analyser.getByteFrequencyData(frequencyData);
+
+      const step = Math.max(1, Math.floor(frequencyData.length / waveformBars.length));
+
+      waveformBars.forEach((bar, index) => {
+        const sample = frequencyData[(index * step) % frequencyData.length];
+        const scale = 0.28 + (sample / 255) * 0.72;
+        bar.style.transform = `scaleY(${scale.toFixed(3)})`;
+      });
+
+      visualizerFrame = requestAnimationFrame(runVisualizer);
+    };
+
+    const startVisualizer = async () => {
+      if (!useAudioVisualizer) {
+        return;
+      }
+
+      try {
+        setupVisualizer();
+
+        if (audioContext.state === "suspended") {
+          await audioContext.resume();
+        }
+
+        stopVisualizer();
+        runVisualizer();
+      } catch (error) {
+        stopVisualizer();
+      }
+    };
+
+    const setVoiceNotePlaying = (playing) => {
+      voiceNoteCard.classList.toggle("is-playing", playing);
+      voiceNotePlay.setAttribute("aria-label", playing ? "Pause voice note" : "Play voice note");
+
+      if (!playing) {
+        stopVisualizer();
+      }
+    };
+
+    const formatTime = (seconds) => {
+      if (!Number.isFinite(seconds) || seconds < 0) {
+        return "0:00";
+      }
+
+      const wholeSeconds = Math.floor(seconds);
+      const minutes = Math.floor(wholeSeconds / 60);
+      const remainder = wholeSeconds % 60;
+      return `${minutes}:${String(remainder).padStart(2, "0")}`;
+    };
+
+    const updateProgress = () => {
+      const duration = voiceNoteAudio.duration;
+      const currentTime = voiceNoteAudio.currentTime;
+      const progress = duration > 0 ? (currentTime / duration) * 100 : 0;
+
+      voiceNoteProgressFill.style.width = `${progress}%`;
+      voiceNoteProgress.setAttribute("aria-valuenow", String(Math.round(progress)));
+      voiceNoteCurrent.textContent = formatTime(currentTime);
+      voiceNoteDuration.textContent = formatTime(duration);
+    };
+
+    const seekFromClientX = (clientX) => {
+      const rect = voiceNoteProgress.getBoundingClientRect();
+      const ratio = Math.min(1, Math.max(0, (clientX - rect.left) / rect.width));
+
+      if (Number.isFinite(voiceNoteAudio.duration)) {
+        voiceNoteAudio.currentTime = voiceNoteAudio.duration * ratio;
+      }
+
+      updateProgress();
+    };
+
+    voiceNotePlay.addEventListener("click", async () => {
+      if (voiceNoteAudio.paused) {
+        try {
+          await voiceNoteAudio.play();
+          setVoiceNotePlaying(true);
+          await startVisualizer();
+        } catch (error) {
+          setVoiceNotePlaying(false);
+        }
+      } else {
+        voiceNoteAudio.pause();
+        setVoiceNotePlaying(false);
+      }
+    });
+
+    voiceNoteAudio.addEventListener("loadedmetadata", updateProgress);
+    voiceNoteAudio.addEventListener("timeupdate", updateProgress);
+    voiceNoteAudio.addEventListener("ended", () => {
+      setVoiceNotePlaying(false);
+      updateProgress();
+    });
+
+    voiceNoteProgress.addEventListener("click", (event) => {
+      seekFromClientX(event.clientX);
+    });
+
+    voiceNoteProgress.addEventListener("keydown", (event) => {
+      if (!Number.isFinite(voiceNoteAudio.duration)) {
+        return;
+      }
+
+      const step = voiceNoteAudio.duration * 0.05;
+
+      if (event.key === "ArrowRight") {
+        voiceNoteAudio.currentTime = Math.min(voiceNoteAudio.duration, voiceNoteAudio.currentTime + step);
+        updateProgress();
+      }
+
+      if (event.key === "ArrowLeft") {
+        voiceNoteAudio.currentTime = Math.max(0, voiceNoteAudio.currentTime - step);
+        updateProgress();
+      }
+    });
+
+    updateProgress();
+
+    const supportBackdrop = document.getElementById("support-backdrop");
+    const parallaxMarks = document.querySelectorAll("[data-parallax]");
+    const revealElements = document.querySelectorAll(".support-reveal");
+
+    const revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.16, rootMargin: "0px 0px -10% 0px" }
+    );
+
+    revealElements.forEach((element) => {
+      if (reducedMotionQuery.matches) {
+        element.classList.add("is-visible");
+        return;
+      }
+
+      revealObserver.observe(element);
+    });
+
+    if (!reducedMotionQuery.matches && (supportBackdrop || parallaxMarks.length)) {
+      let parallaxFrame = null;
+
+      const updateParallax = () => {
+        parallaxFrame = null;
+        const scrollY = window.scrollY;
+
+        if (supportBackdrop) {
+          supportBackdrop.style.transform = `translate3d(0, ${scrollY * 0.12}px, 0)`;
+        }
+
+        parallaxMarks.forEach((mark) => {
+          const chapter = mark.closest(".support-chapter");
+
+          if (!chapter) {
+            return;
+          }
+
+          const rect = chapter.getBoundingClientRect();
+          const offset = (window.innerHeight * 0.5 - (rect.top + rect.height * 0.35)) * 0.05;
+          mark.style.setProperty("--parallax-y", `${offset}px`);
+        });
+      };
+
+      const queueParallax = () => {
+        if (parallaxFrame !== null) {
+          return;
+        }
+
+        parallaxFrame = window.requestAnimationFrame(updateParallax);
+      };
+
+      window.addEventListener("scroll", queueParallax, { passive: true });
+      window.addEventListener("resize", queueParallax);
+      queueParallax();
+    }
+  </script>
+</body>
+</html>

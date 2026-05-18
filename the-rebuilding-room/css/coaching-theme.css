@@ -1,0 +1,95 @@
+/* The Rebuilding Room: shared editorial / cinematic aesthetic */
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500&display=swap");
+
+:root {
+  --font-display: "Cormorant Garamond", "Baskerville", "Palatino Linotype", Georgia, serif;
+  --font-body: "Manrope", system-ui, -apple-system, sans-serif;
+
+  --bg-base: #070605;
+  --bg-card: rgba(20, 18, 16, 0.55);
+  --bg-card-solid: rgba(16, 15, 14, 0.92);
+
+  --text: rgba(245, 241, 233, 0.94);
+  --text-quiet: rgba(232, 226, 216, 0.66);
+  --text-faint: rgba(218, 210, 198, 0.42);
+
+  --line: rgba(200, 182, 152, 0.16);
+  --line-strong: rgba(200, 182, 152, 0.28);
+
+  --accent: rgba(198, 175, 138, 0.92);
+  --accent-mid: rgba(168, 145, 110, 0.85);
+  --accent-soft: rgba(190, 168, 130, 0.45);
+  --accent-glow: rgba(175, 150, 115, 0.1);
+
+  --ease-out: cubic-bezier(0.28, 0.9, 0.34, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-short: 0.45s;
+  --dur-medium: 0.85s;
+  --dur-long: 1.35s;
+
+  --heading-tracking: 0.02em;
+  --body-leading: 1.78;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-weight: 300;
+  font-size: 1.02rem;
+  line-height: var(--body-leading);
+  letter-spacing: 0.01em;
+  color: var(--text);
+  background-color: var(--bg-base);
+  padding-left: max(0px, env(safe-area-inset-left, 0px));
+  padding-right: max(0px, env(safe-area-inset-right, 0px));
+}
+
+@keyframes coaching-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.65rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes coaching-ambient {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 0.92;
+    transform: scale(1.02) translate3d(0.5%, -0.5%, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes coaching-rise {
+    from {
+      opacity: 1;
+      transform: none;
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @keyframes coaching-ambient {
+    0%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}

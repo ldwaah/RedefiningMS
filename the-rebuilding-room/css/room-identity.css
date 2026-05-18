@@ -1,0 +1,357 @@
+/* Room 2 (Identity): cinematic layer — mirrors Room 1 tone, scoped html.room-identity */
+
+html.room-identity {
+  --idm-ink: rgba(245, 240, 232, 0.94);
+  --idm-ink-soft: rgba(235, 228, 216, 0.72);
+  --idm-ink-faint: rgba(220, 210, 195, 0.45);
+  --idm-scene-ease: cubic-bezier(0.32, 0.72, 0.28, 1);
+  --idm-scene-ms: 880ms;
+}
+
+html.room-identity .room-bg {
+  background:
+    radial-gradient(ellipse 85% 70% at 50% 42%, rgba(120, 95, 68, 0.09), transparent 58%),
+    radial-gradient(ellipse 50% 45% at 20% 88%, rgba(85, 72, 58, 0.07), transparent 52%),
+    radial-gradient(ellipse 55% 50% at 82% 18%, rgba(95, 82, 68, 0.05), transparent 55%),
+    var(--bg-base);
+  animation: idm-bg-breathe 42s var(--ease-soft) infinite;
+}
+
+@keyframes idm-bg-breathe {
+  0%,
+  100% {
+    filter: brightness(1) saturate(1);
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+  50% {
+    filter: brightness(1.03) saturate(1.04);
+    transform: scale(1.012) translate3d(0.2%, -0.15%, 0);
+  }
+}
+
+html.room-identity .room-grain {
+  opacity: 0.038;
+  animation: idm-grain-shift 28s steps(12) infinite;
+}
+
+@keyframes idm-grain-shift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-2.5%, 1.8%, 0);
+  }
+}
+
+html.room-identity .idm-atmo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+html.room-identity .idm-atmo__vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 72% 65% at 50% 45%, transparent 35%, rgba(0, 0, 0, 0.55) 100%);
+  opacity: 0.85;
+}
+
+html.room-identity .idm-atmo__warm {
+  position: absolute;
+  inset: -15%;
+  background: radial-gradient(ellipse 48% 42% at 50% 48%, rgba(175, 155, 125, 0.12), transparent 62%);
+  animation: idm-warm-pulse 18s ease-in-out infinite;
+}
+
+@keyframes idm-warm-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.82;
+    transform: scale(1.03);
+  }
+}
+
+html.room-identity .idm-atmo__drift {
+  position: absolute;
+  inset: -25%;
+  background:
+    radial-gradient(ellipse 40% 35% at 30% 40%, rgba(145, 128, 108, 0.06), transparent 55%),
+    radial-gradient(ellipse 45% 38% at 70% 60%, rgba(110, 98, 85, 0.05), transparent 58%);
+  animation: idm-drift 55s linear infinite;
+  opacity: 0.88;
+}
+
+@keyframes idm-drift {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(-3%, 2%, 0) rotate(4deg);
+  }
+}
+
+html.room-identity .room-page {
+  max-width: 36rem;
+  z-index: 2;
+}
+
+html.room-identity .room-page__nav {
+  opacity: 0.85;
+}
+
+html.room-identity .room-page > nav,
+html.room-identity .room-page > main > header {
+  animation: idm-page-rise 1.15s var(--idm-scene-ease) 0.1s both;
+}
+
+@keyframes idm-page-rise {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+html.room-identity .room-eyebrow {
+  color: var(--idm-ink-faint);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-style: normal;
+  font-size: 0.72rem;
+}
+
+html.room-identity .room-title {
+  color: var(--idm-ink);
+  font-weight: 500;
+  font-size: clamp(1.55rem, 5vw, 2.15rem);
+  line-height: 1.12;
+  letter-spacing: var(--heading-tracking, 0.02em);
+}
+
+html.room-identity .room-intro {
+  color: var(--idm-ink-soft);
+  font-size: clamp(0.98rem, 3.1vw, 1.06rem);
+  font-weight: 300;
+  line-height: 1.85;
+  max-width: 28rem;
+  margin-top: 1.35rem;
+}
+
+html.room-identity .room-intro--preline {
+  white-space: pre-line;
+  text-wrap: pretty;
+}
+
+html.room-identity #room-prompt-flow {
+  animation: idm-page-rise 1.15s var(--idm-scene-ease) 0.28s both;
+  max-width: 28rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: clamp(1.85rem, 5.5vh, 2.85rem);
+}
+
+html.room-identity .room-prompt__scene {
+  transition:
+    opacity var(--idm-scene-ms) var(--idm-scene-ease),
+    filter var(--idm-scene-ms) var(--idm-scene-ease),
+    transform var(--idm-scene-ms) var(--idm-scene-ease);
+  will-change: opacity, filter, transform;
+}
+
+html.room-identity .room-prompt__scene.is-exiting {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(-0.85rem);
+}
+
+html.room-identity .room-prompt__scene.is-entering {
+  animation: idm-scene-enter var(--idm-scene-ms) var(--idm-scene-ease) both;
+}
+
+@keyframes idm-scene-enter {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    transform: translateY(1.25rem);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+html.room-identity .room-prompt__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.06rem, 3.5vw, 1.32rem);
+  font-weight: 500;
+  color: var(--idm-ink);
+  line-height: 1.42;
+  letter-spacing: var(--heading-tracking, 0.02em);
+  margin-bottom: 0.85rem;
+}
+
+html.room-identity .room-prompt__body {
+  margin-top: 0;
+  margin-bottom: clamp(1.2rem, 3.5vh, 1.9rem);
+  color: var(--idm-ink-soft);
+  font-size: clamp(0.9rem, 2.8vw, 0.98rem);
+  font-weight: 300;
+  line-height: 1.82;
+  letter-spacing: 0.02em;
+  white-space: pre-line;
+  text-wrap: pretty;
+}
+
+html.room-identity .room-reflect__ta {
+  border: 1px solid rgba(185, 155, 115, 0.12);
+  border-radius: 0.75rem;
+  background: rgba(8, 7, 6, 0.42);
+  color: var(--idm-ink);
+  font-family: var(--font-body);
+  font-size: max(16px, 1rem);
+  line-height: 1.75;
+  min-height: clamp(8.5rem, 28vh, 12rem);
+  padding: 1.1rem 1.15rem;
+  box-shadow: 0 0 0 0 rgba(185, 155, 115, 0);
+  transition:
+    border-color 0.5s ease,
+    box-shadow 0.55s ease,
+    background 0.55s ease,
+    min-height 0.6s var(--idm-scene-ease),
+    color 0.45s ease;
+}
+
+html.room-identity .room-reflect__ta::placeholder {
+  color: rgba(200, 190, 175, 0.28);
+  font-style: italic;
+  letter-spacing: 0.01em;
+}
+
+html.room-identity .room-reflect__ta:hover {
+  border-color: rgba(185, 155, 115, 0.2);
+}
+
+html.room-identity .room-reflect__ta:focus {
+  outline: none;
+  border-color: rgba(200, 175, 130, 0.35);
+  box-shadow:
+    0 0 0 1px rgba(185, 155, 115, 0.12),
+    0 0 36px rgba(185, 155, 115, 0.08) inset,
+    0 0 48px rgba(0, 0, 0, 0.25);
+  background: rgba(12, 10, 9, 0.55);
+  min-height: clamp(10rem, 32vh, 14rem);
+}
+
+html.room-identity .room-prompt__nav {
+  margin-top: clamp(1.75rem, 5vh, 2.5rem);
+  gap: 0.85rem;
+}
+
+html.room-identity .room-prompt__nav .room-btn--ghost {
+  border: 1px solid rgba(185, 155, 115, 0.18);
+  color: var(--idm-ink-soft);
+  background: rgba(12, 10, 9, 0.25);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 400;
+  transition: box-shadow 0.55s ease, border-color 0.45s ease, color 0.45s ease, background 0.45s ease;
+}
+
+html.room-identity .room-prompt__nav .room-btn--ghost:hover,
+html.room-identity .room-prompt__nav .room-btn--ghost:focus-visible {
+  border-color: rgba(200, 175, 130, 0.35);
+  color: var(--idm-ink);
+  box-shadow: 0 0 28px rgba(185, 155, 115, 0.12);
+  background: rgba(18, 15, 13, 0.45);
+}
+
+html.room-identity .room-prompt__nav #prompt-next {
+  border-color: rgba(200, 175, 130, 0.28);
+}
+
+html.room-identity .room-identity-coda {
+  margin-top: 0.25rem;
+  padding: 0.25rem 0 0.5rem;
+}
+
+html.room-identity .room-identity-coda__text {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 3.4vw, 1.28rem);
+  font-weight: 400;
+  color: rgba(238, 230, 218, 0.9);
+  line-height: 1.55;
+  letter-spacing: var(--heading-tracking, 0.02em);
+  text-wrap: pretty;
+  white-space: pre-line;
+  opacity: 0;
+  transform: translateY(0.65rem);
+  filter: blur(8px);
+}
+
+html.room-identity .room-identity-coda.is-revealed .room-identity-coda__text {
+  animation: idm-coda-rise 1.15s var(--idm-scene-ease) forwards;
+}
+
+@keyframes idm-coda-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+html.room-identity .room-actions .room-btn {
+  border-radius: 999px;
+}
+
+html.room-identity .room-actions .room-btn--primary {
+  box-shadow: 0 0 32px rgba(185, 155, 115, 0.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.room-identity .room-page > nav,
+  html.room-identity .room-page > main > header,
+  html.room-identity #room-prompt-flow {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+
+  html.room-identity .room-bg,
+  html.room-identity .room-grain,
+  html.room-identity .idm-atmo__warm,
+  html.room-identity .idm-atmo__drift {
+    animation: none !important;
+  }
+
+  html.room-identity .room-prompt__scene.is-exiting,
+  html.room-identity .room-prompt__scene.is-entering {
+    animation: none !important;
+    opacity: 1 !important;
+    filter: none !important;
+    transform: none !important;
+  }
+
+  html.room-identity .room-identity-coda__text,
+  html.room-identity .room-identity-coda.is-revealed .room-identity-coda__text {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
