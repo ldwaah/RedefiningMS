@@ -977,6 +977,7 @@
 
   <nav id="site-nav-menu" class="site-nav__menu" aria-label="Primary" aria-hidden="true">
     <ul class="site-nav__list">
+      <li><a class="site-nav__link" href="index.html" aria-current="page">Home</a></li>
       <li><a class="site-nav__link" href="my-story.html">My Story</a></li>
       <li><a class="site-nav__link" href="the-book.html">The Book</a></li>
       <li><a class="site-nav__link" href="support.html">Support</a></li>
@@ -1046,6 +1047,7 @@
     const revealTargets = document.querySelectorAll(".screen__line--in-view, .screen--in-view");
     const openingScreen = document.querySelector(".screen--opening");
     const invitationScreen = document.querySelector(".screen--invitation");
+    const brandScreen = document.querySelector(".screen--brand");
     const scrollCue = document.getElementById("scroll-cue");
     const scrollCueLabel = document.getElementById("scroll-cue-label");
     const siteNav = document.getElementById("site-nav");
@@ -1102,18 +1104,28 @@
       window.requestAnimationFrame(syncCourseAnnounceHeight);
     };
 
-    const setNavVisible = (visible) => {
-      siteNav.classList.toggle("is-visible", visible);
-      siteNav.setAttribute("aria-hidden", String(!visible));
-      courseAnnounce?.classList.toggle("is-visible", visible);
-      courseAnnounce?.setAttribute("aria-hidden", String(!visible));
+    const setCourseAnnounceVisible = (visible) => {
+      if (!courseAnnounce) {
+        return;
+      }
+
+      courseAnnounce.classList.toggle("is-visible", visible);
+      courseAnnounce.setAttribute("aria-hidden", String(!visible));
       document.body.classList.toggle("has-course-announce", visible);
 
       if (!visible) {
         setCourseAnnounceOpen(false);
-        setMenuOpen(false);
       } else {
         window.requestAnimationFrame(syncCourseAnnounceHeight);
+      }
+    };
+
+    const setNavVisible = (visible) => {
+      siteNav.classList.toggle("is-visible", visible);
+      siteNav.setAttribute("aria-hidden", String(!visible));
+
+      if (!visible) {
+        setMenuOpen(false);
       }
     };
 
@@ -1274,6 +1286,52 @@
       );
 
       navObserver.observe(openingScreen);
+    }
+
+    if (brandScreen && courseAnnounce) {
+      let courseAnnounceScheduled = false;
+      const brandRevealDelayMs = reducedMotionQuery.matches
+        ? 0
+        : Math.ceil((1.35 + 4.75 + 0.5) * 1000);
+
+      const maybeRevealCourseAnnounce = () => {
+        if (courseAnnounceScheduled || !brandScreen.classList.contains("is-visible")) {
+          return;
+        }
+
+        const rect = brandScreen.getBoundingClientRect();
+        const inView =
+          rect.top < window.innerHeight * 0.78 && rect.bottom > window.innerHeight * 0.22;
+
+        if (!inView) {
+          return;
+        }
+
+        courseAnnounceScheduled = true;
+        window.setTimeout(() => {
+          setCourseAnnounceVisible(true);
+        }, brandRevealDelayMs);
+      };
+
+      const brandAnnounceObserver = new IntersectionObserver(
+        () => {
+          maybeRevealCourseAnnounce();
+        },
+        {
+          threshold: [0.22, 0.45, 0.65],
+        }
+      );
+
+      brandAnnounceObserver.observe(brandScreen);
+
+      const brandClassObserver = new MutationObserver(() => {
+        maybeRevealCourseAnnounce();
+      });
+
+      brandClassObserver.observe(brandScreen, {
+        attributes: true,
+        attributeFilter: ["class"],
+      });
     }
 
     updateScrollCue();
