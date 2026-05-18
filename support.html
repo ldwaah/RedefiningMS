@@ -849,6 +849,10 @@
       pointer-events: none;
     }
 
+    body:not(.support-gate-active) .support-video-gate {
+      display: none !important;
+    }
+
     .support-video-gate__video {
       display: block;
       width: 100%;
@@ -1062,17 +1066,21 @@
       </div>
     </section>
   </main>
+  </div>
 
   <button type="button" class="support-door" id="support-door-trigger" aria-label="Open The Rebuilding Room">
-    <img class="support-door__frame" id="support-door-frame" src="doors/1.svg" alt="" width="375" height="375" />
+    <img class="support-door__frame" src="doors/1.svg" alt="" width="375" height="375" />
   </button>
 
-  <div id="support-door-entry" class="support-door-entry" hidden aria-hidden="true">
+  <div id="support-door-entry" class="support-door-entry" aria-hidden="true">
     <button type="button" class="support-door-entry__close" id="support-door-close" aria-label="Close">×</button>
-    <div class="support-door-entry__anim" id="support-door-anim">
-      <img class="support-door-entry__frame" id="support-door-anim-frame" src="doors/1.svg" alt="" width="375" height="375" />
+    <div class="support-door-entry__stage" id="support-door-stage" aria-hidden="true">
+      <img src="doors/1.svg" alt="" class="is-current" />
+      <img src="doors/2.svg" alt="" />
+      <img src="doors/3.svg" alt="" />
+      <img src="doors/4.svg" alt="" />
     </div>
-    <div class="support-door-entry__portal" id="support-door-portal" hidden>
+    <div class="support-door-entry__portal" id="support-door-portal" aria-hidden="true">
       <div class="support-door-entry__dialog" role="dialog" aria-modal="true" aria-labelledby="support-door-title">
         <h2 class="support-door-entry__title" id="support-door-title">The Rebuilding Room</h2>
         <p class="support-door-entry__lede">Start your free coaching course.</p>
@@ -1097,7 +1105,6 @@
       </div>
     </div>
   </div>
-  </div>
 
   <script>
     const supportVideoGate = document.getElementById("support-video-gate");
@@ -1105,25 +1112,48 @@
     const supportVideoSkip = document.getElementById("support-video-skip");
     const supportGateMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
+    const stopSupportIntroVideo = () => {
+      if (!supportIntroVideo) {
+        return;
+      }
+
+      supportIntroVideo.pause();
+      supportIntroVideo.currentTime = 0;
+      supportIntroVideo.muted = true;
+      supportIntroVideo.removeAttribute("autoplay");
+      supportIntroVideo.setAttribute("preload", "none");
+    };
+
     const dismissSupportGate = () => {
       if (!document.body.classList.contains("support-gate-active")) {
         return;
       }
 
+      stopSupportIntroVideo();
       supportVideoGate?.classList.add("is-exiting");
-      if (supportIntroVideo) {
-        supportIntroVideo.pause();
-      }
 
       window.setTimeout(() => {
         document.body.classList.remove("support-gate-active");
         supportVideoGate?.setAttribute("hidden", "");
         supportVideoGate?.setAttribute("aria-hidden", "true");
-      }, 420);
+        stopSupportIntroVideo();
+      }, 320);
     };
 
     supportVideoSkip?.addEventListener("click", dismissSupportGate);
     supportIntroVideo?.addEventListener("ended", dismissSupportGate);
+
+    supportIntroVideo?.addEventListener("play", () => {
+      if (!document.body.classList.contains("support-gate-active")) {
+        stopSupportIntroVideo();
+      }
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden || !document.body.classList.contains("support-gate-active")) {
+        stopSupportIntroVideo();
+      }
+    });
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && document.body.classList.contains("support-gate-active")) {
