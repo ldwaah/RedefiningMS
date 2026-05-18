@@ -20,49 +20,76 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: min(100%, 28rem);
+  width: min(100%, 30rem);
 }
 
 .site-nav__course-btn {
-  margin-top: clamp(2.5rem, 6vh, 4rem);
-  padding: 0.85rem 1.65rem;
-  border: 1px solid var(--text-sage, #98a892);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: min(100%, 19.5rem);
+  margin-top: clamp(3rem, 7vh, 4.5rem);
+  padding: 1.15rem 1.75rem;
+  border: 1px solid rgba(180, 196, 174, 0.5);
   border-radius: 999px;
-  background: rgba(152, 168, 146, 0.12);
-  color: var(--text, #f2f0eb);
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: clamp(0.78rem, 2vw, 0.88rem);
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  line-height: 1.3;
-  text-transform: uppercase;
+  background:
+    linear-gradient(180deg, rgba(152, 168, 146, 0.32) 0%, rgba(98, 112, 96, 0.14) 100%);
+  color: #f2f0eb;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 14px 36px rgba(0, 0, 0, 0.38);
   cursor: pointer;
   transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    color 0.25s ease,
-    transform 0.25s ease;
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    background 0.28s ease;
+}
+
+.site-nav__course-btn-label {
+  font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: clamp(1.05rem, 3.2vw, 1.22rem);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.site-nav__course-btn-sub {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: #b8c9b2;
 }
 
 .site-nav__course-btn:hover,
 .site-nav__course-btn:focus-visible {
-  background: rgba(152, 168, 146, 0.22);
-  border-color: #b4c4ae;
-  color: #fff;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  border-color: rgba(196, 210, 190, 0.75);
+  background:
+    linear-gradient(180deg, rgba(168, 184, 162, 0.42) 0%, rgba(110, 126, 104, 0.22) 100%);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 18px 44px rgba(0, 0, 0, 0.45);
 }
 
 .site-nav__course-btn:focus-visible {
-  outline: 2px solid var(--text-sage, #98a892);
-  outline-offset: 4px;
+  outline: 2px solid #98a892;
+  outline-offset: 5px;
 }
 
 .coaching-modal {
   position: fixed;
   inset: 0;
   z-index: 220;
-  display: grid;
-  place-items: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: max(1rem, env(safe-area-inset-top)) max(1rem, env(safe-area-inset-right))
     max(1rem, env(safe-area-inset-bottom)) max(1rem, env(safe-area-inset-left));
   opacity: 0;
@@ -87,20 +114,24 @@
   position: absolute;
   inset: 0;
   border: 0;
-  background: rgba(0, 0, 0, 0.72);
+  background: rgba(0, 0, 0, 0.78);
   cursor: pointer;
 }
 
 .coaching-modal__dialog {
   position: relative;
   z-index: 1;
-  width: min(100%, 22rem);
-  padding: 1.35rem 1.35rem 1.2rem;
-  border: 1px solid rgba(152, 168, 146, 0.35);
-  border-radius: 0.35rem;
-  background: #0f0f0f;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 23.5rem);
+  padding: 2rem 1.75rem 1.65rem;
+  border: 1px solid rgba(152, 168, 146, 0.4);
+  border-radius: 0.5rem;
+  background: #0a0a0a;
   color: #f2f0eb;
-  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+  text-align: center;
+  box-shadow: 0 28px 72px rgba(0, 0, 0, 0.55);
   transform: translateY(0.75rem) scale(0.98);
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -109,16 +140,21 @@
   transform: translateY(0) scale(1);
 }
 
+.coaching-modal__dialog.is-success {
+  justify-content: center;
+  padding: 2.75rem 2rem;
+}
+
 .coaching-modal__close {
   position: absolute;
-  top: 0.55rem;
-  right: 0.55rem;
+  top: 0.65rem;
+  right: 0.65rem;
   width: 2rem;
   height: 2rem;
   border: 0;
   border-radius: 999px;
   background: transparent;
-  color: rgba(242, 240, 235, 0.72);
+  color: rgba(242, 240, 235, 0.65);
   font-size: 1.35rem;
   line-height: 1;
   cursor: pointer;
@@ -131,35 +167,39 @@
 }
 
 .coaching-modal__close:focus-visible {
-  outline: 2px solid var(--text-sage, #98a892);
+  outline: 2px solid #98a892;
   outline-offset: 2px;
 }
 
 .coaching-modal__title {
-  margin: 0 2rem 0.35rem 0;
-  font-size: clamp(1.05rem, 3vw, 1.2rem);
+  margin: 0 0 0.45rem;
+  width: 100%;
+  font-size: clamp(1.1rem, 3.2vw, 1.28rem);
   font-weight: 400;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   line-height: 1.35;
   text-transform: uppercase;
 }
 
 .coaching-modal__lede {
-  margin: 0 0 1rem;
-  color: rgba(242, 240, 235, 0.78);
-  font-size: 0.92rem;
-  line-height: 1.5;
+  margin: 0 0 1.35rem;
+  width: 100%;
+  color: rgba(242, 240, 235, 0.76);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  text-wrap: balance;
 }
 
 .coaching-modal__form {
   display: grid;
-  gap: 0.75rem;
+  gap: 0.8rem;
+  width: 100%;
+  text-align: left;
 }
 
 .coaching-modal__field {
   display: grid;
   gap: 0.35rem;
-  text-align: left;
 }
 
 .coaching-modal__field span {
@@ -172,10 +212,10 @@
 
 .coaching-modal__field input {
   width: 100%;
-  padding: 0.6rem 0.7rem;
-  border: 1px solid rgba(242, 240, 235, 0.2);
-  border-radius: 0.25rem;
-  background: rgba(0, 0, 0, 0.35);
+  padding: 0.65rem 0.75rem;
+  border: 1px solid rgba(242, 240, 235, 0.22);
+  border-radius: 0.3rem;
+  background: rgba(255, 255, 255, 0.04);
   color: #f2f0eb;
   font: inherit;
   font-size: 0.95rem;
@@ -188,8 +228,8 @@
 }
 
 .coaching-modal__submit {
-  margin-top: 0.2rem;
-  padding: 0.65rem 1rem;
+  margin-top: 0.25rem;
+  padding: 0.75rem 1rem;
   border: 1px solid #f2f0eb;
   border-radius: 999px;
   background: #f2f0eb;
@@ -211,9 +251,9 @@
 
 .coaching-modal__success {
   margin: 0;
-  font-size: clamp(0.95rem, 2.4vw, 1.05rem);
-  line-height: 1.55;
-  text-align: center;
+  max-width: 17rem;
+  font-size: clamp(1.05rem, 3vw, 1.22rem);
+  line-height: 1.65;
   text-wrap: balance;
 }
 
