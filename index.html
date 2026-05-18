@@ -49,6 +49,7 @@
       --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
       --reveal-blur: 11px;
       --screen-gutter: clamp(2rem, 8vw, 5.5rem);
+      --course-announce-height: 2.85rem;
     }
 
     * {
@@ -178,6 +179,71 @@
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
       border: 0;
+    }
+
+    .course-announce {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 31;
+      display: grid;
+      place-items: center;
+      min-height: var(--course-announce-height);
+      padding: 0 max(1rem, env(safe-area-inset-right)) 0 max(1rem, env(safe-area-inset-left));
+      background: #ffffff;
+      color: #0a0a0a;
+      opacity: 0;
+      transform: translateY(-100%);
+      pointer-events: none;
+      transition:
+        opacity 0.65s ease,
+        transform 0.65s var(--reveal-ease);
+    }
+
+    .course-announce.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .course-announce__link {
+      display: block;
+      width: 100%;
+      max-width: 52rem;
+      padding: 0.2rem 0.5rem;
+      color: inherit;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: clamp(0.72rem, 2vw, 0.86rem);
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      line-height: 1.35;
+      text-align: center;
+      text-decoration: none;
+      text-wrap: balance;
+    }
+
+    .course-announce__link:hover,
+    .course-announce__link:focus-visible {
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+
+    .course-announce__link:focus-visible {
+      outline: 2px solid #0a0a0a;
+      outline-offset: 3px;
+    }
+
+    .course-announce__name {
+      font-weight: 600;
+    }
+
+    body.has-course-announce .site-nav.is-visible {
+      top: var(--course-announce-height);
+    }
+
+    body.has-course-announce .site-nav.is-menu-open .site-nav__inner {
+      top: var(--course-announce-height);
     }
 
     .site-nav {
@@ -739,6 +805,12 @@
     <div class="ambient__noise"></div>
   </div>
 
+  <aside class="course-announce" id="course-announce" aria-hidden="true">
+    <a class="course-announce__link" href="the-rebuilding-room/">
+      Start Free Coaching Course — <span class="course-announce__name">The Rebuilding Room</span>
+    </a>
+  </aside>
+
   <header class="site-nav" id="site-nav" aria-hidden="true">
     <div class="site-nav__inner">
       <button type="button" class="site-nav__toggle" aria-expanded="false" aria-controls="site-nav-menu">
@@ -826,6 +898,7 @@
     const scrollCue = document.getElementById("scroll-cue");
     const scrollCueLabel = document.getElementById("scroll-cue-label");
     const siteNav = document.getElementById("site-nav");
+    const courseAnnounce = document.getElementById("course-announce");
     const navToggle = document.querySelector(".site-nav__toggle");
     const navToggleLabel = document.getElementById("site-nav-toggle-label");
     const navMenu = document.getElementById("site-nav-menu");
@@ -837,6 +910,9 @@
     const setNavVisible = (visible) => {
       siteNav.classList.toggle("is-visible", visible);
       siteNav.setAttribute("aria-hidden", String(!visible));
+      courseAnnounce?.classList.toggle("is-visible", visible);
+      courseAnnounce?.setAttribute("aria-hidden", String(!visible));
+      document.body.classList.toggle("has-course-announce", visible);
 
       if (!visible) {
         setMenuOpen(false);
